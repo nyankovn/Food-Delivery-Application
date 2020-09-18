@@ -27,7 +27,7 @@ public class Publisher {
 
             System.out.println("Try the following GET operations in your internet browser: ");
             String[] getOperations = {BASE_URI.toURL() + "users/hello",
-                    BASE_URI.toURL() + "users/2", BASE_URI.toURL() + "users", BASE_URI.toURL() + "students?country=BG"};
+                    BASE_URI.toURL() + "users/2", BASE_URI.toURL() + "users", BASE_URI.toURL() + "user?country=BG"};
             for (String getOperation : getOperations) {
                 System.out.println(getOperation);
             }

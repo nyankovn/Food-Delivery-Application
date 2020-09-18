@@ -30,5 +30,14 @@ public class FakeDataStore {
         }
         return null;
     }
+    public List<User> getAllCustomers() {
+        List<User> customers=new ArrayList<>();
 
+        for (User user : users) {
+            if (user instanceof Customer){
+                customers.add(user);
+            }
+        }
+        return customers;
+    }
 }

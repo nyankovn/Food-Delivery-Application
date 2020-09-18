@@ -9,16 +9,19 @@ public class User {
     public String Password;
 
 
+    public  User() {}
+
     public User(int UserId, String Name, String email, String phoneNumber, String username, String password) {
-        UserId = UserId;
-        Name = Name;
-        Email = email;
-        PhoneNumber = phoneNumber;
-        Username = username;
-        Password = password;
+        this.UserId = UserId;
+        this.Name = Name;
+        this.Email = email;
+        this.PhoneNumber = phoneNumber;
+        this.Username = username;
+        this.Password = password;
     }
 
     public int getUserId() {
         return UserId;
     }
+
 }

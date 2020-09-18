@@ -4,19 +4,24 @@ import model.User;
 import repository.FakeDataStore;
 
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.GenericEntity;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import javax.ws.rs.*;
+import javax.ws.rs.core.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Path("/users")
 public class UsersResources {
+    @Context
+    private UriInfo uriInfo;
     private FakeDataStore dataStore=new FakeDataStore();
+
+    @GET //GET at http://localhost:XXXX/students/hello
+    @Path("/hello")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response sayHello() {
+        String msg = " Hello, your resources works!";
+        return Response.ok(msg).build();
+    }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -27,16 +32,22 @@ public class UsersResources {
         return Response.ok(entity).build();
     }
 
-    @GET //GET at http://localhost:XXXX/students/3
+    @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserPath(@PathParam("id") int id) {
-        // StudentsRepository studentsRepository = RepositoryFactory.getStudentsRepository();
-        User user = dataStore.getUser(id);//studentsRepository.get(stNr);
+        User user=new User();
+        user = dataStore.getUser(id);
         if (user == null) {
-            return Response.status(Response.Status.BAD_REQUEST).entity("Please provide a valid student number.").build();
+            return Response.status(Response.Status.BAD_REQUEST).entity("Please provide a valid user number.").build();
         } else {
             return Response.ok(user).build();
         }
     }
+
+
+
+
+
+
 }
