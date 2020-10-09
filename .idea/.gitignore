@@ -2,7 +2,7 @@
 /shelf/
 /workspace.xml
 # Datasource local storage ignored files
-/../../../../../../:\Semester3\ITS\Individual Project\food-delivery-app\.idea/dataSources/
+/../../../:\FoodDelivery\.idea/dataSources/
 /dataSources.local.xml
 # Editor-based HTTP Client requests
 /httpRequests/
