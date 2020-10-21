@@ -1,5 +1,7 @@
 package guru.framework.springmvcrest.model;
 
+import guru.framework.springmvcrest.model.menu.Menu;
+import guru.framework.springmvcrest.model.users.RestaurantOwner;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -7,22 +9,40 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name = "restaurants")
-//@AttributeOverride(name="id", column = @Column(name = "restaurant_id"))
-public class Restaurant extends User {
+public class Restaurant {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-
+    @Column(name = "id")
     private long id;
-    @Column(name = "restaurant_name")
-    private String restaurantName;
-    @Column(name = "address")
-    private String address;
-    
-    public Restaurant(){}
+    @Column(name = "name")
+    private String name;
+    @Column(name = "location")
+    private String location;
+    @Column(name = "phone_number")
+    private String phoneNum;
 
-    public Restaurant(String firstName, String lastName, String phoneNumber, String email, String password, String restaurantName, String address) {
-        super(firstName, lastName, phoneNumber, email, password);
-        this.restaurantName = restaurantName;
-        this.address = address;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.PERSIST)
+    private RestaurantOwner restaurantOwner;
+
+    @OneToOne(mappedBy = "restaurant", cascade = CascadeType.ALL)
+    private Menu menu;
+
+    //    @OneToMany(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "restaurant_id")
+//    private List<Menu> menus=new ArrayList<>();
+    public Restaurant() {
+
+    }
+
+    public Restaurant(long id, String name, String location, String phoneNum, RestaurantOwner restaurantOwner, Menu menu) {
+        this.id = id;
+        this.name = name;
+        this.location = location;
+        this.phoneNum = phoneNum;
+        this.restaurantOwner = restaurantOwner;
+        this.menu = menu;
+    }
+
+    public boolean CreateMenu() {
+        return true;
     }
 }
