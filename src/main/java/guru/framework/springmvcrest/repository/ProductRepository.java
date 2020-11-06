@@ -1,9 +1,10 @@
 package guru.framework.springmvcrest.repository;
 
-import guru.framework.springmvcrest.model.users.User;
+import guru.framework.springmvcrest.model.Tag;
+import guru.framework.springmvcrest.model.menu.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface ProductRepository extends JpaRepository<Product,Long> {
 }

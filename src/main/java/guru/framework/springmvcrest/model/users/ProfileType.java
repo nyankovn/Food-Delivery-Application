@@ -1,7 +1,9 @@
-//package guru.framework.springmvcrest.model.users;
-//
-//public enum ProfileType {
-//    Personal,
-//    Business,
-//    Service
-//}
+package guru.framework.springmvcrest.model.users;
+
+import javax.persistence.Table;
+
+public enum ProfileType {
+    Customer,
+    RestaurantOwner,
+    Admin
+}
