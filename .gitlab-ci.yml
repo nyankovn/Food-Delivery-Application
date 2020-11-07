@@ -1,16 +1,16 @@
-# Docker image to use
-image: adoptopenjdk/openjdk11
-
-# Define stages
-#   Stages group various steps into one block,
-#   if any step fails, the entire stage fails
 stages:
   - build
-
-
+  - test
 build:
   stage: build
-  script: ./mvnw package
-  artifacts:
-    paths:
-      - target/demo-0.0.1-SNAPSHOT.jar
+  script:
+    - mvn $MAVEN_CLI_OPTS compile
+test:
+    stage: test
+    dependencies:
+      - build
+    script:
+      - mvn $MAVEN_CLI_OPTS test
+      
+after_script:
+    - echo "End CI"
