@@ -3,7 +3,7 @@
 # But you could define any stages you want.
 stages:
   - build
-  - test
+#  - test
   - deploy
 
 # This is the name of the job.
@@ -11,7 +11,7 @@ stages:
 maven_build:
   # A job is always executed within a stage.
   # If no stage is set, it defaults to 'test'.
-  stage: test
+#  stage: test
   # Since we require Maven for this job,
   # we can restrict the job to runners with a certain tag.
   # Of course, it is our duty to actually configure a runner
