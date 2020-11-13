@@ -34,7 +34,7 @@ public class Restaurant {
     @Column(name = "rating", nullable = true)
     private double rating;
     @Column(name = "rating_votes", nullable = true)
-    private int raitingVotes;
+    private int ratingVotes;
 
     @Column(name = "opening_hour")
     private long openingHour;
@@ -67,21 +67,17 @@ public class Restaurant {
 
     }
 
-    public Restaurant(String name, String location, String phoneNumber, double rating, int raitingVotes, long openingHour, long closingHour, int minMinsToPrepare, int maxMinsToPrepare, Menu menu) {
+    public Restaurant(String name, String location, String phoneNumber, double rating, int ratingVotes, long openingHour, long closingHour, int minMinsToPrepare, int maxMinsToPrepare) {
         this.name = name;
         this.location = location;
         this.phoneNumber = phoneNumber;
         this.rating = rating;
-        this.raitingVotes = raitingVotes;
+        this.ratingVotes = ratingVotes;
         this.openingHour = openingHour;
         this.closingHour = closingHour;
         this.minMinsToPrepare = minMinsToPrepare;
         this.maxMinsToPrepare = maxMinsToPrepare;
     }
-
-
-
-
 
     //    @OneToMany(cascade = CascadeType.ALL)
 //    @JoinColumn(name = "restaurant_id")

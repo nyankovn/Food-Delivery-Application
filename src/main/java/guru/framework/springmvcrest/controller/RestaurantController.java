@@ -7,6 +7,8 @@ import guru.framework.springmvcrest.model.users.ProfileType;
 import guru.framework.springmvcrest.model.users.User;
 import guru.framework.springmvcrest.repository.RestaurantRepository;
 import guru.framework.springmvcrest.repository.UserRepository;
+import guru.framework.springmvcrest.services.RestaurantService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,13 +26,17 @@ public class RestaurantController {
 
     private final RestaurantRepository restaurantRepository;
 
-    public RestaurantController(RestaurantRepository restaurantRepository) {
+    @Autowired
+    private final RestaurantService restaurantService;
+
+    public RestaurantController(RestaurantRepository restaurantRepository, RestaurantService restaurantService) {
         this.restaurantRepository = restaurantRepository;
+        this.restaurantService = restaurantService;
     }
 
     @GetMapping("/restaurants")
     public List<Restaurant> getAllRestaurants() {
-        return restaurantRepository.findAll();
+        return restaurantService.findAllRestaurants();
     }
 
     @GetMapping("/restaurants/{id}")
@@ -40,6 +46,14 @@ public class RestaurantController {
 
         return ResponseEntity.ok(restaurant);
     }
+
+    @GetMapping("/restaurants/mockRestaurant")
+    public ResponseEntity<Restaurant> getMockRestaurant() {
+        Restaurant mockRestaurant = new Restaurant("New Restaurant", "Location 4", "+85845845450", 4, 4, 10, 22, 15, 50);
+
+        return ResponseEntity.ok(mockRestaurant);
+    }
+
 
     @PutMapping("/restaurants/{id}")
     public ResponseEntity<Restaurant> updateRestaurant(@PathVariable Long id, @RequestBody Restaurant restaurantDetails) {
