@@ -1,16 +1,22 @@
-stages:
+--- 
+after_script: 
+  - "echo \"End CI\""
+artifacts: 
+  reports: 
+    junit: 
+      - target/surefire-reports/TEST-*.xml
+      - target/failsafe-reports/TEST-*.xml
+  when: always
+build: 
+  script: 
+    - "mvn $MAVEN_CLI_OPTS compile"
+  stage: build
+stages: 
   - build
   - test
-build:
-  stage: build
-  script:
-    - mvn $MAVEN_CLI_OPTS compile
-test:
-    stage: test
-    dependencies:
-      - build
-    script:
-      - mvn $MAVEN_CLI_OPTS test
-      
-after_script:
-    - echo "End CI"
+test: 
+  dependencies: 
+    - build
+  script: 
+    - "mvn $MAVEN_CLI_OPTS test"
+  stage: test
