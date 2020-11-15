@@ -21,6 +21,8 @@ public  class Product {
     protected double price;
     @Column(name = "amount")
     protected double amount;//ml and gr
+    @Column(name = "times_ordered")
+    protected int timesOrdered;//ml and gr
 //    @Column(name = "menu_id",insertable = false, updatable = false)
 //    protected double menuId;//ml and gr
 
@@ -31,6 +33,10 @@ public  class Product {
     @ManyToOne(fetch = FetchType.LAZY,optional = false, cascade = CascadeType.PERSIST)
     @JsonBackReference
     private Menu menu;
+
+    @ManyToOne(fetch = FetchType.LAZY,optional = false, cascade = CascadeType.PERSIST)
+    @JsonBackReference
+    private Order order;
 
     public Product() {
 

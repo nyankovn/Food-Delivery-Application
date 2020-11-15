@@ -60,6 +60,11 @@ public class Restaurant {
     //one of the two sides of the relationship should not be serialized, in order to avoid the infite loop
     private List<Tag> tags;
 
+    @OneToMany(mappedBy = "restaurant", fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
+    @JsonManagedReference
+    private List<Order> orders;
+
 //    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.PERSIST)
 //    private RestaurantOwner restaurantOwner;
 
