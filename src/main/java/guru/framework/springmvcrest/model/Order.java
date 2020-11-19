@@ -12,6 +12,9 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -24,8 +27,9 @@ public class Order {
 
     @Column(name = "location")
     private String location;
-    @Column(name = "price")
-    private double price;
+
+    @Column(name = "dateOrdered")
+    private LocalDateTime dateTime;
 
 //    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.PERSIST)
 //    private Customer customer;
@@ -34,12 +38,23 @@ public class Order {
 //    @Fetch(value = FetchMode.SUBSELECT)
 //    private List<Product> products;
 
-    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
-    @Fetch(value = FetchMode.SUBSELECT)
-    @JsonManagedReference
-    private List<Product> products;
+//    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
+//    @Fetch(value = FetchMode.SUBSELECT)
+//    @JsonManagedReference
+//    private List<Product> products;
 
-    @ManyToOne(fetch = FetchType.LAZY,optional = false, cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    @JsonManagedReference
+    @JoinTable(name = "order_product",
+            joinColumns = @JoinColumn(name = "order_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
+    private List<Product> products = new ArrayList<>();
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.PERSIST)
     @JsonBackReference
     private Restaurant restaurant;
 }

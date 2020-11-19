@@ -2,24 +2,29 @@ package guru.framework.springmvcrest.controller;
 
 import guru.framework.springmvcrest.exception.ResourceNotFoundException;
 import guru.framework.springmvcrest.model.Restaurant;
-import guru.framework.springmvcrest.model.users.Profile;
-import guru.framework.springmvcrest.model.users.ProfileType;
-import guru.framework.springmvcrest.model.users.User;
+import guru.framework.springmvcrest.model.authentication.AuthenticationRequest;
+import guru.framework.springmvcrest.model.authentication.AuthenticationResponse;
 import guru.framework.springmvcrest.repository.RestaurantRepository;
-import guru.framework.springmvcrest.repository.UserRepository;
+import guru.framework.springmvcrest.security.JwtUtil;
+import guru.framework.springmvcrest.services.MyUserDetailsService;
 import guru.framework.springmvcrest.services.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping(UserController.BASE_URL)
+@RequestMapping(RestaurantController.BASE_URL)
 public class RestaurantController {
 
     public static final String BASE_URL = "/admin_ui";
@@ -29,10 +34,50 @@ public class RestaurantController {
     @Autowired
     private final RestaurantService restaurantService;
 
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private JwtUtil jwtTokenUtil;
+
+    @Autowired
+    private MyUserDetailsService userDetailsService;
+
     public RestaurantController(RestaurantRepository restaurantRepository, RestaurantService restaurantService) {
         this.restaurantRepository = restaurantRepository;
         this.restaurantService = restaurantService;
     }
+
+
+    @RequestMapping({"/hello"})
+    public String Hello() {
+        return "Hello World";
+    }
+
+    @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
+    public ResponseEntity<AuthenticationResponse> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword())
+            );
+        } catch (BadCredentialsException e) {
+            throw new Exception("Incorrect username or password", e);
+        }
+
+        final UserDetails userDetails = userDetailsService
+                .loadUserByUsername(authenticationRequest.getUsername());
+
+        final String jwt = jwtTokenUtil.generateToken(userDetails);
+
+        return ResponseEntity.ok(new AuthenticationResponse(jwt));
+    }
+
+    @GetMapping("/authenticate")
+    public AuthenticationRequest getAuthenticationRequest() {
+        AuthenticationRequest authenticationRequest=new AuthenticationRequest("foo","foo");
+        return authenticationRequest;
+    }
+
 
     @GetMapping("/restaurants")
     public List<Restaurant> getAllRestaurants() {

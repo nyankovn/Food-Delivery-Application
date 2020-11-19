@@ -5,6 +5,8 @@ import guru.framework.springmvcrest.model.Order;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -21,8 +23,10 @@ public  class Product {
     protected double price;
     @Column(name = "amount")
     protected double amount;//ml and gr
-    @Column(name = "times_ordered")
-    protected int timesOrdered;//ml and gr
+//    @Column(name = "times_ordered")
+//    protected int timesOrdered;
+
+    //ml and gr
 //    @Column(name = "menu_id",insertable = false, updatable = false)
 //    protected double menuId;//ml and gr
 
@@ -34,9 +38,13 @@ public  class Product {
     @JsonBackReference
     private Menu menu;
 
-    @ManyToOne(fetch = FetchType.LAZY,optional = false, cascade = CascadeType.PERSIST)
+//    @ManyToOne(fetch = FetchType.LAZY,optional = false, cascade = CascadeType.PERSIST)
+//    @JsonBackReference
+//    private Order order;
+
+    @ManyToMany(mappedBy = "products")
     @JsonBackReference
-    private Order order;
+    private List<Order> orders = new ArrayList<>();
 
     public Product() {
 
