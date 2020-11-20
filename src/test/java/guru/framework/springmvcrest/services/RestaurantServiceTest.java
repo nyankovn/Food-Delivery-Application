@@ -45,7 +45,7 @@ public class RestaurantServiceTest {
         when(restaurantRepository.findAll()).thenReturn(list);
         List<Restaurant> restList = restaurantService.findAllRestaurants();
 
-        assertEquals(3, restList.size());
+        assertEquals(4, restList.size());
         verify(restaurantRepository, times(1)).findAll();
     }
 
