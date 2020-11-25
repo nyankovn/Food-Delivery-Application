@@ -25,22 +25,22 @@ public class UserController {
     }
 
 
-//    @GetMapping("/admins")
-//    public List<Admin> getAllAdmins() {
-//        return adminRepository.findAll();
-//    }
-
     @GetMapping("/admins")
     public List<User> getAllAdmins() {
-        List<User> admins = new ArrayList<>();
-        for (User admin : userRepository.findAll()) {
-            for (Profile profile : admin.getProfiles()) {
-                if (profile.getProfileType() == ProfileType.Admin) {
-                    admins.add(admin);
-                }
-            }
-
-        }
-        return admins;
+        return userRepository.findAll();
     }
+
+//    @GetMapping("/admins")
+//    public List<User> getAllAdmins() {
+//        List<User> admins = new ArrayList<>();
+//        for (User admin : userRepository.findAll()) {
+//            for (Profile profile : admin.getProfiles()) {
+//                if (profile.getRole() == ProfileType.Admin) {
+//                    admins.add(admin);
+//                }
+//            }
+//
+//        }
+//        return admins;
+//    }
 }

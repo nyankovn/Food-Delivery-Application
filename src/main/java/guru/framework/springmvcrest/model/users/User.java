@@ -30,8 +30,6 @@ public class User {
     //one of the two sides of the relationship should not be serialized, in order to avoid the infite loop
     private List<Profile> profiles = new ArrayList<>();
 
-
-
     public User() {
     }
 

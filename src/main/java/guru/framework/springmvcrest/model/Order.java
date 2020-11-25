@@ -7,6 +7,7 @@ import guru.framework.springmvcrest.model.menu.Meal;
 //import guru.framework.springmvcrest.model.users.Customer;
 //import guru.framework.springmvcrest.model.users.RestaurantOwner;
 import guru.framework.springmvcrest.model.menu.Product;
+import guru.framework.springmvcrest.model.users.Profile;
 import lombok.Data;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -31,18 +32,6 @@ public class Order {
     @Column(name = "dateOrdered")
     private LocalDateTime dateTime;
 
-//    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.PERSIST)
-//    private Customer customer;
-
-//    @OneToMany( mappedBy = "order", fetch = FetchType.EAGER)
-//    @Fetch(value = FetchMode.SUBSELECT)
-//    private List<Product> products;
-
-//    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
-//    @Fetch(value = FetchMode.SUBSELECT)
-//    @JsonManagedReference
-//    private List<Product> products;
-
     @ManyToMany(cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE
@@ -54,7 +43,21 @@ public class Order {
     )
     private List<Product> products = new ArrayList<>();
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY,optional = false, cascade = CascadeType.PERSIST)
     @JsonBackReference
-    private Restaurant restaurant;
+    private Profile profile;
+
+//    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.PERSIST)
+//    @JsonBackReference
+//    private Restaurant restaurant;
+
+    public Order() {}
+
+    public Order(String location, LocalDateTime dateTime, List<Product> products, Restaurant restaurant, Profile profile) {
+        this.location = location;
+        this.dateTime = dateTime;
+//        this.products = products;
+//        this.restaurant = restaurant;
+//        this.profile = profile;
+    }
 }

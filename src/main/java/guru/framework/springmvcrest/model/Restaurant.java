@@ -1,11 +1,13 @@
 package guru.framework.springmvcrest.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import guru.framework.springmvcrest.model.menu.Menu;
 //import guru.framework.springmvcrest.model.users.RestaurantOwner;
 import guru.framework.springmvcrest.model.menu.Product;
+import guru.framework.springmvcrest.model.users.Profile;
 import lombok.Data;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -46,9 +48,6 @@ public class Restaurant {
     @Column(name = "max_mins_to_prepare")
     private int maxMinsToPrepare;
 
-//    @OneToOne(mappedBy = "restaurant", cascade = CascadeType.ALL)
-//    private Menu menu;
-
     @OneToMany(mappedBy = "restaurant", fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
     @JsonManagedReference
@@ -60,13 +59,15 @@ public class Restaurant {
     //one of the two sides of the relationship should not be serialized, in order to avoid the infite loop
     private List<Tag> tags;
 
-    @OneToMany(mappedBy = "restaurant", fetch = FetchType.EAGER)
-    @Fetch(value = FetchMode.SUBSELECT)
-    @JsonManagedReference
-    private List<Order> orders;
+    @ManyToOne(fetch = FetchType.LAZY,optional = false, cascade = CascadeType.PERSIST)
+    @JsonBackReference
+    private Profile profile;
 
-//    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.PERSIST)
-//    private RestaurantOwner restaurantOwner;
+//    @OneToMany(mappedBy = "restaurant", fetch = FetchType.EAGER)
+//    @Fetch(value = FetchMode.SUBSELECT)
+//    @JsonManagedReference
+//    private List<Order> orders;
+
 
     public Restaurant() {
 
@@ -83,8 +84,4 @@ public class Restaurant {
         this.minMinsToPrepare = minMinsToPrepare;
         this.maxMinsToPrepare = maxMinsToPrepare;
     }
-
-    //    @OneToMany(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "restaurant_id")
-//    private List<Menu> menus=new ArrayList<>();
 }

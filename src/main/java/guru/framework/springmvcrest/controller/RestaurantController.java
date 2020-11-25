@@ -6,6 +6,7 @@ import guru.framework.springmvcrest.model.authentication.AuthenticationRequest;
 import guru.framework.springmvcrest.model.authentication.AuthenticationResponse;
 import guru.framework.springmvcrest.repository.RestaurantRepository;
 import guru.framework.springmvcrest.security.JwtUtil;
+//import guru.framework.springmvcrest.security.UserDetailsServiceImpl;
 import guru.framework.springmvcrest.services.MyUserDetailsService;
 import guru.framework.springmvcrest.services.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,7 @@ public class RestaurantController {
     @Autowired
     private JwtUtil jwtTokenUtil;
 
+
     @Autowired
     private MyUserDetailsService userDetailsService;
 
@@ -71,13 +73,6 @@ public class RestaurantController {
 
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }
-
-    @GetMapping("/authenticate")
-    public AuthenticationRequest getAuthenticationRequest() {
-        AuthenticationRequest authenticationRequest=new AuthenticationRequest("foo","foo");
-        return authenticationRequest;
-    }
-
 
     @GetMapping("/restaurants")
     public List<Restaurant> getAllRestaurants() {
