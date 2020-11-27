@@ -47,9 +47,9 @@ public class Order {
     @JsonBackReference
     private Profile profile;
 
-//    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.PERSIST)
-//    @JsonBackReference
-//    private Restaurant restaurant;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.PERSIST)
+    @JsonBackReference
+    private Restaurant restaurant;
 
     public Order() {}
 

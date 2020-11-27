@@ -63,10 +63,10 @@ public class Restaurant {
     @JsonBackReference
     private Profile profile;
 
-//    @OneToMany(mappedBy = "restaurant", fetch = FetchType.EAGER)
-//    @Fetch(value = FetchMode.SUBSELECT)
-//    @JsonManagedReference
-//    private List<Order> orders;
+    @OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY)
+    @Fetch(value = FetchMode.SUBSELECT)
+    @JsonManagedReference
+    private List<Order> orders;
 
 
     public Restaurant() {

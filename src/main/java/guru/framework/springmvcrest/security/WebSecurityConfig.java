@@ -5,21 +5,33 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 
 @EnableWebSecurity
 @Configuration
 class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurerAdapter() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**");
+            }
+        };
+    }
+
     @Autowired
     private MyUserDetailsService myUserDetailsService;
 
@@ -30,6 +42,7 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(myUserDetailsService);
     }
+
 
 //    @Bean
 //    public DaoAuthenticationProvider authenticationProvider() {
@@ -57,8 +70,15 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/admin_ui/authenticate").permitAll().
-                antMatchers("/admin_ui/admins").hasAuthority("ADMIN").// Enabling URL to be accessed by all users (even un-authenticated)
+                .antMatchers("/admin_ui/authenticate/signin").permitAll().
+                antMatchers("/admin_ui/users").hasAuthority("ADMIN").// Enabling URL to be accessed by all users (even un-authenticated)
+                antMatchers("/admin_ui/restaurants").hasAuthority("ADMIN").
+                antMatchers("/admin_ui/roles").hasAuthority("ADMIN").
+                antMatchers("/admin_ui/restaurants/{id}").hasAuthority("ADMIN").
+                antMatchers("/admin_ui/restaurants/mockRestaurant").hasAuthority("ADMIN").
+                antMatchers("/admin_ui/profiles").hasAuthority("ADMIN").
+
+
                 anyRequest()
                 .authenticated()// Any resources not mentioned above needs to be authenticated
                 .and().sessionManagement()

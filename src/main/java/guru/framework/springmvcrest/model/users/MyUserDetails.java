@@ -4,12 +4,13 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-
+@Transactional
 public class MyUserDetails implements UserDetails {
 
     private Profile profile;
@@ -19,12 +20,13 @@ public class MyUserDetails implements UserDetails {
     }
 
     @Override
+    @Transactional
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        Set<Role> roles = profile.getRoles();
+        List<Role> roles = profile.getRoles();
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 
-        for (Role role : roles) {
-            authorities.add(new SimpleGrantedAuthority(role.getName()));
+        for (Role s : roles) {
+            authorities.add(new SimpleGrantedAuthority(s.getName()));
         }
 
         return authorities;
@@ -39,6 +41,16 @@ public class MyUserDetails implements UserDetails {
     public String getUsername() {
         return profile.getUsername();
     }
+
+    public String getEmail() {
+        return profile.getEmail();
+    }
+
+    public List<Role> getRoles() {
+        return profile.getRoles();
+    }
+
+
 
     @Override
     public boolean isAccountNonExpired() {
