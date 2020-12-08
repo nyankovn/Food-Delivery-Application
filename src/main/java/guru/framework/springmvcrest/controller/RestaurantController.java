@@ -80,13 +80,14 @@ public class RestaurantController {
 
         final String jwt = jwtTokenUtil.generateToken(userDetails);
 
-        return ResponseEntity.ok(new AuthenticationResponse(jwt, temp.getUsername(), temp.getEmail(), temp.getRoles()));
+        return ResponseEntity.ok(new AuthenticationResponse(jwt,temp.getId(), temp.getUsername(), temp.getEmail(), temp.getRoles()));
     }
 
     @GetMapping("/restaurants")
     public List<Restaurant> getAllRestaurants() {
         return restaurantService.findAllRestaurants();
     }
+
 
     @GetMapping("/restaurants/{id}")
     public ResponseEntity<Restaurant> getRestaurantById(@PathVariable Long id) {
@@ -117,8 +118,8 @@ public class RestaurantController {
         restaurant.setMinMinsToPrepare(restaurantDetails.getMinMinsToPrepare());
         restaurant.setMaxMinsToPrepare(restaurantDetails.getMaxMinsToPrepare());
 
-        Restaurant updateRestaurant = restaurantRepository.save(restaurant);
-        return ResponseEntity.ok(updateRestaurant);
+        Restaurant updatedRestaurant = restaurantRepository.save(restaurant);
+        return ResponseEntity.ok(updatedRestaurant);
     }
 
     @DeleteMapping("/restaurants/{id}")

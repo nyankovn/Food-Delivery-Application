@@ -11,7 +11,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
+
 @Table(name = "menus")
 @Entity
 public class Menu {
@@ -29,11 +29,11 @@ public class Menu {
 
     @OneToMany(mappedBy = "menu", fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
-    @JsonManagedReference
+    @JsonManagedReference(value="product-menu")
     private List<Product> products;
 
     @ManyToOne(fetch = FetchType.LAZY,optional = false, cascade = CascadeType.PERSIST)
-    @JsonBackReference
+    @JsonBackReference(value="restaurant-menu")
     private Restaurant restaurant;
 
     public Menu() {
@@ -46,7 +46,35 @@ public class Menu {
         this.restaurant = restaurant;
     }
 
-    //    @OneToMany(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "menu_id")
-//    private List<Product> products=new ArrayList<>();
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
+    }
 }

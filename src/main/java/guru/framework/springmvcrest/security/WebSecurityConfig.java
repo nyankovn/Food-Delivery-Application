@@ -13,24 +13,72 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
+import java.util.Arrays;
 
 
 @EnableWebSecurity
 @Configuration
 class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+
+    @Bean
+    public CorsFilter corsFilter() {
+        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        final CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(true);
+        config.addAllowedOrigin("*");
+        config.addAllowedHeader("*");
+        config.addAllowedMethod("OPTIONS");
+        config.addAllowedMethod("HEAD");
+        config.addAllowedMethod("GET");
+        config.addAllowedMethod("PUT");
+        config.addAllowedMethod("POST");
+        config.addAllowedMethod("DELETE");
+        config.addAllowedMethod("PATCH");
+        source.registerCorsConfiguration("/**", config);
+        return new CorsFilter(source);
+    }
+
+//    @Bean
+//    public WebMvcConfigurer corsConfigurer() {
+//        return new WebMvcConfigurerAdapter() {
+//            @Override
+//            public void addCorsMappings(CorsRegistry registry) {
+//                registry.addMapping("/**").allowedOrigins("*");
+//            }
+//        };
+//    }
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurerAdapter() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**");
+                registry.addMapping("/**").allowedMethods("GET", "POST", "PUT", "DELETE").allowedOrigins("*")
+                        .allowedHeaders("*");
             }
         };
     }
+
+
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("*"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
+
 
     @Autowired
     private MyUserDetailsService myUserDetailsService;
@@ -67,23 +115,33 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
+//        httpSecurity.cors();
         httpSecurity
-                .csrf().disable()
-                .authorizeRequests()
+                .csrf().disable().cors().and()
+                .authorizeRequests()// Enabling URL to be accessed by all users (even un-authenticated)
                 .antMatchers("/admin_ui/authenticate/signin").permitAll().
-                antMatchers("/admin_ui/users").hasAuthority("ADMIN").// Enabling URL to be accessed by all users (even un-authenticated)
-                antMatchers("/admin_ui/restaurants").hasAuthority("ADMIN").
-                antMatchers("/admin_ui/roles").hasAuthority("ADMIN").
-                antMatchers("/admin_ui/restaurants/{id}").hasAuthority("ADMIN").
-                antMatchers("/admin_ui/restaurants/mockRestaurant").hasAuthority("ADMIN").
-                antMatchers("/admin_ui/profiles").hasAuthority("ADMIN").
+
+                antMatchers("/admin_ui/users").permitAll().
+                antMatchers("/admin_ui/users/{id}").permitAll().
+
+                antMatchers("/admin_ui/restaurants/mockRestaurant").hasAuthority("admin").
+
+                antMatchers("/admin_ui/restaurants").hasAuthority("admin").
+                antMatchers("/admin_ui/restaurants/{id}").hasAuthority("admin").
+
+                antMatchers("/admin_ui/roles").permitAll().
+                antMatchers("/admin_ui/profiles").permitAll().
+                antMatchers("/admin_ui/{userRole}").permitAll().
+                antMatchers("/admin_ui/{userRole}/{id}").permitAll().
 
 
                 anyRequest()
                 .authenticated()// Any resources not mentioned above needs to be authenticated
                 .and().sessionManagement()
+
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);//not to create a session
         httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+
     }
 
 //    @Override

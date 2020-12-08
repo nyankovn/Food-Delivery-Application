@@ -1,12 +1,14 @@
 package guru.framework.springmvcrest.model.menu;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.*;
 import guru.framework.springmvcrest.model.Order;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -23,28 +25,16 @@ public  class Product {
     protected double price;
     @Column(name = "amount")
     protected double amount;//ml and gr
-//    @Column(name = "times_ordered")
-//    protected int timesOrdered;
-
-    //ml and gr
-//    @Column(name = "menu_id",insertable = false, updatable = false)
-//    protected double menuId;//ml and gr
-
-
-//    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-//    private Order order;
 
     @ManyToOne(fetch = FetchType.LAZY,optional = false, cascade = CascadeType.PERSIST)
-    @JsonBackReference
+    @JsonBackReference(value="product-menu")
     private Menu menu;
 
-//    @ManyToOne(fetch = FetchType.LAZY,optional = false, cascade = CascadeType.PERSIST)
-//    @JsonBackReference
-//    private Order order;
 
     @ManyToMany(mappedBy = "products")
-    @JsonBackReference
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     private List<Order> orders = new ArrayList<>();
+//    private Set<Order> orders=new HashSet<>();
 
     public Product() {
 

@@ -1,7 +1,6 @@
 package guru.framework.springmvcrest.model.users;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import guru.framework.springmvcrest.model.Order;
 import guru.framework.springmvcrest.model.Restaurant;
 import lombok.Data;
@@ -17,7 +16,6 @@ import java.util.Set;
 @Entity
 @Table(name = "profiles")
 public class Profile {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -28,6 +26,8 @@ public class Profile {
     private String username;
     @Column(name = "password")
     private String password;
+//    @Column(name = "user_id")
+//    private long userId;
 
     private boolean enabled;
 
@@ -36,23 +36,22 @@ public class Profile {
 //    private ProfileType role;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.PERSIST)
-    @JsonBackReference
-//one of the two sides of the relationship should not be serialized, in order to avoid the infite loop
-    private User user;
+    @JsonBackReference(value="user-profile")
+    @JoinColumn(name="user_id",referencedColumnName="id")
+    private User profileUser;
 
     @OneToMany(mappedBy = "profile")
     @LazyCollection(LazyCollectionOption.FALSE)
-    @JsonManagedReference
+    @JsonManagedReference(value = "restaurant-profile")
     private List<Restaurant> restaurants;
 
     @OneToMany(mappedBy = "profile")
     @LazyCollection(LazyCollectionOption.FALSE)
-    @JsonManagedReference
+    @JsonManagedReference(value = "order-profile")
     private List<Order> orders;
 
-
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JsonManagedReference
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JoinTable(
             name = "profiles_roles",
             joinColumns = @JoinColumn(name = "profile_id"),
@@ -60,36 +59,15 @@ public class Profile {
     )
     private List<Role> roles = new ArrayList<>();
 
-
-
-
-//    @OneToMany(mappedBy = "profile", fetch = FetchType.EAGER)
-//    @JsonManagedReference
-//    private Set<Role> roles=new HashSet<>();
-
-
-
     public Profile() {
 
     }
 
-    public Profile(String email, String username, String password) {
+    public Profile(String email, String username, String password,User profileUser) {
         this.email = email;
         this.username = username;
         this.password = password;
+        this.profileUser=profileUser;
     }
 
-    public  List<Role> getAllRoles(){
-        return roles;
-    }
-
-//    @Column(name = "role")
-//    private String role;
-//
-//
-//    public Set<String> getRoles(){
-//        Set<String> roles=new HashSet<>();
-//        roles.add(role);
-//        return roles;
-//    }
 }

@@ -11,12 +11,14 @@ import java.util.Set;
 public class AuthenticationResponse implements Serializable {
 
     private final String accessToken;
+    private long id;
     private String username;
     private String email;
     private List<Role> roles;
 
 
-    public AuthenticationResponse(String accessToken,  String username, String email, List<Role> roles) {
+    public AuthenticationResponse(String accessToken,long id,  String username, String email, List<Role> roles) {
+        this.id=id;
         this.accessToken = accessToken;
         this.username = username;
         this.email = email;

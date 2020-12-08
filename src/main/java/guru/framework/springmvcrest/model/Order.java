@@ -1,7 +1,6 @@
 package guru.framework.springmvcrest.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import guru.framework.springmvcrest.model.menu.Drink;
 import guru.framework.springmvcrest.model.menu.Meal;
 //import guru.framework.springmvcrest.model.users.Customer;
@@ -14,13 +13,11 @@ import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
-@Data
 @Entity
 @Table(name = "orders")
+
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,35 +26,88 @@ public class Order {
     @Column(name = "location")
     private String location;
 
-    @Column(name = "dateOrdered")
-    private LocalDateTime dateTime;
+    @Column(name = "date_ordered")
+    private LocalDateTime dateOrdered;
+
 
     @ManyToMany(cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE
     })
-    @JsonManagedReference
     @JoinTable(name = "order_product",
             joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     private List<Product> products = new ArrayList<>();
+//    private Set<Product> products = new HashSet<>();
+
+
 
     @ManyToOne(fetch = FetchType.LAZY,optional = false, cascade = CascadeType.PERSIST)
-    @JsonBackReference
+//    @JsonManagedReference(value="order-profile")
+    @JsonBackReference(value = "order-profile")
+
+//    @JsonIdentityInfo( generator= ObjectIdGenerators.PropertyGenerator.class, property="id" )
     private Profile profile;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.PERSIST)
-    @JsonBackReference
+    @JsonBackReference(value="restaurant-order")
     private Restaurant restaurant;
 
     public Order() {}
 
-    public Order(String location, LocalDateTime dateTime, List<Product> products, Restaurant restaurant, Profile profile) {
+    public Order(String location, LocalDateTime dateOrdered) {
         this.location = location;
-        this.dateTime = dateTime;
-//        this.products = products;
-//        this.restaurant = restaurant;
-//        this.profile = profile;
+        this.dateOrdered = dateOrdered;
+    }
+
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public LocalDateTime getDateOrdered() {
+        return dateOrdered;
+    }
+
+    public void setDateOrdered(LocalDateTime dateOrdered) {
+        this.dateOrdered = dateOrdered;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+
+    public Profile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
     }
 }

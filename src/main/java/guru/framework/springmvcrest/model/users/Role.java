@@ -1,7 +1,6 @@
 package guru.framework.springmvcrest.model.users;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -11,6 +10,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "roles")
+
 public class Role {
     @Id
     @Column(name = "role_id")
@@ -22,7 +22,9 @@ public class Role {
 
 
     @ManyToMany(mappedBy = "roles")
-    @JsonBackReference
+//    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+//    @JsonIdentityInfo( generator= ObjectIdGenerators.PropertyGenerator.class, property="id" )
+    @JsonIgnore
     private List<Profile> profiles= new ArrayList<>();
 
 //    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.PERSIST)

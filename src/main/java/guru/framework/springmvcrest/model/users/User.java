@@ -1,6 +1,8 @@
 package guru.framework.springmvcrest.model.users;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -10,6 +12,7 @@ import java.util.List;
 @Data
 @Table(name = "users")
 @Entity
+
 public class User {
 
     @Id
@@ -25,8 +28,8 @@ public class User {
     @Column(name = "address")
     private String address;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    @JsonManagedReference
+    @OneToMany(mappedBy = "profileUser", fetch = FetchType.EAGER)
+    @JsonManagedReference(value="user-profile")
     //one of the two sides of the relationship should not be serialized, in order to avoid the infite loop
     private List<Profile> profiles = new ArrayList<>();
 
