@@ -126,13 +126,18 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 antMatchers("/admin_ui/restaurants/mockRestaurant").hasAuthority("admin").
 
-                antMatchers("/admin_ui/restaurants").hasAuthority("admin").
-                antMatchers("/admin_ui/restaurants/{id}").hasAuthority("admin").
+                antMatchers("/admin_ui/restaurants").permitAll().
+                antMatchers("/admin_ui/restaurants/top-rated").permitAll().
+                antMatchers("/admin_ui/restaurants/{id}").permitAll().
 
-                antMatchers("/admin_ui/roles").permitAll().
-                antMatchers("/admin_ui/profiles").permitAll().
-                antMatchers("/admin_ui/{userRole}").permitAll().
-                antMatchers("/admin_ui/{userRole}/{id}").permitAll().
+                antMatchers("/admin_ui/roles").hasAuthority("admin").
+                antMatchers("/admin_ui/profiles").hasAuthority("admin").
+
+                antMatchers("/admin_ui/orders").hasAuthority("admin").
+                antMatchers("/admin_ui/orders/{id}").hasAuthority("admin").
+
+                antMatchers("/admin_ui/{userRole}").hasAuthority("admin").
+                antMatchers("/admin_ui/{userRole}/{id}").hasAuthority("admin").
 
 
                 anyRequest()

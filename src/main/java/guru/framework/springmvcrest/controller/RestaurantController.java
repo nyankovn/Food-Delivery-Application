@@ -88,6 +88,11 @@ public class RestaurantController {
         return restaurantService.findAllRestaurants();
     }
 
+    @GetMapping("/restaurants/top-rated")
+    public List<Restaurant> getTopRatedRestaurants() {
+        return restaurantService.getTopRatedRestaurants();
+    }
+
 
     @GetMapping("/restaurants/{id}")
     public ResponseEntity<Restaurant> getRestaurantById(@PathVariable Long id) {
@@ -103,6 +108,8 @@ public class RestaurantController {
 
         return ResponseEntity.ok(mockRestaurant);
     }
+
+
 
 
     @PutMapping("/restaurants/{id}")

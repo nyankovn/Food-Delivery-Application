@@ -20,16 +20,7 @@ public class Role {
     @Column(name = "name")
     private String name;
 
-
     @ManyToMany(mappedBy = "roles")
-//    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-//    @JsonIdentityInfo( generator= ObjectIdGenerators.PropertyGenerator.class, property="id" )
     @JsonIgnore
     private List<Profile> profiles= new ArrayList<>();
-
-//    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.PERSIST)
-//    @JsonBackReference
-////one of the two sides of the relationship should not be serialized, in order to avoid the infite loop
-//    private Profile profile;
-
 }

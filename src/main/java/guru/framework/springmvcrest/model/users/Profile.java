@@ -45,12 +45,12 @@ public class Profile {
     @JsonManagedReference(value = "restaurant-profile")
     private List<Restaurant> restaurants;
 
-    @OneToMany(mappedBy = "profile")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    @JsonManagedReference(value = "order-profile")
+    @OneToMany(mappedBy = "profile", fetch = FetchType.LAZY)
+//    @LazyCollection(LazyCollectionOption.FALSE)
+    @JsonBackReference(value = "order-profile")
     private List<Order> orders;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany( fetch = FetchType.EAGER)
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JoinTable(
             name = "profiles_roles",

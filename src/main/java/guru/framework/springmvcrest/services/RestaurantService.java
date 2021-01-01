@@ -12,4 +12,5 @@ public interface RestaurantService {
 
      Restaurant findRestaurantById(Long id);
 
+     List<Restaurant> getTopRatedRestaurants();
 }

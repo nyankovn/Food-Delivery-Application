@@ -40,15 +40,9 @@ public class Order {
     )
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     private List<Product> products = new ArrayList<>();
-//    private Set<Product> products = new HashSet<>();
 
-
-
-    @ManyToOne(fetch = FetchType.LAZY,optional = false, cascade = CascadeType.PERSIST)
-//    @JsonManagedReference(value="order-profile")
+    @ManyToOne(fetch = FetchType.EAGER,optional = false)
     @JsonBackReference(value = "order-profile")
-
-//    @JsonIdentityInfo( generator= ObjectIdGenerators.PropertyGenerator.class, property="id" )
     private Profile profile;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.PERSIST)

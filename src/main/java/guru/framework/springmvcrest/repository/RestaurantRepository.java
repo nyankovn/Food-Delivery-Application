@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Repository
 
 public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
@@ -20,4 +22,10 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
                     " ON o.restaurant_id=r.id WHERE r.id=1",
             nativeQuery = true)
     double getRevenue();
+
+    @Query(
+            value = "SELECT * FROM restaurants ORDER BY rating LIMIT 5",
+            nativeQuery = true)
+
+    List<Restaurant> getTopRatedRestaurants();
 }

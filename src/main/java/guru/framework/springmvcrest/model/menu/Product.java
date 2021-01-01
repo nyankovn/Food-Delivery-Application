@@ -33,6 +33,7 @@ public  class Product {
 
     @ManyToMany(mappedBy = "products")
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+    @JsonIgnore
     private List<Order> orders = new ArrayList<>();
 //    private Set<Order> orders=new HashSet<>();
 
