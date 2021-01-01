@@ -1,6 +1,9 @@
 package guru.framework.springmvcrest.model.users;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import guru.framework.springmvcrest.model.Order;
 import guru.framework.springmvcrest.model.Restaurant;
 import lombok.Data;
@@ -10,7 +13,6 @@ import org.hibernate.annotations.LazyCollectionOption;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Data
 @Entity
@@ -26,18 +28,12 @@ public class Profile {
     private String username;
     @Column(name = "password")
     private String password;
-//    @Column(name = "user_id")
-//    private long userId;
 
     private boolean enabled;
 
-
-//    @Enumerated(EnumType.STRING)
-//    private ProfileType role;
-
     @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.PERSIST)
-    @JsonBackReference(value="user-profile")
-    @JoinColumn(name="user_id",referencedColumnName="id")
+    @JsonBackReference(value = "user-profile")
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User profileUser;
 
     @OneToMany(mappedBy = "profile")
@@ -46,11 +42,10 @@ public class Profile {
     private List<Restaurant> restaurants;
 
     @OneToMany(mappedBy = "profile", fetch = FetchType.LAZY)
-//    @LazyCollection(LazyCollectionOption.FALSE)
     @JsonBackReference(value = "order-profile")
     private List<Order> orders;
 
-    @ManyToMany( fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JoinTable(
             name = "profiles_roles",
@@ -63,11 +58,10 @@ public class Profile {
 
     }
 
-    public Profile(String email, String username, String password,User profileUser) {
+    public Profile(String email, String username, String password, User profileUser) {
         this.email = email;
         this.username = username;
         this.password = password;
-        this.profileUser=profileUser;
+        this.profileUser = profileUser;
     }
-
 }

@@ -5,7 +5,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 import guru.framework.springmvcrest.model.users.Profile;
-import guru.framework.springmvcrest.model.users.User;
 
 import java.io.IOException;
 import java.util.ArrayList;

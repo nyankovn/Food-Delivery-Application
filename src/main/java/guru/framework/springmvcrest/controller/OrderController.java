@@ -3,10 +3,7 @@ package guru.framework.springmvcrest.controller;
 
 import guru.framework.springmvcrest.exception.ResourceNotFoundException;
 import guru.framework.springmvcrest.model.Order;
-import guru.framework.springmvcrest.model.Restaurant;
 import guru.framework.springmvcrest.repository.OrderRepository;
-import guru.framework.springmvcrest.repository.RestaurantRepository;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,12 +32,11 @@ public class OrderController {
 
     @GetMapping("/orders/{id}")
     public ResponseEntity<Order> getOrderById(@PathVariable Long id) {
-        Order order =orderRepository.findById(id)
+        Order order = orderRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Order with id " + id + " does not exists"));
 
         return ResponseEntity.ok(order);
     }
-
 
 
     @PutMapping("/orders/{id}")

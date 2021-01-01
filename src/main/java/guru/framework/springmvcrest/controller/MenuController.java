@@ -1,10 +1,7 @@
 package guru.framework.springmvcrest.controller;
 
-import guru.framework.springmvcrest.model.Restaurant;
 import guru.framework.springmvcrest.model.menu.Menu;
-import guru.framework.springmvcrest.model.menu.Product;
 import guru.framework.springmvcrest.repository.MenuRepository;
-import guru.framework.springmvcrest.repository.RestaurantRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,9 +28,9 @@ public class MenuController {
 
     @GetMapping("/menus/{restId}")
     public ResponseEntity<List<Menu>> getMenuByMenuRestaurant(@PathVariable Long restId) {
-        List<Menu> allMenusByRestaurantId=new ArrayList<>();
-        for (Menu m:menuRepository.findAll()) {
-            if(m.getRestaurant().getId()==restId){
+        List<Menu> allMenusByRestaurantId = new ArrayList<>();
+        for (Menu m : menuRepository.findAll()) {
+            if (m.getRestaurant().getId() == restId) {
                 allMenusByRestaurantId.add(m);
             }
         }

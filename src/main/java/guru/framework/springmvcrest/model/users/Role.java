@@ -22,5 +22,5 @@ public class Role {
 
     @ManyToMany(mappedBy = "roles")
     @JsonIgnore
-    private List<Profile> profiles= new ArrayList<>();
+    private List<Profile> profiles = new ArrayList<>();
 }

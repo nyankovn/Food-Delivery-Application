@@ -1,17 +1,17 @@
 package guru.framework.springmvcrest.controller;
 
- import guru.framework.springmvcrest.exception.ResourceNotFoundException;
+import guru.framework.springmvcrest.exception.ResourceNotFoundException;
 import guru.framework.springmvcrest.model.users.Profile;
 import guru.framework.springmvcrest.model.users.Role;
- import guru.framework.springmvcrest.model.users.User;
- import guru.framework.springmvcrest.repository.ProfileRepository;
+import guru.framework.springmvcrest.model.users.User;
+import guru.framework.springmvcrest.repository.ProfileRepository;
 import guru.framework.springmvcrest.repository.RoleRepository;
- import guru.framework.springmvcrest.repository.UserRepository;
- import org.springframework.http.HttpStatus;
+import guru.framework.springmvcrest.repository.UserRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
- import java.util.*;
+import java.util.*;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -25,10 +25,10 @@ public class ProfileController {
     private final RoleRepository roleRepository;
 
 
-    public ProfileController(ProfileRepository profileRepository, RoleRepository roleRepository,UserRepository userRepository) {
+    public ProfileController(ProfileRepository profileRepository, RoleRepository roleRepository, UserRepository userRepository) {
         this.profileRepository = profileRepository;
         this.roleRepository = roleRepository;
-        this.userRepository=userRepository;
+        this.userRepository = userRepository;
     }
 
     @GetMapping("/profiles")
@@ -38,9 +38,9 @@ public class ProfileController {
 
     @GetMapping("/{userRole}")
     public List<Profile> getAllUsersProfilesByRole(@PathVariable String userRole) {
-        List<Profile>profile=new ArrayList<>();
-        for (Role r:roleRepository.findByName(userRole)) {
-            for (Profile p :r.getProfiles()) {
+        List<Profile> profile = new ArrayList<>();
+        for (Role r : roleRepository.findByName(userRole)) {
+            for (Profile p : r.getProfiles()) {
                 profile.add(p);
             }
         }
@@ -63,13 +63,13 @@ public class ProfileController {
 
     @GetMapping("/{userRole}/role")
     public ResponseEntity<List<Role>> getUserRole(@PathVariable String userRole) {
-       List<Role> role= roleRepository.findByName(userRole);
+        List<Role> role = roleRepository.findByName(userRole);
 
         return ResponseEntity.ok(role);
     }
 
-    @PutMapping("/{userRole}/{id}" )
-    public ResponseEntity<Profile> updateUser(@PathVariable Long id, @RequestBody  Profile userDetails) {
+    @PutMapping("/{userRole}/{id}")
+    public ResponseEntity<Profile> updateUser(@PathVariable Long id, @RequestBody Profile userDetails) {
         Profile profile = profileRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Profile with id " + id + " does not exists"));
 
@@ -86,11 +86,11 @@ public class ProfileController {
                 .orElseThrow(() -> new ResourceNotFoundException("Profile with id " + id + " does not exists"));
 
         User user = profile.getProfileUser();
-        List<Profile>updatedList=user.getProfiles();
+        List<Profile> updatedList = user.getProfiles();
         updatedList.remove(profile);
         user.setProfiles(updatedList);
 
-        List<Role>updatedRoles=profile.getRoles();
+        List<Role> updatedRoles = profile.getRoles();
         updatedRoles.removeAll(updatedRoles);
         profile.setRoles(updatedRoles);
 
@@ -98,7 +98,7 @@ public class ProfileController {
         profileRepository.delete(profile);
 
 
-        Map<String,Boolean> response=new HashMap<>();
+        Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
         return ResponseEntity.ok(response);
     }

@@ -1,8 +1,6 @@
 package guru.framework.springmvcrest.controller;
 
-import guru.framework.springmvcrest.model.menu.Menu;
 import guru.framework.springmvcrest.model.menu.Product;
-import guru.framework.springmvcrest.repository.MenuRepository;
 import guru.framework.springmvcrest.repository.ProductRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,9 +27,9 @@ public class ProductController {
 
     @GetMapping("/products/{menuId}")
     public ResponseEntity<List<Product>> getProductsByMenuId(@PathVariable Long menuId) {
-        List<Product> allProductsWithMenuId=new ArrayList<>();
-        for (Product p:productRepository.findAll()) {
-            if(p.getMenu().getId()==menuId){
+        List<Product> allProductsWithMenuId = new ArrayList<>();
+        for (Product p : productRepository.findAll()) {
+            if (p.getMenu().getId() == menuId) {
                 allProductsWithMenuId.add(p);
             }
         }

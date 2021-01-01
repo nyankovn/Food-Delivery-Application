@@ -1,9 +1,7 @@
 package guru.framework.springmvcrest.controller;
 
 import guru.framework.springmvcrest.model.users.Role;
-import guru.framework.springmvcrest.model.users.User;
 import guru.framework.springmvcrest.repository.RoleRepository;
-import guru.framework.springmvcrest.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;

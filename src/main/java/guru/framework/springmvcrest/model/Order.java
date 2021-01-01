@@ -1,19 +1,15 @@
 package guru.framework.springmvcrest.model;
 
-import com.fasterxml.jackson.annotation.*;
-import guru.framework.springmvcrest.model.menu.Drink;
-import guru.framework.springmvcrest.model.menu.Meal;
-//import guru.framework.springmvcrest.model.users.Customer;
-//import guru.framework.springmvcrest.model.users.RestaurantOwner;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import guru.framework.springmvcrest.model.menu.Product;
 import guru.framework.springmvcrest.model.users.Profile;
-import lombok.Data;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "orders")
@@ -41,15 +37,16 @@ public class Order {
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     private List<Product> products = new ArrayList<>();
 
-    @ManyToOne(fetch = FetchType.EAGER,optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JsonBackReference(value = "order-profile")
     private Profile profile;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.PERSIST)
-    @JsonBackReference(value="restaurant-order")
+    @JsonBackReference(value = "restaurant-order")
     private Restaurant restaurant;
 
-    public Order() {}
+    public Order() {
+    }
 
     public Order(String location, LocalDateTime dateOrdered) {
         this.location = location;

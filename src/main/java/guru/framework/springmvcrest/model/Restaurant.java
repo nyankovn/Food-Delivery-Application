@@ -13,8 +13,6 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-//import guru.framework.springmvcrest.model.users.RestaurantOwner;
-
 @Entity
 @Table(name = "restaurants")
 public class Restaurant implements java.io.Serializable {
@@ -52,12 +50,6 @@ public class Restaurant implements java.io.Serializable {
     @JsonManagedReference(value="restaurant-menu")
     private List<Menu> menus;
 
-//    @OneToMany(mappedBy = "restaurant", fetch = FetchType.EAGER)
-//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-////    @JsonManagedReference(value="restaurant-tag")
-//    private List<Tag> tags=new ArrayList<>();
-
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JoinTable(
@@ -72,11 +64,6 @@ public class Restaurant implements java.io.Serializable {
     @Fetch(value = FetchMode.SUBSELECT)
     @JsonManagedReference(value="restaurant-order")
     private List<Order> orders;
-
-
-
-
-
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.PERSIST)
     @JsonBackReference(value = "restaurant-profile")

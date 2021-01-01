@@ -28,9 +28,4 @@ public class MyUserDetailsService implements UserDetailsService {
         }
         return new MyUserDetails(profile);
     }
-
-//    @Override
-//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//        List<Profile> profiles=profileRepository;
-//    }
 }

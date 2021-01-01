@@ -1,8 +1,6 @@
 package guru.framework.springmvcrest.model;
 
-import com.fasterxml.jackson.annotation.*;
-import guru.framework.springmvcrest.model.users.Profile;
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -18,14 +16,9 @@ public class Tag {
     @Column(name = "name")
     private String name;
 
-//    @ManyToOne(fetch = FetchType.LAZY,optional = false, cascade = CascadeType.PERSIST)
-//    @JsonBackReference(value = "restaurant-tag")
-//    private Restaurant restaurant;
-
     @ManyToMany(mappedBy = "tags")
-//    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JsonIgnore
-    private List<Restaurant> restaurants= new ArrayList<>();
+    private List<Restaurant> restaurants = new ArrayList<>();
 
     public long getId() {
         return id;

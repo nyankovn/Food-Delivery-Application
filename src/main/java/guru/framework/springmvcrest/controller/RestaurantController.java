@@ -5,7 +5,6 @@ import guru.framework.springmvcrest.model.Restaurant;
 import guru.framework.springmvcrest.model.authentication.AuthenticationRequest;
 import guru.framework.springmvcrest.model.authentication.AuthenticationResponse;
 import guru.framework.springmvcrest.model.users.Profile;
-import guru.framework.springmvcrest.model.users.Role;
 import guru.framework.springmvcrest.repository.ProfileRepository;
 import guru.framework.springmvcrest.repository.RestaurantRepository;
 import guru.framework.springmvcrest.security.JwtUtil;
@@ -22,9 +21,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
-//import guru.framework.springmvcrest.security.UserDetailsServiceImpl;
 
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -80,7 +76,7 @@ public class RestaurantController {
 
         final String jwt = jwtTokenUtil.generateToken(userDetails);
 
-        return ResponseEntity.ok(new AuthenticationResponse(jwt,temp.getId(), temp.getUsername(), temp.getEmail(), temp.getRoles()));
+        return ResponseEntity.ok(new AuthenticationResponse(jwt, temp.getId(), temp.getUsername(), temp.getEmail(), temp.getRoles()));
     }
 
     @GetMapping("/restaurants")
@@ -108,8 +104,6 @@ public class RestaurantController {
 
         return ResponseEntity.ok(mockRestaurant);
     }
-
-
 
 
     @PutMapping("/restaurants/{id}")
