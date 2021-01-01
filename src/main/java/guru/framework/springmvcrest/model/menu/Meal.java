@@ -18,7 +18,7 @@ public class Meal extends Product {
     }
 
     public Meal(long id, String name, double price, double amount, String description) {
-        super(id, name, price, amount);
+        super( name, price, amount);
         this.description = description;
     }
 }
