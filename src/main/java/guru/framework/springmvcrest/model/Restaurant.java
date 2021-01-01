@@ -48,7 +48,7 @@ public class Restaurant implements java.io.Serializable {
     @OneToMany(mappedBy = "restaurant", fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
     @JsonManagedReference(value="restaurant-menu")
-    private List<Menu> menus;
+    private transient List<Menu> menus;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
@@ -57,17 +57,17 @@ public class Restaurant implements java.io.Serializable {
             joinColumns = @JoinColumn(name = "restaurant_id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id")
     )
-    private List<Tag> tags=new ArrayList<>();
+    private transient List<Tag> tags=new ArrayList<>();
 
 
     @OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY)
     @Fetch(value = FetchMode.SUBSELECT)
     @JsonManagedReference(value="restaurant-order")
-    private List<Order> orders;
+    private transient List<Order> orders;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.PERSIST)
     @JsonBackReference(value = "restaurant-profile")
-    private Profile profile;
+    private transient Profile profile;
 
     public Restaurant() {
 

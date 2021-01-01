@@ -22,7 +22,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping(RestaurantController.BASE_URL)
@@ -51,12 +50,6 @@ public class RestaurantController {
         this.restaurantRepository = restaurantRepository;
         this.restaurantService = restaurantService;
         this.profileRepository = profileRepository;
-    }
-
-
-    @RequestMapping({"/hello"})
-    public String Hello() {
-        return "Hello World";
     }
 
     @RequestMapping(value = "/authenticate/signin", method = RequestMethod.POST)
@@ -89,11 +82,13 @@ public class RestaurantController {
         return restaurantService.getTopRatedRestaurants();
     }
 
+    private String restaurantWithId = "Restaurant with id ";
+    private String doesNotExist = " does not exists";
 
     @GetMapping("/restaurants/{id}")
     public ResponseEntity<Restaurant> getRestaurantById(@PathVariable Long id) {
         Restaurant restaurant = restaurantRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Restaurant with id " + id + " does not exists"));
+                .orElseThrow(() -> new ResourceNotFoundException(restaurantWithId + id + doesNotExist));
 
         return ResponseEntity.ok(restaurant);
     }
@@ -109,7 +104,7 @@ public class RestaurantController {
     @PutMapping("/restaurants/{id}")
     public ResponseEntity<Restaurant> updateRestaurant(@PathVariable Long id, @RequestBody Restaurant restaurantDetails) {
         Restaurant restaurant = restaurantRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Restaurant with id " + id + " does not exists"));
+                .orElseThrow(() -> new ResourceNotFoundException(restaurantWithId + id + doesNotExist));
 
         restaurant.setName(restaurantDetails.getName());
         restaurant.setLocation(restaurantDetails.getLocation());
@@ -126,7 +121,7 @@ public class RestaurantController {
     @DeleteMapping("/restaurants/{id}")
     public ResponseEntity<Map<String, Boolean>> deleteRestaurant(@PathVariable Long id) {
         Restaurant restaurant = restaurantRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Restaurant with id " + id + " does not exists"));
+                .orElseThrow(() -> new ResourceNotFoundException(restaurantWithId + id + doesNotExist));
 
         restaurantRepository.delete(restaurant);
         Map<String, Boolean> response = new HashMap<>();

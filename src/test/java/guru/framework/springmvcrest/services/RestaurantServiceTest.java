@@ -26,12 +26,12 @@ public class RestaurantServiceTest {
     RestaurantRepository restaurantRepository;
 
     @Before
-    public void init() {
+    void init() {
         MockitoAnnotations.initMocks(this);
     }
 
     @Test
-    public void getAllRestaurantsTest() {
+    void getAllRestaurantsTest() {
         List<Restaurant> list = new ArrayList<>();
 
         Restaurant restaurantOne = new Restaurant("Name1", "location", "+123456789", 0, 0, 10, 2, 20, 40);
@@ -50,7 +50,7 @@ public class RestaurantServiceTest {
     }
 
     @Test
-    public void getRestaurantByIdTest() {
+    void getRestaurantByIdTest() {
         when(restaurantRepository.findById((long) 0)).thenReturn(java.util.Optional.of(new Restaurant("Name", "location", "+123456789", 0, 0, 10, 2, 20, 40)));
 
         Restaurant restaurant = restaurantService.findRestaurantById((long) 0);

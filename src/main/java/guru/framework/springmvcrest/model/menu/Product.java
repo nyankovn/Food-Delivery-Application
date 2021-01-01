@@ -15,7 +15,7 @@ import java.util.List;
 @Entity
 @Table(name = "products")
 @Inheritance(strategy = InheritanceType.JOINED)
-public  class Product {
+public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected long id;
@@ -27,8 +27,8 @@ public  class Product {
     @Column(name = "amount")
     protected double amount;//ml and gr
 
-    @ManyToOne(fetch = FetchType.LAZY,optional = false, cascade = CascadeType.PERSIST)
-    @JsonBackReference(value="product-menu")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.PERSIST)
+    @JsonBackReference(value = "product-menu")
     private Menu menu;
 
 
@@ -40,7 +40,8 @@ public  class Product {
     public Product() {
 
     }
-    public Product(long id, String name, double price, double amount) {
+
+    public Product(String name, double price, double amount) {
         this.name = name;
         this.price = price;
         this.amount = amount;

@@ -1,33 +1,22 @@
 package guru.framework.springmvcrest.controller;
 
-import guru.framework.springmvcrest.model.Restaurant;
 import guru.framework.springmvcrest.model.users.User;
 import guru.framework.springmvcrest.repository.UserRepository;
-import org.apache.http.protocol.HTTP;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.http.HttpHeaders;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-
-import javax.transaction.Transactional;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,9 +24,7 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-
 
 
 //@Transactional
@@ -51,7 +38,6 @@ import static org.mockito.Mockito.when;
 @ActiveProfiles("test")
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = User.class)
-
 class UserControllerTest {
 
     @InjectMocks
@@ -61,7 +47,7 @@ class UserControllerTest {
     UserRepository userRepository;
 
     @Test
-    public void testFindAll() {
+    void testFindAll() {
         // given
         User user1 = new User("Lokesh", "Gupta", "+5265454", "Lombokpad 2a");
         User user2 = new User("Alex", "Gussin", "+9638574142", "Kleine Berg 98");
@@ -86,7 +72,7 @@ class UserControllerTest {
     }
 
     @Test
-    public void testGetUserById() {
+    void testGetUserById() {
 
         when(userRepository.findById((long) 1)).thenReturn(java.util.Optional.of(new User("Alex", "Gussin", "+9638574142", "Kleine Berg 98")));
 
@@ -100,7 +86,7 @@ class UserControllerTest {
 
 
     @Test
-    public void testAddUser() {
+    void testAddUser() {
         MockHttpServletRequest request = new MockHttpServletRequest();
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
 
@@ -118,7 +104,7 @@ class UserControllerTest {
 
 
     @Test
-    public void testUpdateUser() {
+    void testUpdateUser() {
         User user1 = new User("Lokesh", "Gupta", "+5265454", "Lombokpad 2a");
         userController.createUser(user1);
 
@@ -131,9 +117,8 @@ class UserControllerTest {
     }
 
 
-
     @Test
-    public void testDeleteUser() {
+    void testDeleteUser() {
         MockHttpServletRequest request = new MockHttpServletRequest();
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
 
@@ -146,7 +131,7 @@ class UserControllerTest {
         users.add(user1);
         users.add(user2);
 
-        ResponseEntity<Map<String,Boolean>> responseEntity = userController.deleteUser(user1.getId());
+        ResponseEntity<Map<String, Boolean>> responseEntity = userController.deleteUser(user1.getId());
         users.remove(user1);
 
         assertThat(responseEntity.getStatusCodeValue()).isEqualTo(200);

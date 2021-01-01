@@ -53,10 +53,13 @@ public class ProfileController {
         return profileRepository.save(user);
     }
 
+    private String profileWithId = "Profile with id ";
+    private String doesNotExist = " does not exists";
+
     @GetMapping("/{userRole}/{id}")
     public ResponseEntity<Profile> getUserById(@PathVariable Long id) {
         Profile profile = profileRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Profile with id " + id + " does not exists"));
+                .orElseThrow(() -> new ResourceNotFoundException(profileWithId + id + doesNotExist));
 
         return ResponseEntity.ok(profile);
     }
@@ -71,7 +74,7 @@ public class ProfileController {
     @PutMapping("/{userRole}/{id}")
     public ResponseEntity<Profile> updateUser(@PathVariable Long id, @RequestBody Profile userDetails) {
         Profile profile = profileRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Profile with id " + id + " does not exists"));
+                .orElseThrow(() -> new ResourceNotFoundException(profileWithId + id + doesNotExist));
 
         profile.setEmail(userDetails.getEmail());
         profile.setPassword(userDetails.getPassword());
@@ -83,7 +86,7 @@ public class ProfileController {
     @DeleteMapping("/{userRole}/{id}")
     public ResponseEntity<Map<String, Boolean>> deleteUser(@PathVariable Long id) {
         Profile profile = profileRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Profile with id " + id + " does not exists"));
+                .orElseThrow(() -> new ResourceNotFoundException(profileWithId + id + doesNotExist));
 
         User user = profile.getProfileUser();
         List<Profile> updatedList = user.getProfiles();

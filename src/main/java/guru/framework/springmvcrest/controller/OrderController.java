@@ -30,10 +30,13 @@ public class OrderController {
     }
 
 
+    private String orderWithId = "Order with id ";
+    private String doesNotExist = " does not exists";
+
     @GetMapping("/orders/{id}")
     public ResponseEntity<Order> getOrderById(@PathVariable Long id) {
         Order order = orderRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Order with id " + id + " does not exists"));
+                .orElseThrow(() -> new ResourceNotFoundException(orderWithId + id + doesNotExist));
 
         return ResponseEntity.ok(order);
     }
@@ -42,7 +45,7 @@ public class OrderController {
     @PutMapping("/orders/{id}")
     public ResponseEntity<Order> updateOrder(@PathVariable Long id, @RequestBody Order orderDetails) {
         Order order = orderRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Order with id " + id + " does not exists"));
+                .orElseThrow(() -> new ResourceNotFoundException(orderWithId + id + doesNotExist));
 
         order.setDateOrdered(orderDetails.getDateOrdered());
         order.setLocation(orderDetails.getLocation());
@@ -54,7 +57,7 @@ public class OrderController {
     @DeleteMapping("/orders/{id}")
     public ResponseEntity<Map<String, Boolean>> deleteOrder(@PathVariable Long id) {
         Order order = orderRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Order with id " + id + " does not exists"));
+                .orElseThrow(() -> new ResourceNotFoundException(orderWithId + id + doesNotExist));
 
         orderRepository.delete(order);
         Map<String, Boolean> response = new HashMap<>();

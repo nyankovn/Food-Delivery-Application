@@ -23,7 +23,7 @@ public class UserController {
     @Autowired
     private final UserRepository userRepository;
 
-    public UserController(UserRepository userRepository, UserService userService) {
+    public UserController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
@@ -33,11 +33,13 @@ public class UserController {
     }
 
 
+    private String userWithId = "User with id ";
+    private String doesNotExist = " does not exists";
 
     @GetMapping("/users/{id}")
     public ResponseEntity<User> getUserById(@PathVariable Long id) {
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User with id " + id + " does not exists"));
+                .orElseThrow(() -> new ResourceNotFoundException(userWithId + id + doesNotExist));
 
         return ResponseEntity.ok(user);
     }
@@ -51,7 +53,7 @@ public class UserController {
     @PutMapping("/users/{id}")
     public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User userDetails) {
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User with id " + id + " does not exists"));
+                .orElseThrow(() -> new ResourceNotFoundException(userWithId + id + doesNotExist));
 
         user.setAddress(userDetails.getAddress());
         user.setPhoneNumber(userDetails.getPhoneNumber());
@@ -63,7 +65,7 @@ public class UserController {
     @DeleteMapping("/users/{id}")
     public ResponseEntity<Map<String, Boolean>> deleteUser(@PathVariable Long id) {
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User with id " + id + " does not exists"));
+                .orElseThrow(() -> new ResourceNotFoundException(userWithId + id + doesNotExist));
 
         userRepository.delete(user);
         Map<String, Boolean> response = new HashMap<>();
