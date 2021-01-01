@@ -1,6 +1,7 @@
 stages:
   - build
   - test
+  - sonarqube
 build:
   stage: build
   script:
@@ -11,6 +12,11 @@ test:
       - build
     script:
       - mvn $MAVEN_CLI_OPTS test
-      
+sonarqube:
+  stage: sonarqube
+  dependencies:
+    - test
+  script:
+    - mvn verify sonar:sonar "-Desonar.qualitygate=true"
 after_script:
     - echo "End CI"
