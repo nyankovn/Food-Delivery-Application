@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RestaurantServiceImpl implements RestaurantService {
@@ -27,7 +28,8 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public List<Restaurant> getTopRatedRestaurants() {
-        return restaurantRepository.getTopRatedRestaurants();
+    public Optional<List<Restaurant>> getTopRatedRestaurants() {
+        Optional<List<Restaurant>> topRatedRestaurants=restaurantRepository.getTopRatedRestaurants();
+        return  topRatedRestaurants;
     }
 }

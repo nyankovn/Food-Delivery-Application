@@ -3,6 +3,7 @@ package guru.framework.springmvcrest.services;
 import guru.framework.springmvcrest.model.Restaurant;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface RestaurantService {
 
@@ -10,5 +11,5 @@ public interface RestaurantService {
 
      Restaurant findRestaurantById(Long id);
 
-     List<Restaurant> getTopRatedRestaurants();
+     Optional<List<Restaurant>> getTopRatedRestaurants();
 }

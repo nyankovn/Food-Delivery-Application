@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 
@@ -25,5 +26,6 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
     @Query(
             value = "SELECT * FROM restaurants ORDER BY rating LIMIT 5",
             nativeQuery = true)
-    List<Restaurant> getTopRatedRestaurants();
+
+    Optional<List<Restaurant>> getTopRatedRestaurants();
 }

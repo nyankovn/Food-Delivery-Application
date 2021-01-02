@@ -93,13 +93,11 @@ public class ProfileController {
         updatedList.remove(profile);
         user.setProfiles(updatedList);
 
-        List<Role> updatedRoles = profile.getRoles();
-        updatedRoles.removeAll(updatedRoles);
+        List<Role> updatedRoles = new ArrayList<>();
         profile.setRoles(updatedRoles);
 
         userRepository.save(user);
         profileRepository.delete(profile);
-
 
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
