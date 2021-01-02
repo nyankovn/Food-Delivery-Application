@@ -1,8 +1,5 @@
 package guru.framework.springmvcrest.controller;
 
-import guru.framework.springmvcrest.exception.ResourceNotFoundException;
-import guru.framework.springmvcrest.model.Restaurant;
-import guru.framework.springmvcrest.repository.ProductRepository;
 import guru.framework.springmvcrest.repository.RestaurantRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

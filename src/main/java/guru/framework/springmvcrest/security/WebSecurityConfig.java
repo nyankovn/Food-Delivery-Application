@@ -93,7 +93,9 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-//        httpSecurity.cors();
+
+        String admin="admin";
+
         httpSecurity
                 .csrf().disable().cors().and()
                 .authorizeRequests()// Enabling URL to be accessed by all users (even un-authenticated)
@@ -102,20 +104,20 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 antMatchers("/admin_ui/users").permitAll().
                 antMatchers("/admin_ui/users/{id}").permitAll().
 
-                antMatchers("/admin_ui/restaurants/mockRestaurant").hasAuthority("admin").
+                antMatchers("/admin_ui/restaurants/mockRestaurant").hasAuthority(admin).
 
                 antMatchers("/admin_ui/restaurants").permitAll().
                 antMatchers("/admin_ui/restaurants/top-rated").permitAll().
                 antMatchers("/admin_ui/restaurants/{id}").permitAll().
 
-                antMatchers("/admin_ui/roles").hasAuthority("admin").
-                antMatchers("/admin_ui/profiles").hasAuthority("admin").
+                antMatchers("/admin_ui/roles").hasAuthority(admin).
+                antMatchers("/admin_ui/profiles").hasAuthority(admin).
 
-                antMatchers("/admin_ui/orders").hasAuthority("admin").
-                antMatchers("/admin_ui/orders/{id}").hasAuthority("admin").
+                antMatchers("/admin_ui/orders").hasAuthority(admin).
+                antMatchers("/admin_ui/orders/{id}").hasAuthority(admin).
 
-                antMatchers("/admin_ui/{userRole}").hasAuthority("admin").
-                antMatchers("/admin_ui/{userRole}/{id}").hasAuthority("admin").
+                antMatchers("/admin_ui/{userRole}").hasAuthority(admin).
+                antMatchers("/admin_ui/{userRole}/{id}").hasAuthority(admin).
 
 
                 anyRequest()

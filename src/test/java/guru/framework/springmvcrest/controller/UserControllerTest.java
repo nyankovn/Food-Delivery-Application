@@ -136,6 +136,6 @@ class UserControllerTest {
 
         assertThat(responseEntity.getStatusCodeValue()).isEqualTo(200);
         assertThat(responseEntity).isEqualTo(users);
-        assertThat(responseEntity.getBody().size()).isEqualTo(1);
+        assertThat(responseEntity.getBody()).hasSize(1);
     }
 }

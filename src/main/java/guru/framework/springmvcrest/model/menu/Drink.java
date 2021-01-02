@@ -13,8 +13,8 @@ public class Drink extends Product {
 
     }
 
-    public Drink(long id, String name, double price, double amount, long id1) {
-        super( name, price, amount);
+    public Drink(String name, double price, double amount, long id1) {
+        super(name, price, amount);
         this.id = id1;
     }
 }

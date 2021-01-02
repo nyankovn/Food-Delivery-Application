@@ -3,7 +3,6 @@ package guru.framework.springmvcrest.controller;
 import guru.framework.springmvcrest.exception.ResourceNotFoundException;
 import guru.framework.springmvcrest.model.users.User;
 import guru.framework.springmvcrest.repository.UserRepository;
-import guru.framework.springmvcrest.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

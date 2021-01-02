@@ -27,5 +27,5 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
             value = "SELECT * FROM restaurants ORDER BY rating LIMIT 5",
             nativeQuery = true)
 
-    Optional<List<Restaurant>> getTopRatedRestaurants();
+    List<Restaurant> getTopRatedRestaurants();
 }

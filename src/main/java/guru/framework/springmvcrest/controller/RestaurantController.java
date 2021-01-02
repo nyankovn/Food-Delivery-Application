@@ -11,6 +11,7 @@ import guru.framework.springmvcrest.security.JwtUtil;
 import guru.framework.springmvcrest.services.MyUserDetailsService;
 import guru.framework.springmvcrest.services.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -53,7 +54,8 @@ public class RestaurantController {
         this.profileRepository = profileRepository;
     }
 
-    @RequestMapping(value = "/authenticate/signin", method = RequestMethod.POST)
+    @PostMapping("/authenticate/signin")
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<AuthenticationResponse> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
         try {
             authenticationManager.authenticate(
@@ -79,7 +81,7 @@ public class RestaurantController {
     }
 
     @GetMapping("/restaurants/top-rated")
-    public Optional<List<Restaurant>> getTopRatedRestaurants() {
+    public List<Restaurant> getTopRatedRestaurants() {
         return restaurantService.getTopRatedRestaurants();
     }
 

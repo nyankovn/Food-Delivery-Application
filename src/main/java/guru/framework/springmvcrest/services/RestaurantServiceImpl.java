@@ -28,8 +28,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public Optional<List<Restaurant>> getTopRatedRestaurants() {
-        Optional<List<Restaurant>> topRatedRestaurants=restaurantRepository.getTopRatedRestaurants();
-        return  topRatedRestaurants;
+    public List<Restaurant> getTopRatedRestaurants() {
+        return  restaurantRepository.getTopRatedRestaurants();
     }
 }
