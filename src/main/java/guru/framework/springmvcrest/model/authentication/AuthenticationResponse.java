@@ -13,7 +13,7 @@ public class AuthenticationResponse implements Serializable {
     private long id;
     private String username;
     private String email;
-    private transient List<Role> roles;
+    private  List<Role> roles;
 
 
     public AuthenticationResponse(String accessToken,long id,  String username, String email, List<Role> roles) {

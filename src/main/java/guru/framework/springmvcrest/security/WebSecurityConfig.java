@@ -53,6 +53,7 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**").allowedMethods("GET", "POST", "PUT", "DELETE").allowedOrigins("*")
                         .allowedHeaders("*");
+                registry.addMapping("/**").allowCredentials(true).allowedOrigins("*").allowedMethods("*");
             }
         };
     }
@@ -103,6 +104,11 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 antMatchers("/admin_ui/users").permitAll().
                 antMatchers("/admin_ui/users/{id}").permitAll().
+                antMatchers("/websocket-chat").permitAll().
+                antMatchers("/websocket-chat/user-all").permitAll().
+                antMatchers("/websocket-chat/topic/user").permitAll().
+                antMatchers("/websocket-chat/*").permitAll().
+                antMatchers("/websocket-chat/**").permitAll().
 
                 antMatchers("/admin_ui/restaurants/mockRestaurant").hasAuthority(admin).
 

@@ -12,7 +12,7 @@ import java.util.List;
 @Transactional
 public class MyUserDetails implements UserDetails {
 
-    private transient Profile profile;
+    private  Profile profile;
 
     public MyUserDetails(Profile profile) {
         this.profile = profile;
