@@ -5,9 +5,11 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import guru.framework.springmvcrest.model.menu.Product;
 import guru.framework.springmvcrest.model.users.Profile;
+import guru.framework.springmvcrest.repository.RestaurantRepository;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +25,7 @@ public class Order {
     private String location;
 
     @Column(name = "date_ordered")
-    private LocalDateTime dateOrdered;
+    private static LocalDateTime dateOrdered;
 
 
     @ManyToMany(cascade = {
@@ -48,9 +50,9 @@ public class Order {
     public Order() {
     }
 
-    public Order(String location, LocalDateTime dateOrdered) {
+    public Order(String location) {
         this.location = location;
-        this.dateOrdered = dateOrdered;
+        this.dateOrdered=LocalDateTime.now();
     }
 
 

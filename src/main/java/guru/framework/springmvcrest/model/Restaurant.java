@@ -43,7 +43,8 @@ public class Restaurant implements java.io.Serializable {
     @Column(name = "max_mins_to_prepare")
     private int maxMinsToPrepare;
 
-
+    @Column(name = "img_dir")
+    private String img_dir;
 
     @OneToMany(mappedBy = "restaurant", fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
@@ -92,6 +93,14 @@ public class Restaurant implements java.io.Serializable {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getImg_dir() {
+        return img_dir;
+    }
+
+    public void setImg_dir(String img_dir) {
+        this.img_dir = img_dir;
     }
 
     public String getName() {

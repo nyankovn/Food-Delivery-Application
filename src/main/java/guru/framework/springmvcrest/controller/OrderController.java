@@ -3,13 +3,19 @@ package guru.framework.springmvcrest.controller;
 
 import guru.framework.springmvcrest.exception.ResourceNotFoundException;
 import guru.framework.springmvcrest.model.Order;
+import guru.framework.springmvcrest.model.Restaurant;
+import guru.framework.springmvcrest.model.users.Profile;
 import guru.framework.springmvcrest.repository.OrderRepository;
+import guru.framework.springmvcrest.repository.ProfileRepository;
+import guru.framework.springmvcrest.repository.RestaurantRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -19,9 +25,13 @@ public class OrderController {
     public static final String BASE_URL = "/admin_ui";
 
     private final OrderRepository orderRepository;
+    private final ProfileRepository profileRepository;
+    private final RestaurantRepository restaurantRepository;
 
-    public OrderController(OrderRepository orderRepository) {
+    public OrderController(OrderRepository orderRepository, ProfileRepository profileRepository, RestaurantRepository restaurantRepository) {
         this.orderRepository = orderRepository;
+        this.profileRepository = profileRepository;
+        this.restaurantRepository = restaurantRepository;
     }
 
     @GetMapping("/orders")
@@ -39,6 +49,30 @@ public class OrderController {
                 .orElseThrow(() -> new ResourceNotFoundException(orderWithId + id + doesNotExist));
 
         return ResponseEntity.ok(order);
+    }
+
+    public Profile getProfileById(@PathVariable Long id) {
+        Profile profile = profileRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(orderWithId + id + doesNotExist));
+
+        return profile;
+    }
+
+    public Restaurant getRestaurantById(@PathVariable Long id) {
+        Restaurant restaurant = restaurantRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(orderWithId + id + doesNotExist));
+
+        return restaurant;
+    }
+
+    @PostMapping("/orders")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Order createOrder(@RequestBody Order order) {
+
+//        order.setProfile(getProfileById(profileId));
+//        order.setRestaurant(getRestaurantById(restaurantId));
+
+        return orderRepository.save(order);
     }
 
 

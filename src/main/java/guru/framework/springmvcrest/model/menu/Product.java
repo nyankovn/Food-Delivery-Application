@@ -22,10 +22,14 @@ public class Product {
 
     @Column(name = "name")
     protected String name;
+
     @Column(name = "price")
     protected double price;
     @Column(name = "amount")
     protected double amount;//ml and gr
+
+    @Column(name = "img_dir")
+    protected String img_dir;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.PERSIST)
     @JsonBackReference(value = "product-menu")
@@ -46,6 +50,4 @@ public class Product {
         this.price = price;
         this.amount = amount;
     }
-
-
 }

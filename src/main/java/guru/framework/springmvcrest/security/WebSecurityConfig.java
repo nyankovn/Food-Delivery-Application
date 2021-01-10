@@ -103,6 +103,7 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin_ui/authenticate/signin").permitAll().
 
                 antMatchers("/admin_ui/users").permitAll().
+
                 antMatchers("/admin_ui/users/{id}").permitAll().
                 antMatchers("/websocket-chat").permitAll().
                 antMatchers("/websocket-chat/user-all").permitAll().
@@ -117,10 +118,11 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 antMatchers("/admin_ui/restaurants/{id}").permitAll().
 
                 antMatchers("/admin_ui/roles").hasAuthority(admin).
-                antMatchers("/admin_ui/profiles").hasAuthority(admin).
+                antMatchers("/admin_ui/profiles").permitAll().
 
-                antMatchers("/admin_ui/orders").hasAuthority(admin).
-                antMatchers("/admin_ui/orders/{id}").hasAuthority(admin).
+                antMatchers("/admin_ui/orders").permitAll().
+                antMatchers("/admin_ui/orders/{id}").permitAll().
+                antMatchers("/admin_ui/restaurants/view-restaurant/{id}").permitAll().
 
                 antMatchers("/admin_ui/{userRole}").hasAuthority(admin).
                 antMatchers("/admin_ui/{userRole}/{id}").hasAuthority(admin).
