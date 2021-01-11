@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -52,26 +51,18 @@ public class OrderController {
     }
 
     public Profile getProfileById(@PathVariable Long id) {
-        Profile profile = profileRepository.findById(id)
+        return profileRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(orderWithId + id + doesNotExist));
-
-        return profile;
     }
 
     public Restaurant getRestaurantById(@PathVariable Long id) {
-        Restaurant restaurant = restaurantRepository.findById(id)
+        return restaurantRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(orderWithId + id + doesNotExist));
-
-        return restaurant;
     }
 
     @PostMapping("/orders")
     @ResponseStatus(HttpStatus.CREATED)
     public Order createOrder(@RequestBody Order order) {
-
-//        order.setProfile(getProfileById(profileId));
-//        order.setRestaurant(getRestaurantById(restaurantId));
-
         return orderRepository.save(order);
     }
 

@@ -3,7 +3,6 @@ package guru.framework.springmvcrest.services;
 import guru.framework.springmvcrest.model.Restaurant;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface RestaurantService {
 
