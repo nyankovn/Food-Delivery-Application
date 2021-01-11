@@ -71,8 +71,6 @@ public class OrderController {
     public ResponseEntity<Order> updateOrder(@PathVariable Long id, @RequestBody Order orderDetails) {
         Order order = orderRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(orderWithId + id + doesNotExist));
-
-        order.setDateOrdered(orderDetails.getDateOrdered());
         order.setLocation(orderDetails.getLocation());
 
         Order updatedOrder = orderRepository.save(order);
