@@ -16,6 +16,7 @@
 
     <properties>
         <java.version>15</java.version>
+        <sonar.coverage.jacoco.xmlReportPaths>../app-it/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     </properties>
 
     <dependencies>
@@ -192,10 +193,6 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
-
-
-
-
 
     </dependencies>
 
