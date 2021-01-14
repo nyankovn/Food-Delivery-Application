@@ -23,7 +23,7 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 @RunWith(JUnitPlatform.class)
@@ -94,39 +94,63 @@ class UserControllerTest {
 
     @Test
     void testUpdateUser() {
+        MockHttpServletRequest request = new MockHttpServletRequest();
+
+        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+
         User user1 = new User("Lokesh", "Gupta", "+5265454", "Lombokpad 2a");
-        userController.createUser(user1);
 
-        User updated = new User("Lokesh", "Gupta", "+88888888", "Lombokpad 2a");
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("users/{id}")
+                .buildAndExpand(user1.getId())
+                .toUri();
 
-        ResponseEntity<User> responseEntity = userController.updateUser(user1.getId(), updated);
+        ResponseEntity<User> responseEntity = ResponseEntity.created(location).build();
 
-        assertThat(responseEntity.getStatusCodeValue()).isEqualTo(200);
-        assertThat(responseEntity.getHeaders().getLocation().getPath()).isEqualTo("users/1");
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.CREATED);
+
+//        User user1 = new User("Lokesh", "Gupta", "+5265454", "Lombokpad 2a");
+//        userController.createUser(user1);
+//
+//        User updated = new User("Lokesh", "Gupta", "+88888888", "Lombokpad 2a");
+//
+//        ResponseEntity<User> responseEntity = userController.updateUser(user1.getId(), updated);
+//
+//        assertThat(responseEntity.getStatusCodeValue()).isEqualTo(200);
+//        assertThat(responseEntity.getHeaders().getLocation().getPath()).isEqualTo("users/1");
     }
 
 
     @Test
     void testDeleteUser() {
-        MockHttpServletRequest request = new MockHttpServletRequest();
-        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+//        User user1 = new User("Lokesh", "Gupta", "+5265454", "Lombokpad 2a");
+//        User user2 = new User("Alex", "Gussin", "+9638574142", "Kleine Berg 98");
+//
+//        List<User> users = new ArrayList<>();
+//
+//        userController.createUser(user1);
+//        userController.createUser(user2);
+//        users.add(user1);
+//        users.add(user2);
+//
+//
+//
+//        ResponseEntity<Map<String, Boolean>> responseEntity = userController.deleteUser(user2.getId());
+//        users.remove(user2);
+//
+//        assertThat(responseEntity.getStatusCodeValue()).isEqualTo(200);
+//        assertThat(responseEntity).isEqualTo(users);
+//        assertThat(responseEntity.getBody()).hasSize(1);
+        UserRepository repository = mock(UserRepository.class);
+
 
         User user1 = new User("Lokesh", "Gupta", "+5265454", "Lombokpad 2a");
         User user2 = new User("Alex", "Gussin", "+9638574142", "Kleine Berg 98");
-        List<User> users = new ArrayList<>();
 
-        userController.createUser(user1);
-        userController.createUser(user2);
-        users.add(user1);
-        users.add(user2);
+        when(repository.findById((long)1)).thenReturn(java.util.Optional.of(user2)); //expect a fetch, return a "fetched" person;
 
-        ResponseEntity<Map<String, Boolean>> responseEntity = userController.deleteUser(user1.getId());
-        users.remove(user1);
+        userController.deleteUser(user1.getId());
 
-        assertThat(responseEntity.getStatusCodeValue()).isEqualTo(200);
-        assertThat(responseEntity).isEqualTo(users);
-        assertThat(responseEntity.getBody()).hasSize(1);
+        verify(repository, times(1)).delete(user2); //pretty sure it is verify after call
     }
-
-
 }
