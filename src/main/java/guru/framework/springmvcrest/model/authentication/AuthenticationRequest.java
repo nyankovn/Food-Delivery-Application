@@ -1,11 +1,9 @@
 package guru.framework.springmvcrest.model.authentication;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Data;
 
 import java.io.Serializable;
 
-@Data
 public class AuthenticationRequest implements Serializable {
     @JsonProperty(value = "username")
     private String username;
@@ -20,4 +18,19 @@ public class AuthenticationRequest implements Serializable {
         this.password = password;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

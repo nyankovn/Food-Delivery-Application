@@ -1,13 +1,11 @@
 package guru.framework.springmvcrest.model.users;
 
-import com.fasterxml.jackson.annotation.*;
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
 @Entity
 @Table(name = "roles")
 
@@ -29,5 +27,29 @@ public class Role {
 
     public Role(String name) {
         this.name = name;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Profile> getProfiles() {
+        return profiles;
+    }
+
+    public void setProfiles(List<Profile> profiles) {
+        this.profiles = profiles;
     }
 }

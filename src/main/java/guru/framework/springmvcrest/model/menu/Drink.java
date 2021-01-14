@@ -1,11 +1,8 @@
 package guru.framework.springmvcrest.model.menu;
 
-import lombok.Data;
-
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-@Data
 @Entity
 @Table(name = "drinks")
 public class Drink extends Product {

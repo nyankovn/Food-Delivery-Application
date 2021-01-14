@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import guru.framework.springmvcrest.model.Order;
-import lombok.Data;
 
 import javax.persistence.*;
 import java.util.ArrayList;

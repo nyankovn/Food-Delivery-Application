@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import guru.framework.springmvcrest.model.menu.Menu;
 import guru.framework.springmvcrest.model.users.Profile;
-import lombok.Data;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -14,7 +13,6 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
 @Entity
 @Table(name = "restaurants")
 public class Restaurant implements java.io.Serializable {
@@ -86,5 +84,125 @@ public class Restaurant implements java.io.Serializable {
         this.closingHour = closingHour;
         this.minMinsToPrepare = minMinsToPrepare;
         this.maxMinsToPrepare = maxMinsToPrepare;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+    public int getRatingVotes() {
+        return ratingVotes;
+    }
+
+    public void setRatingVotes(int ratingVotes) {
+        this.ratingVotes = ratingVotes;
+    }
+
+    public long getOpeningHour() {
+        return openingHour;
+    }
+
+    public void setOpeningHour(long openingHour) {
+        this.openingHour = openingHour;
+    }
+
+    public long getClosingHour() {
+        return closingHour;
+    }
+
+    public void setClosingHour(long closingHour) {
+        this.closingHour = closingHour;
+    }
+
+    public int getMinMinsToPrepare() {
+        return minMinsToPrepare;
+    }
+
+    public void setMinMinsToPrepare(int minMinsToPrepare) {
+        this.minMinsToPrepare = minMinsToPrepare;
+    }
+
+    public int getMaxMinsToPrepare() {
+        return maxMinsToPrepare;
+    }
+
+    public void setMaxMinsToPrepare(int maxMinsToPrepare) {
+        this.maxMinsToPrepare = maxMinsToPrepare;
+    }
+
+    public String getImg_dir() {
+        return img_dir;
+    }
+
+    public void setImg_dir(String img_dir) {
+        this.img_dir = img_dir;
+    }
+
+    public List<Menu> getMenus() {
+        return menus;
+    }
+
+    public void setMenus(List<Menu> menus) {
+        this.menus = menus;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
+    public Profile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
     }
 }
