@@ -34,9 +34,10 @@ class AuthenticationResponseTest {
         assertEquals("test", response.getEmail());
     }
 
+    List<Role> newRoles = new ArrayList<>();
+
     @Test
     void setRoles() {
-        List<Role> newRoles = new ArrayList<>();
         newRoles.add(new Role());
 
         response.setRoles(newRoles);
@@ -63,7 +64,6 @@ class AuthenticationResponseTest {
 
     @Test
     void getRoles() {
-        List<Role> newRoles = new ArrayList<>();
         newRoles.add(new Role());
 
         response.setRoles(newRoles);

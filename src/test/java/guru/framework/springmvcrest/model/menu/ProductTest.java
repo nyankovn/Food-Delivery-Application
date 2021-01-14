@@ -44,16 +44,17 @@ class ProductTest {
         assertTrue(product.getImg_dir() == "test");
     }
 
+    Menu menu=new Menu();
+    List<Order> orders=new ArrayList<>();
+
     @Test
     void getMenu() {
-        Menu menu=new Menu();
         product.setMenu(menu);
         assertTrue(product.getMenu() == menu);
     }
 
     @Test
     void getOrders() {
-        List<Order> orders=new ArrayList<>();
         product.setOrders(orders);
         assertTrue(product.getOrders() == orders);
     }
@@ -96,7 +97,6 @@ class ProductTest {
 
     @Test
     void setMenu() {
-        Menu menu=new Menu();
         product.setMenu(menu);
 
         assertEquals(menu, product.getMenu());
@@ -104,7 +104,6 @@ class ProductTest {
 
     @Test
     void setOrders() {
-        List<Order> orders=new ArrayList<>();
         product.setOrders(orders);
 
         assertEquals(orders, product.getOrders());
