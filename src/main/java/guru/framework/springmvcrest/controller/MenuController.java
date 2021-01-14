@@ -27,7 +27,7 @@ public class MenuController {
     }
 
     @GetMapping("/menus/{restId}")
-    public ResponseEntity<List<Menu>> getMenuByMenuRestaurant(@PathVariable Long restId) {
+    public ResponseEntity<List<Menu>> getMenuByRestaurantId(@PathVariable Long restId) {
         List<Menu> allMenusByRestaurantId = new ArrayList<>();
         for (Menu m : menuRepository.findAll()) {
             if (m.getRestaurant().getId() == restId) {
@@ -36,5 +36,4 @@ public class MenuController {
         }
         return ResponseEntity.ok(allMenusByRestaurantId);
     }
-
 }

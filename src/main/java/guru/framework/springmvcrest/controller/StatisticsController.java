@@ -20,6 +20,4 @@ public class StatisticsController {
     public ResponseEntity<Double> getRestaurantRevenueById(@PathVariable Long id) {
         return ResponseEntity.ok(restaurantRepository.getRevenue());
     }
-
-
 }

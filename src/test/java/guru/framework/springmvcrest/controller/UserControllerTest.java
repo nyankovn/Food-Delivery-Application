@@ -1,143 +1,132 @@
 package guru.framework.springmvcrest.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import guru.framework.springmvcrest.model.users.User;
-import org.junit.Assert;
-import org.junit.Before;
+import guru.framework.springmvcrest.repository.UserRepository;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.RequestBuilder;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-@AutoConfigureMockMvc()
-@AutoConfigureTestDatabase
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
+
+@ExtendWith(MockitoExtension.class)
+@RunWith(JUnitPlatform.class)
 class UserControllerTest {
 
-    @Autowired
-    private WebApplicationContext webAppContext;
-
-    private MockMvc mvc;
-
     @InjectMocks
-    private UserController userController;
+    UserController userController;
 
-    List<User> users;
+    @Mock
+    UserRepository userRepository;
 
-    ObjectMapper objectMapper = new ObjectMapper();
+    @Test
+    void testGetUserById() {
 
-    @Before
-    public void setMockMvc() {
-//        MockitoAnnotations.initMocks(this);
-        mvc = MockMvcBuilders.webAppContextSetup(webAppContext).build();
+        when(userRepository.findById((long) 1)).thenReturn(java.util.Optional.of(new User("Alex", "Gussin", "+9638574142", "Kleine Berg 98")));
 
-        users = new ArrayList<>();
+        ResponseEntity<User> user = userController.getUserById((long) 1);
 
+        assertEquals("Alex", user.getBody().getFirstName());
+        assertEquals("Gussin", user.getBody().getLastName());
+        assertEquals("+9638574142", user.getBody().getPhoneNumber());
+        assertEquals("Kleine Berg 98", user.getBody().getAddress());
+    }
+
+
+    @Test
+    public void testFindAll() {
+        // given
         User user1 = new User("Lokesh", "Gupta", "+5265454", "Lombokpad 2a");
         User user2 = new User("Alex", "Gussin", "+9638574142", "Kleine Berg 98");
 
+        List<User> users = new ArrayList<>();
         users.add(user1);
         users.add(user2);
+
+        when(userRepository.findAll()).thenReturn(users);
+
+        // when
+        List<User> result = userController.getAllUsers();
+
+        // then
+        assertThat(result.size()).isEqualTo(2);
+
+        assertThat(result.get(0).getFirstName())
+                .isEqualTo(user1.getFirstName());
+
+        assertThat(result.get(1).getFirstName())
+                .isEqualTo(user2.getFirstName());
     }
 
     @Test
-    void testFindAll() throws Exception{
+    public void testAddEmployee() {
+        MockHttpServletRequest request = new MockHttpServletRequest();
 
-        Mockito.when(userController.getAllUsers()).thenReturn(users);
+        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
 
-        RequestBuilder builder = MockMvcRequestBuilders.get("/admin_ui/users");
+        User user1 = new User("Lokesh", "Gupta", "+5265454", "Lombokpad 2a");
 
-        MvcResult mvcResult = mvc.perform(builder).andReturn();
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("users/{id}")
+                .buildAndExpand(user1.getId())
+                .toUri();
 
-        String content=mvcResult.getResponse().getContentAsString();
-        String expected=objectMapper.writeValueAsString(users);
+        ResponseEntity<User> responseEntity = ResponseEntity.created(location).build();
 
-        Assert.assertEquals(content,expected);
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.CREATED);
     }
 
-//    @Test
-//    void testGetUserById() {
-//
-//        when(userRepository.findById((long) 1)).thenReturn(java.util.Optional.of(new User("Alex", "Gussin", "+9638574142", "Kleine Berg 98")));
-//
-//        ResponseEntity<User> user = userController.getUserById((long) 1);
-//
-//        assertEquals("Alex", user.getBody().getFirstName());
-//        assertEquals("Gussin", user.getBody().getLastName());
-//        assertEquals("+9638574142", user.getBody().getPhoneNumber());
-//        assertEquals("Kleine Berg 98", user.getBody().getAddress());
-//    }
-//
-//
-//    @Test
-//    void testAddUser() {
-//        MockHttpServletRequest request = new MockHttpServletRequest();
-//        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
-//
-//        User user1 = new User("Lokesh", "Gupta", "+5265454", "Lombokpad 2a");
-//
-//        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-//                .path("users/{id}")
-//                .buildAndExpand(user1.getId())
-//                .toUri();
-//
-//        ResponseEntity<User> responseEntity = ResponseEntity.created(location).build();
-//
-//        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.CREATED);
-//    }
-//
-//
-//    @Test
-//    void testUpdateUser() {
-//        User user1 = new User("Lokesh", "Gupta", "+5265454", "Lombokpad 2a");
-//        userController.createUser(user1);
-//
-//        User updated = new User("Lokesh", "Gupta", "+88888888", "Lombokpad 2a");
-//
-//        ResponseEntity<User> responseEntity = userController.updateUser(user1.getId(), updated);
-//
-//        assertThat(responseEntity.getStatusCodeValue()).isEqualTo(200);
-//        assertThat(responseEntity.getHeaders().getLocation().getPath()).isEqualTo("users/1");
-//    }
-//
-//
-//    @Test
-//    void testDeleteUser() {
-//        MockHttpServletRequest request = new MockHttpServletRequest();
-//        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
-//
-//        User user1 = new User("Lokesh", "Gupta", "+5265454", "Lombokpad 2a");
-//        User user2 = new User("Alex", "Gussin", "+9638574142", "Kleine Berg 98");
-//        List<User> users = new ArrayList<>();
-//
-//        userController.createUser(user1);
-//        userController.createUser(user2);
-//        users.add(user1);
-//        users.add(user2);
-//
-//        ResponseEntity<Map<String, Boolean>> responseEntity = userController.deleteUser(user1.getId());
-//        users.remove(user1);
-//
-//        assertThat(responseEntity.getStatusCodeValue()).isEqualTo(200);
-//        assertThat(responseEntity).isEqualTo(users);
-//        assertThat(responseEntity.getBody()).hasSize(1);
-//    }
+    @Test
+    void testUpdateUser() {
+        User user1 = new User("Lokesh", "Gupta", "+5265454", "Lombokpad 2a");
+        userController.createUser(user1);
+
+        User updated = new User("Lokesh", "Gupta", "+88888888", "Lombokpad 2a");
+
+        ResponseEntity<User> responseEntity = userController.updateUser(user1.getId(), updated);
+
+        assertThat(responseEntity.getStatusCodeValue()).isEqualTo(200);
+        assertThat(responseEntity.getHeaders().getLocation().getPath()).isEqualTo("users/1");
+    }
+
+
+    @Test
+    void testDeleteUser() {
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+
+        User user1 = new User("Lokesh", "Gupta", "+5265454", "Lombokpad 2a");
+        User user2 = new User("Alex", "Gussin", "+9638574142", "Kleine Berg 98");
+        List<User> users = new ArrayList<>();
+
+        userController.createUser(user1);
+        userController.createUser(user2);
+        users.add(user1);
+        users.add(user2);
+
+        ResponseEntity<Map<String, Boolean>> responseEntity = userController.deleteUser(user1.getId());
+        users.remove(user1);
+
+        assertThat(responseEntity.getStatusCodeValue()).isEqualTo(200);
+        assertThat(responseEntity).isEqualTo(users);
+        assertThat(responseEntity.getBody()).hasSize(1);
+    }
 
 
 }

@@ -127,6 +127,8 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 antMatchers("/admin_ui/{userRole}").hasAuthority(admin).
                 antMatchers("/admin_ui/{userRole}/{id}").hasAuthority(admin).
 
+                antMatchers("/admin_ui/menus").permitAll().
+                antMatchers("/admin_ui/menus/{id}").permitAll().
 
                 anyRequest()
                 .authenticated()// Any resources not mentioned above needs to be authenticated
