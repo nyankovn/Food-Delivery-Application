@@ -95,14 +95,6 @@ public class Restaurant implements java.io.Serializable {
         this.id = id;
     }
 
-    public String getImg_dir() {
-        return img_dir;
-    }
-
-    public void setImg_dir(String img_dir) {
-        this.img_dir = img_dir;
-    }
-
     public String getName() {
         return name;
     }
@@ -125,22 +117,6 @@ public class Restaurant implements java.io.Serializable {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public double getRating() {
-        return rating;
-    }
-
-    public void setRating(double rating) {
-        this.rating = rating;
-    }
-
-    public int getRatingVotes() {
-        return ratingVotes;
-    }
-
-    public void setRatingVotes(int ratingVotes) {
-        this.ratingVotes = ratingVotes;
     }
 
     public long getOpeningHour() {
@@ -173,10 +149,6 @@ public class Restaurant implements java.io.Serializable {
 
     public void setMaxMinsToPrepare(int maxMinsToPrepare) {
         this.maxMinsToPrepare = maxMinsToPrepare;
-    }
-
-    public List<Menu> getMenus() {
-        return menus;
     }
 
     public void setMenus(List<Menu> menus) {

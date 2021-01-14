@@ -15,7 +15,6 @@ public class AuthenticationResponse implements Serializable {
     private String email;
     private  List<Role> roles;
 
-
     public AuthenticationResponse(String accessToken,long id,  String username, String email, List<Role> roles) {
         this.id=id;
         this.accessToken = accessToken;

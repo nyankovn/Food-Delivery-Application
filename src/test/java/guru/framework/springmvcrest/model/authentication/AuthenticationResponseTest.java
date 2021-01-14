@@ -1,0 +1,72 @@
+package guru.framework.springmvcrest.model.authentication;
+
+import guru.framework.springmvcrest.model.users.Role;
+import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class AuthenticationResponseTest {
+
+    private List<Role> roles = new ArrayList<>();
+    private AuthenticationResponse response = new AuthenticationResponse("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNjA3MzkwNzQyLCJpYXQiOjE2MDczNTQ3NDJ9.cZSP6zcauxH7EVVOusSx6SQP1-F9NPJJrgcnS4_HRIw", 1, "username", "password", roles);
+
+
+    @Test
+    void setId() {
+        response.setId(2);
+        assertEquals(2, response.getId());
+    }
+
+    @Test
+    void setUsername() {
+        response.setUsername("test");
+        assertEquals("test", response.getUsername());
+    }
+
+    @Test
+    void setEmail() {
+        response.setEmail("test");
+        assertEquals("test", response.getEmail());
+    }
+
+    @Test
+    void setRoles() {
+        List<Role> newRoles = new ArrayList<>();
+        newRoles.add(new Role());
+
+        response.setRoles(newRoles);
+        assertEquals(newRoles, response.getRoles());
+    }
+
+    @Test
+    void getId() {
+        response.setId(2);
+        assertTrue(response.getId() == 2);
+    }
+
+    @Test
+    void getUsername() {
+        response.setUsername("test");
+        assertTrue(response.getUsername() == "test");
+    }
+
+    @Test
+    void getEmail() {
+        response.setEmail("newEmial");
+        assertTrue(response.getEmail() == "newEmial");
+    }
+
+    @Test
+    void getRoles() {
+        List<Role> newRoles = new ArrayList<>();
+        newRoles.add(new Role());
+
+        response.setRoles(newRoles);
+        assertTrue(response.getRoles() == newRoles);
+    }
+}

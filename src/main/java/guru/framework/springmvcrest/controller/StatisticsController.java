@@ -17,7 +17,7 @@ public class StatisticsController {
     }
 
     @GetMapping("/restaurantRevenue/{id}")
-    public ResponseEntity<Double> getRestaurantRevenueById(@PathVariable Long id) {
+    public ResponseEntity<Double> getRestaurantRevenue() {
         return ResponseEntity.ok(restaurantRepository.getRevenue());
     }
 }
