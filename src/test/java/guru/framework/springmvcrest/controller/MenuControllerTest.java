@@ -2,10 +2,7 @@ package guru.framework.springmvcrest.controller;
 
 import guru.framework.springmvcrest.model.Restaurant;
 import guru.framework.springmvcrest.model.menu.Menu;
-import guru.framework.springmvcrest.model.menu.Product;
-import guru.framework.springmvcrest.model.users.User;
 import guru.framework.springmvcrest.repository.MenuRepository;
-import guru.framework.springmvcrest.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.runner.JUnitPlatform;
@@ -19,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
