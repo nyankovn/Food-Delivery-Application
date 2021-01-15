@@ -1,18 +1,27 @@
 package guru.framework.springmvcrest.model.menu;
 
 import guru.framework.springmvcrest.model.Order;
-import guru.framework.springmvcrest.model.authentication.AuthenticationResponse;
-import guru.framework.springmvcrest.model.users.Role;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ProductTest {
 
     private Product product = new Product("name",12.25, 12.25);
+
+    @Test
+    void constructorTest() {
+        Product test = new Product("name",12.25, 12.25);
+        assertThat("name", is(test.getName()));
+        assertThat(12.25, is(test.getPrice()));
+        assertThat(12.25, is(test.getAmount()));
+    }
 
     @Test
     void getId() {
