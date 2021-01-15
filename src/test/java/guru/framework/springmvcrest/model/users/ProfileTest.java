@@ -11,8 +11,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ProfileTest {
 
-    private User user=new User();
-    private Profile profile=new Profile("email","username","password",user);
+    private User user = new User();
+    private Profile profile = new Profile("email", "username", "password", user);
 
     @Test
     void getId() {
@@ -38,14 +38,17 @@ class ProfileTest {
         assertTrue(profile.getPassword() == "test");
     }
 
-//    @Test
-//    void isEnabled() {
-//
-//    }
-User newUser=new User();
-    List<Restaurant> restaurants=new ArrayList<>();
-    List<Order> orders=new ArrayList<>();
-    List<Role> roles=new ArrayList<>();
+    @Test
+    void isEnabled() {
+        profile.setEnabled(true);
+        assertTrue(profile.isEnabled() == true);
+    }
+
+
+    User newUser = new User();
+    List<Restaurant> restaurants = new ArrayList<>();
+    List<Order> orders = new ArrayList<>();
+    List<Role> roles = new ArrayList<>();
 
 
     @Test
@@ -96,11 +99,11 @@ User newUser=new User();
         assertEquals("test", profile.getPassword());
     }
 
-//    @Test
-//    void setEnabled() {
-//        profile.setEmail("test");
-//        assertEquals("test", profile.getEmail());
-//    }
+    @Test
+    void setEnabled() {
+        profile.setEnabled(true);
+        assertEquals(true, profile.isEnabled());
+    }
 
     @Test
     void setProfileUser() {

@@ -2,6 +2,7 @@ package guru.framework.springmvcrest.controller;
 
 import guru.framework.springmvcrest.model.Restaurant;
 import guru.framework.springmvcrest.model.menu.Menu;
+import guru.framework.springmvcrest.model.menu.Product;
 import guru.framework.springmvcrest.model.users.User;
 import guru.framework.springmvcrest.repository.MenuRepository;
 import guru.framework.springmvcrest.repository.UserRepository;
@@ -55,5 +56,16 @@ class MenuControllerTest {
 
         assertThat(result.get(1).getTitle())
                 .isEqualTo(menu2.getTitle());
+    }
+
+    @Test
+    public void testGetMenuByRestaurantId(){
+        Restaurant restaurant=new Restaurant();
+        List<Menu> menus=new ArrayList<>();
+        restaurant.setMenus(menus);
+
+        ResponseEntity<List<Menu>> expected=menuController.getMenuByRestaurantId(restaurant.getId());
+
+        assertThat(expected.getBody()).isEqualTo(menus);
     }
 }

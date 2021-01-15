@@ -1,9 +1,8 @@
 package guru.framework.springmvcrest.controller;
 
+import guru.framework.springmvcrest.model.menu.Menu;
 import guru.framework.springmvcrest.model.menu.Product;
-import guru.framework.springmvcrest.model.users.User;
 import guru.framework.springmvcrest.repository.ProductRepository;
-import guru.framework.springmvcrest.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.runner.JUnitPlatform;
@@ -17,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -28,6 +26,7 @@ class ProductControllerTest {
 
     @Mock
     ProductRepository productRepository;
+
 
     @Test
     public void testFindAll() {
@@ -52,5 +51,16 @@ class ProductControllerTest {
 
         assertThat(result.get(1).getName())
                 .isEqualTo(product2.getName());
+    }
+
+    @Test
+    public void testGetProductsByMenuId() {
+        Menu menu=new Menu();
+        List<Product> products=new ArrayList<>();
+        menu.setProducts(products);
+
+        ResponseEntity<List<Product>> expected=productController.getProductsByMenuId(menu.getId());
+
+        assertThat(expected.getBody()).isEqualTo(products);
     }
 }

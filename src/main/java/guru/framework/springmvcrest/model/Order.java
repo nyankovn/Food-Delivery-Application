@@ -68,14 +68,6 @@ public class Order {
         this.location = location;
     }
 
-    public static LocalDateTime getDateOrdered() {
-        return dateOrdered;
-    }
-
-    public static void setDateOrdered(LocalDateTime dateOrdered) {
-        Order.dateOrdered = dateOrdered;
-    }
-
     public List<Product> getProducts() {
         return products;
     }

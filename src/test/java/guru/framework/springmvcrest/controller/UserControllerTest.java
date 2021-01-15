@@ -9,9 +9,12 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -27,6 +30,8 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 @RunWith(JUnitPlatform.class)
+@ActiveProfiles("test")
+@AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
 class UserControllerTest {
 
     @InjectMocks
@@ -94,30 +99,16 @@ class UserControllerTest {
 
     @Test
     void testUpdateUser() {
-        MockHttpServletRequest request = new MockHttpServletRequest();
+        User user = new User("Lokesh", "Gupta", "+5265454", "Lombokpad 2a");
+        user.setId(1);
+        userRepository.save(user);
 
-        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+        User updatedUser = new User("newName", "Gupta", "+5265454", "Lombokpad 2a");
 
-        User user1 = new User("Lokesh", "Gupta", "+5265454", "Lombokpad 2a");
+        ResponseEntity<User> result = userController.updateUser(user.getId(),updatedUser);
 
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("users/{id}")
-                .buildAndExpand(user1.getId())
-                .toUri();
-
-        ResponseEntity<User> responseEntity = ResponseEntity.created(location).build();
-
-        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.CREATED);
-
-//        User user1 = new User("Lokesh", "Gupta", "+5265454", "Lombokpad 2a");
-//        userController.createUser(user1);
-//
-//        User updated = new User("Lokesh", "Gupta", "+88888888", "Lombokpad 2a");
-//
-//        ResponseEntity<User> responseEntity = userController.updateUser(user1.getId(), updated);
-//
-//        assertThat(responseEntity.getStatusCodeValue()).isEqualTo(200);
-//        assertThat(responseEntity.getHeaders().getLocation().getPath()).isEqualTo("users/1");
+        assertThat(result).isEqualTo(updatedUser);
+        assertThat(result.getBody().getFirstName()).isEqualTo("newName");
     }
 
 

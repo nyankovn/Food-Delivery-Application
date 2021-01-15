@@ -60,41 +60,11 @@ import static org.mockito.Mockito.*;
         assertEquals("+123456789", restaurant.getPhoneNumber());
     }
 
-//    @MockBean
-//    private RestaurantServiceImpl restaurantService;
-//
-//    @Test
-//    void findAllTestNrOfElements() {
-//        when(restaurantService.findAllRestaurants()).thenReturn(Stream.of(
-//                new Restaurant(),
-//                new Restaurant()
-//        ).collect(Collectors.toList()));
-//        assertEquals(2, restaurantService.findAllRestaurants().size());
-//    }
+    @Test
+    void getTopRatedRestaurantsTest(){
+        List<Restaurant> expected = restaurantRepository.getTopRatedRestaurants();
+        List<Restaurant> result = restaurantService.getTopRatedRestaurants();
 
-//    @Test
-//    void findAllTest() {
-//        when(restaurantService.findAllRestaurants()).thenReturn(Stream.of(
-//                new Restaurant("Name", "location", "+123456789", 0, 0, 10, 2, 20, 40),
-//                new Restaurant("SecondName", "location", "+123456789", 0, 0, 10, 2, 20, 40)
-//        ).collect(Collectors.toList()));
-//
-//        String exampleRestaurantJson = "[Restaurant(id=0, name=Name, location=location, phoneNumber=+123456789, rating=0.0, ratingVotes=0, openingHour=10, closingHour=2, minMinsToPrepare=20, maxMinsToPrepare=40, menus=null, tags=null, orders=null), Restaurant(id=0, name=SecondName, location=location, phoneNumber=+123456789, rating=0.0, ratingVotes=0, openingHour=10, closingHour=2, minMinsToPrepare=20, maxMinsToPrepare=40, menus=null, tags=null, orders=null)]";
-//
-//        assertEquals(exampleRestaurantJson, restaurantService.findAllRestaurants().toString()
-//        );
-//    }
-
-
-//    This is NOT WORKING
-//    @Test
-//    public void findByIdTest() {
-//        //Arange
-//        Restaurant restaurant = new Restaurant("Name", "location", "+123456789", 0, 0, 10, 2, 20, 40),
-//
-//
-//        Mockito.when(restaurantService.findRestaurantById((long) 0)).thenReturn(Optional.of(restaurant));
-//        assertThat( .findById(DISH_ID)).isEqualTo(dish);
-//
-//    }
+        assertEquals(expected, result);
+    }
 }
