@@ -99,15 +99,15 @@ class UserControllerTest {
     @Test
     void testUpdateUser() {
         User user = new User("Lokesh", "Gupta", "+5265454", "Lombokpad 2a");
-        user.setId(1);
-        userRepository.save(user);
 
-        User updatedUser = new User("newName", "Gupta", "+5265454", "Lombokpad 2a");
+        User updated = new User("Lokesh", "Gupta", "+5265454", "Lombokpad 2a");
 
-        ResponseEntity<User> result = userController.updateUser(user.getId(),updatedUser);
+        when(userRepository.save(user)).thenReturn(updated);
 
-        assertThat(result).isEqualTo(updatedUser);
-        assertThat(result.getBody().getFirstName()).isEqualTo("newName");
+        ResponseEntity<User> result = userController.updateUser(user.getId(),updated );
+
+        assertEquals(updated.getFirstName(), result.getBody().getFirstName());
+
     }
 
 
