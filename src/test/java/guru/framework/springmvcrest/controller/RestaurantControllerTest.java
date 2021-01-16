@@ -35,7 +35,17 @@ public class RestaurantControllerTest {
     @Mock
     RestaurantRepository restaurantRepository;
 
+    @Test
+    void testMockRestaurant() {
+        Restaurant mockRestaurant = new Restaurant("New Restaurant", "Location 4", "+85845845450", 4, 4, 10, 22, 15, 50);
 
+        ResponseEntity<Restaurant> expected =ResponseEntity.ok(mockRestaurant);
+        ResponseEntity<Restaurant> result =restaurantController.getMockRestaurant();
+
+        assertEquals(expected.getBody().getClosingHour(), result.getBody().getClosingHour());
+        assertEquals(expected.getBody().getName(), result.getBody().getName());
+        assertEquals(expected.getBody().getLocation(), result.getBody().getLocation());
+    }
 
     @Test
     public void testGetAllRestaurants() {
