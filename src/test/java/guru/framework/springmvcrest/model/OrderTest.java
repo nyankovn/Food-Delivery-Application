@@ -1,5 +1,6 @@
 package guru.framework.springmvcrest.model;
 
+import guru.framework.springmvcrest.model.menu.Meal;
 import guru.framework.springmvcrest.model.menu.Product;
 import guru.framework.springmvcrest.model.users.Profile;
 import org.junit.jupiter.api.Test;
@@ -12,6 +13,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class OrderTest {
 
     private Order order=new Order("location");
+
+    @Test
+    void constructorTest() {
+        Order order=new Order();
+        order.setLocation("test");
+        assertEquals("test", order.getLocation());
+    }
 
     @Test
     void getId() {

@@ -16,10 +16,13 @@ class AuthenticationResponseTest {
     private AuthenticationResponse response = new AuthenticationResponse("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNjA3MzkwNzQyLCJpYXQiOjE2MDczNTQ3NDJ9.cZSP6zcauxH7EVVOusSx6SQP1-F9NPJJrgcnS4_HRIw", 1, "username", "password", roles);
 
 
+
+
     @Test
     void setId() {
         response.setId(2);
         assertEquals(2, response.getId());
+
     }
 
     @Test
@@ -68,5 +71,10 @@ class AuthenticationResponseTest {
 
         response.setRoles(newRoles);
         assertTrue(response.getRoles() == newRoles);
+    }
+
+    @Test
+    void getAccessToke() {
+        assertTrue(response.getAccessToken() == "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNjA3MzkwNzQyLCJpYXQiOjE2MDczNTQ3NDJ9.cZSP6zcauxH7EVVOusSx6SQP1-F9NPJJrgcnS4_HRIw");
     }
 }
