@@ -1,7 +1,9 @@
 package guru.framework.springmvcrest.controller;
 
 import guru.framework.springmvcrest.model.menu.Menu;
+import guru.framework.springmvcrest.model.users.User;
 import guru.framework.springmvcrest.repository.MenuRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,5 +37,11 @@ public class MenuController {
             }
         }
         return ResponseEntity.ok(allMenusByRestaurantId);
+    }
+
+    @PostMapping("/menus")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Menu createMenu(@RequestBody Menu menu) {
+        return menuRepository.save(menu);
     }
 }

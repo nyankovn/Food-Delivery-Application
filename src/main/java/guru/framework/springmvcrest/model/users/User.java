@@ -37,6 +37,7 @@ public class User {
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.address = address;
+        profiles=new ArrayList<>();
     }
 
     public long getId() {

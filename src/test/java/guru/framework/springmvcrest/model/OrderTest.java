@@ -21,11 +21,7 @@ class OrderTest {
         assertEquals("test", order.getLocation());
     }
 
-    @Test
-    void getId() {
-        order.setId(2);
-        assertTrue(order.getId() == 2);
-    }
+
 
     @Test
     void getLocation() {
@@ -55,11 +51,6 @@ class OrderTest {
         assertEquals(restaurant, order.getRestaurant());
     }
 
-    @Test
-    void setId() {
-        order.setId(2);
-        assertEquals(2, order.getId());
-    }
 
     @Test
     void setLocation() {

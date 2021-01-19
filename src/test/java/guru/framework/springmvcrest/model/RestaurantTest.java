@@ -13,11 +13,6 @@ class RestaurantTest {
 
     Restaurant restaurant = new Restaurant("Name1", "location", "+123456789", 0, 0, 10, 2, 20, 40);
 
-    @Test
-    void getId() {
-        restaurant.setId(2);
-        assertTrue(restaurant.getId() == 2);
-    }
 
     @Test
     void getName() {
@@ -107,11 +102,7 @@ class RestaurantTest {
         assertTrue(restaurant.getProfile() == profile);
     }
 
-    @Test
-    void setId() {
-        restaurant.setId(2);
-        assertEquals(2, restaurant.getId());
-    }
+
 
     @Test
     void setName() {

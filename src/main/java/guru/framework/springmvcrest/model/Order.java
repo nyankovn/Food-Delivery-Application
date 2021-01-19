@@ -2,6 +2,7 @@ package guru.framework.springmvcrest.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import guru.framework.springmvcrest.model.menu.Product;
 import guru.framework.springmvcrest.model.users.Profile;
@@ -34,15 +35,18 @@ public class Order {
             joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
-    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+//    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+    @JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class,property="@id", scope = Order.class)
+
     private List<Product> products = new ArrayList<>();
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL, optional = false)
     @JsonBackReference(value = "order-profile")
     private Profile profile;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.PERSIST)
-    @JsonBackReference(value = "restaurant-order")
+//    @JsonBackReference(value = "restaurant-order")
+    @JsonIgnore
     private Restaurant restaurant;
 
     public Order() {
@@ -56,9 +60,6 @@ public class Order {
         return id;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getLocation() {
         return location;

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import guru.framework.springmvcrest.model.menu.Menu;
+import guru.framework.springmvcrest.model.menu.Product;
 import guru.framework.springmvcrest.model.users.Profile;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -46,7 +47,7 @@ public class Restaurant implements java.io.Serializable {
     @Column(name = "img_dir")
     private String img_dir;
 
-    @OneToMany(mappedBy = "restaurant", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "restaurant", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @Fetch(value = FetchMode.SUBSELECT)
     @JsonManagedReference(value="restaurant-menu")
     private  List<Menu> menus;
@@ -63,10 +64,11 @@ public class Restaurant implements java.io.Serializable {
 
     @OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY)
     @Fetch(value = FetchMode.SUBSELECT)
-    @JsonManagedReference(value="restaurant-order")
+//    @JsonManagedReference
+    @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class,property="@id", scope = Product.class)
     private  List<Order> orders;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
     @JsonBackReference(value = "restaurant-profile")
     private  Profile profile;
 
@@ -90,9 +92,6 @@ public class Restaurant implements java.io.Serializable {
         return id;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

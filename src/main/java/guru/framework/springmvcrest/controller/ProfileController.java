@@ -53,6 +53,18 @@ public class ProfileController {
         return profileRepository.save(user);
     }
 
+
+    @PostMapping("/authenticate/signup")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Profile signupCustomer(@RequestBody Profile user) {
+//        User user = new User(firstName, lastName, phoneNumbers, address);
+//        Profile profile = new Profile(email, username, password, user);
+
+//        return profileRepository.save(profile);
+        return profileRepository.save(user);
+    }
+
+
     private String profileWithId = "Profile with id ";
     private String doesNotExist = " does not exists";
 

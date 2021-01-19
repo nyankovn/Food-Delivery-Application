@@ -11,11 +11,7 @@ class UserTest {
 
     private User user = new User("firstname", "lastname", "+98412654", "address");
 
-    @Test
-    void getId() {
-        user.setId(2);
-        assertTrue(user.getId() == 2);
-    }
+
 
     @Test
     void getFirstName() {
@@ -50,11 +46,7 @@ class UserTest {
         assertTrue(user.getProfiles() == profiles);
     }
 
-    @Test
-    void setId() {
-        user.setId(2);
-        assertEquals(2, user.getId());
-    }
+
 
     @Test
     void setFirstName() {

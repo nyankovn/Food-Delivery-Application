@@ -11,17 +11,6 @@ class TagTest {
 
     private Tag tag=new Tag();
 
-    @Test
-    void getId() {
-        tag.setId(2);
-        assertTrue(tag.getId() == 2);
-    }
-
-    @Test
-    void setId() {
-        tag.setId(2);
-        assertEquals(2, tag.getId());
-    }
 
     @Test
     void getName() {

@@ -23,11 +23,7 @@ class ProductTest {
         assertThat(12.25, is(test.getAmount()));
     }
 
-    @Test
-    void getId() {
-        product.setId(2);
-        assertTrue(product.getId() == 2);
-    }
+
 
     @Test
     void getName() {
@@ -68,12 +64,6 @@ class ProductTest {
         assertTrue(product.getOrders() == orders);
     }
 
-    @Test
-    void setId() {
-        product.setId(2);
-
-        assertEquals(2, product.getId());
-    }
 
     @Test
     void setName() {

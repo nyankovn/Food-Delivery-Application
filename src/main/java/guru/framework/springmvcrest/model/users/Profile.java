@@ -29,7 +29,7 @@ public class Profile {
 
     private boolean enabled;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     @JsonBackReference(value = "user-profile")
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User profileUser;
@@ -62,6 +62,8 @@ public class Profile {
         this.password = password;
         this.profileUser = profileUser;
     }
+
+
 
     public long getId() {
         return id;
@@ -108,7 +110,11 @@ public class Profile {
     }
 
     public void setProfileUser(User profileUser) {
+
         this.profileUser = profileUser;
+        List<Profile> profiles=new ArrayList<>();
+        profiles.add(this);
+        profileUser.setProfiles(profiles);
     }
 
     public List<Restaurant> getRestaurants() {

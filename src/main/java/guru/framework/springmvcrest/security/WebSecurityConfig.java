@@ -95,12 +95,16 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
 
-        String admin="admin";
+        String admin = "admin";
 
         httpSecurity
                 .csrf().disable().cors().and()
                 .authorizeRequests()// Enabling URL to be accessed by all users (even un-authenticated)
                 .antMatchers("/admin_ui/authenticate/signin").permitAll().
+                antMatchers("/admin_ui/authenticate/signin/**").permitAll().
+
+                antMatchers("/admin_ui/authenticate/signup").permitAll().
+                antMatchers("/admin_ui/authenticate/signup/**").permitAll().
 
                 antMatchers("/admin_ui/users").permitAll().
 
@@ -124,11 +128,12 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 antMatchers("/admin_ui/orders/{id}").permitAll().
                 antMatchers("/admin_ui/restaurants/view-restaurant/{id}").permitAll().
 
-                antMatchers("/admin_ui/{userRole}").hasAuthority(admin).
-                antMatchers("/admin_ui/{userRole}/{id}").hasAuthority(admin).
-
-                antMatchers("/admin_ui/menus").permitAll().
+                antMatchers("/admin_ui/menus/**").permitAll().
+                antMatchers("/admin_ui/menus/*").permitAll().
                 antMatchers("/admin_ui/menus/{id}").permitAll().
+
+                antMatchers("/admin_ui/{userRole}").hasAuthority(admin).
+                antMatchers("/admin_ui/{userRole}/{id}").permitAll().
 
                 anyRequest()
                 .authenticated()// Any resources not mentioned above needs to be authenticated

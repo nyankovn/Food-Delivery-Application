@@ -1,7 +1,10 @@
 package guru.framework.springmvcrest.model.menu;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import guru.framework.springmvcrest.model.Order;
 import guru.framework.springmvcrest.model.Restaurant;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -20,13 +23,14 @@ public class Menu {
     @Column(name = "menu_title")
     private String title;
 
-    @OneToMany(mappedBy = "menu", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "menu", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @Fetch(value = FetchMode.SUBSELECT)
     @JsonManagedReference(value="product-menu")
     private List<Product> products;
 
-    @ManyToOne(fetch = FetchType.LAZY,optional = false, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY,optional = false, cascade = CascadeType.ALL)
     @JsonBackReference(value="restaurant-menu")
+    @JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class,property="@id", scope = Order.class)
     private Restaurant restaurant;
 
     public Menu() {

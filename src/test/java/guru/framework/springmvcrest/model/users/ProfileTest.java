@@ -14,11 +14,6 @@ class ProfileTest {
     private User user = new User();
     private Profile profile = new Profile("email", "username", "password", user);
 
-    @Test
-    void getId() {
-        profile.setId(2);
-        assertTrue(profile.getId() == 2);
-    }
 
     @Test
     void getEmail() {
@@ -75,11 +70,7 @@ class ProfileTest {
         assertTrue(profile.getRoles() == roles);
     }
 
-    @Test
-    void setId() {
-        profile.setId(2);
-        assertEquals(2, profile.getId());
-    }
+
 
     @Test
     void setEmail() {
