@@ -5,10 +5,7 @@ import guru.framework.springmvcrest.model.Restaurant;
 import guru.framework.springmvcrest.model.menu.Menu;
 import guru.framework.springmvcrest.repository.MenuRepository;
 import guru.framework.springmvcrest.repository.RestaurantRepository;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;

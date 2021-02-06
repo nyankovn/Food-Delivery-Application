@@ -1,20 +1,12 @@
 package guru.framework.springmvcrest.controller;
 
-import guru.framework.springmvcrest.exception.ResourceNotFoundException;
-import guru.framework.springmvcrest.model.Restaurant;
 import guru.framework.springmvcrest.model.menu.Menu;
-import guru.framework.springmvcrest.model.users.User;
-import guru.framework.springmvcrest.repository.MenuRepository;
-import guru.framework.springmvcrest.repository.RestaurantRepository;
 import guru.framework.springmvcrest.services.MenuService;
-import guru.framework.springmvcrest.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 

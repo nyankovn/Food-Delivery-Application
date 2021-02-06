@@ -1,25 +1,15 @@
 package guru.framework.springmvcrest.controller;
 
-import guru.framework.springmvcrest.exception.ResourceNotFoundException;
 import guru.framework.springmvcrest.model.Restaurant;
 import guru.framework.springmvcrest.model.users.Profile;
-import guru.framework.springmvcrest.model.users.Role;
-import guru.framework.springmvcrest.model.users.User;
-import guru.framework.springmvcrest.repository.ProfileRepository;
-import guru.framework.springmvcrest.repository.RestaurantRepository;
-import guru.framework.springmvcrest.repository.RoleRepository;
-import guru.framework.springmvcrest.repository.UserRepository;
-import guru.framework.springmvcrest.security.JwtUtil;
 import guru.framework.springmvcrest.services.ProfileService;
-import guru.framework.springmvcrest.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController

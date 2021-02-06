@@ -1,29 +1,12 @@
 package guru.framework.springmvcrest.controller;
 
-import guru.framework.springmvcrest.exception.ResourceNotFoundException;
 import guru.framework.springmvcrest.model.Restaurant;
-import guru.framework.springmvcrest.model.Tag;
-import guru.framework.springmvcrest.model.authentication.AuthenticationRequest;
-import guru.framework.springmvcrest.model.authentication.AuthenticationResponse;
-import guru.framework.springmvcrest.model.users.Profile;
-import guru.framework.springmvcrest.model.users.User;
-import guru.framework.springmvcrest.repository.ProfileRepository;
-import guru.framework.springmvcrest.repository.RestaurantRepository;
-import guru.framework.springmvcrest.repository.TagRepository;
-import guru.framework.springmvcrest.security.JwtUtil;
-import guru.framework.springmvcrest.services.MyUserDetailsService;
 import guru.framework.springmvcrest.services.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
