@@ -76,7 +76,7 @@ class ProfileControllerTest {
 
         when(profileRepository.findById((long) 1)).thenReturn(java.util.Optional.of(new Profile("email", "username", "password", user)));
 
-        ResponseEntity<Profile> profile = profileController.getUserById((long) 1);
+        ResponseEntity<Profile> profile = profileController.getProfileById((long) 1);
 
         assertEquals("email", profile.getBody().getEmail());
     }
@@ -99,31 +99,31 @@ class ProfileControllerTest {
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.CREATED);
     }
 
-    @Test
-    public void testGetAllUsersProfilesByRole() {
-        List<Profile> expected = new ArrayList<>();
-        String userRole = "Admin";
+//    @Test
+//    public void testGetAllUsersProfilesByRole() {
+//        List<Profile> expected = new ArrayList<>();
+//        String userRole = "Admin";
+//
+//        for (Role r : roleRepository.findByName(userRole)) {
+//            for (Profile p : r.getProfiles()) {
+//                expected.add(p);
+//            }
+//        }
+//
+//        List<Profile> result = profileController.getAllUsersProfilesByRole(userRole);
+//
+//        assertThat(expected).isEqualTo(result);
+//    }
 
-        for (Role r : roleRepository.findByName(userRole)) {
-            for (Profile p : r.getProfiles()) {
-                expected.add(p);
-            }
-        }
-
-        List<Profile> result = profileController.getAllUsersProfilesByRole(userRole);
-
-        assertThat(expected).isEqualTo(result);
-    }
-
-    @Test
-    public void testGetUserRole() {
-        String userRole = "Admin";
-
-        List<Role> expected = roleRepository.findByName(userRole);
-        ResponseEntity<List<Role>> result = profileController.getUserRole(userRole);
-
-        assertThat(expected).isEqualTo(result.getBody());
-    }
+//    @Test
+//    public void testGetUserRole() {
+//        String userRole = "Admin";
+//
+//        List<Role> expected = roleRepository.findByName(userRole);
+//        ResponseEntity<List<Role>> result = profileController.getUserRole(userRole);
+//
+//        assertThat(expected).isEqualTo(result.getBody());
+//    }
 
 
 }

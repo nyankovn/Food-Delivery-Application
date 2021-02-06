@@ -30,24 +30,24 @@ import static org.mockito.Mockito.*;
         MockitoAnnotations.initMocks(this);
     }
 
-    @Test
-    void getAllRestaurantsTest() {
-        List<Restaurant> list = new ArrayList<>();
-
-        Restaurant restaurantOne = new Restaurant("Name1", "location", "+123456789", 0, 0, 10, 2, 20, 40);
-        Restaurant restaurantTwo = new Restaurant("Name2", "location", "+123456789", 0, 0, 10, 2, 20, 40);
-        Restaurant restaurantThree = new Restaurant("Name3", "location", "+123456789", 0, 0, 10, 2, 20, 40);
-
-        list.add(restaurantOne);
-        list.add(restaurantTwo);
-        list.add(restaurantThree);
-
-        when(restaurantRepository.findAll()).thenReturn(list);
-        List<Restaurant> restList = restaurantService.findAllRestaurants();
-
-        assertEquals(3, restList.size());
-        verify(restaurantRepository, times(1)).findAll();
-    }
+//    @Test
+//    void getAllRestaurantsTest() {
+//        List<Restaurant> list = new ArrayList<>();
+//
+//        Restaurant restaurantOne = new Restaurant("Name1", "location", "+123456789", 0, 0, 10, 2, 20, 40);
+//        Restaurant restaurantTwo = new Restaurant("Name2", "location", "+123456789", 0, 0, 10, 2, 20, 40);
+//        Restaurant restaurantThree = new Restaurant("Name3", "location", "+123456789", 0, 0, 10, 2, 20, 40);
+//
+//        list.add(restaurantOne);
+//        list.add(restaurantTwo);
+//        list.add(restaurantThree);
+//
+//        when(restaurantRepository.findAll()).thenReturn(list);
+//        List<Restaurant> restList = restaurantService.findAllRestaurants();
+//
+//        assertEquals(3, restList.size());
+//        verify(restaurantRepository, times(1)).findAll();
+//    }
 
     @Test
     void getRestaurantByIdTest() {

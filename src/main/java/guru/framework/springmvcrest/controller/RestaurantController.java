@@ -2,11 +2,14 @@ package guru.framework.springmvcrest.controller;
 
 import guru.framework.springmvcrest.exception.ResourceNotFoundException;
 import guru.framework.springmvcrest.model.Restaurant;
+import guru.framework.springmvcrest.model.Tag;
 import guru.framework.springmvcrest.model.authentication.AuthenticationRequest;
 import guru.framework.springmvcrest.model.authentication.AuthenticationResponse;
 import guru.framework.springmvcrest.model.users.Profile;
+import guru.framework.springmvcrest.model.users.User;
 import guru.framework.springmvcrest.repository.ProfileRepository;
 import guru.framework.springmvcrest.repository.RestaurantRepository;
+import guru.framework.springmvcrest.repository.TagRepository;
 import guru.framework.springmvcrest.security.JwtUtil;
 import guru.framework.springmvcrest.services.MyUserDetailsService;
 import guru.framework.springmvcrest.services.RestaurantService;
@@ -19,6 +22,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,53 +34,12 @@ public class RestaurantController {
 
     public static final String BASE_URL = "/admin_ui";
 
-    private final RestaurantRepository restaurantRepository;
-
-    private final ProfileRepository profileRepository;
-
     @Autowired
-    private final RestaurantService restaurantService;
-
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private JwtUtil jwtTokenUtil;
-
-
-    @Autowired
-    private MyUserDetailsService userDetailsService;
-
-    public RestaurantController(RestaurantRepository restaurantRepository, RestaurantService restaurantService, ProfileRepository profileRepository) {
-        this.restaurantRepository = restaurantRepository;
-        this.restaurantService = restaurantService;
-        this.profileRepository = profileRepository;
-    }
-
-    @PostMapping("/authenticate/signin")
-    @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<AuthenticationResponse> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
-        try {
-            authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword())
-            );
-        } catch (BadCredentialsException e) {
-            throw new Exception("Incorrect username or password", e);
-        }
-
-        final UserDetails userDetails = userDetailsService
-                .loadUserByUsername(authenticationRequest.getUsername());
-
-        Profile temp = profileRepository.findByUsername(authenticationRequest.getUsername());
-
-        final String jwt = jwtTokenUtil.generateToken(userDetails);
-
-        return ResponseEntity.ok(new AuthenticationResponse(jwt, temp.getId(), temp.getUsername(), temp.getEmail(), temp.getRoles()));
-    }
+    private RestaurantService restaurantService;
 
     @GetMapping("/restaurants")
     public List<Restaurant> getAllRestaurants() {
-        return restaurantService.findAllRestaurants();
+        return restaurantService.getAllRestaurants();
     }
 
     @GetMapping("/restaurants/top-rated")
@@ -84,51 +47,36 @@ public class RestaurantController {
         return restaurantService.getTopRatedRestaurants();
     }
 
-    private String restaurantWithId = "Restaurant with id ";
-    private String doesNotExist = " does not exists";
-
     @GetMapping("/restaurants/{id}")
     public ResponseEntity<Restaurant> getRestaurantById(@PathVariable Long id) {
-        Restaurant restaurant = restaurantRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(restaurantWithId + id + doesNotExist));
-
-        return ResponseEntity.ok(restaurant);
+        return new ResponseEntity<>(restaurantService.getRestaurantById(id), HttpStatus.OK);
     }
 
-    @GetMapping("/restaurants/mockRestaurant")
-    public ResponseEntity<Restaurant> getMockRestaurant() {
-        Restaurant mockRestaurant = new Restaurant("New Restaurant", "Location 4", "+85845845450", 4, 4, 10, 22, 15, 50);
-
-        return ResponseEntity.ok(mockRestaurant);
+    @PostMapping("/restaurants/assign-restaurant/{profileId}")
+    public ResponseEntity<Restaurant> createRestaurant(@RequestBody Restaurant restaurant, @PathVariable Long profileId) {
+        return new ResponseEntity<>(restaurantService.createRestaurant(restaurant, profileId), HttpStatus.CREATED);
     }
 
 
     @PutMapping("/restaurants/{id}")
     public ResponseEntity<Restaurant> updateRestaurant(@PathVariable Long id, @RequestBody Restaurant restaurantDetails) {
-        Restaurant restaurant = restaurantRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(restaurantWithId + id + doesNotExist));
+        return new ResponseEntity<>(restaurantService.updateRestaurant(id, restaurantDetails), HttpStatus.OK);
+    }
 
-        restaurant.setName(restaurantDetails.getName());
-        restaurant.setLocation(restaurantDetails.getLocation());
-        restaurant.setPhoneNumber(restaurantDetails.getPhoneNumber());
-        restaurant.setOpeningHour(restaurantDetails.getOpeningHour());
-        restaurant.setClosingHour(restaurantDetails.getClosingHour());
-        restaurant.setMinMinsToPrepare(restaurantDetails.getMinMinsToPrepare());
-        restaurant.setMaxMinsToPrepare(restaurantDetails.getMaxMinsToPrepare());
-
-        Restaurant updatedRestaurant = restaurantRepository.save(restaurant);
-        return ResponseEntity.ok(updatedRestaurant);
+    @PutMapping("/restaurants/{restaurantId}/tags/{tagId}")
+    public ResponseEntity<Restaurant> assignTagToRestaurant(@PathVariable Long restaurantId, @PathVariable Long tagId, @RequestBody Restaurant restaurantDetails) {
+        return new ResponseEntity<>(restaurantService.assignTagToRestaurant(restaurantId, tagId, restaurantDetails), HttpStatus.OK);
     }
 
     @DeleteMapping("/restaurants/{id}")
     public ResponseEntity<Map<String, Boolean>> deleteRestaurant(@PathVariable Long id) {
-        Restaurant restaurant = restaurantRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(restaurantWithId + id + doesNotExist));
+        return new ResponseEntity<>(restaurantService.deleteRestaurant(id), HttpStatus.OK);
 
-        restaurantRepository.delete(restaurant);
-        Map<String, Boolean> response = new HashMap<>();
-        response.put("deleted", Boolean.TRUE);
-        return ResponseEntity.ok(response);
+    }
+
+    @PutMapping("/restaurants/{id}/rate/{rating}")
+    public ResponseEntity<Restaurant> rateRestaurant(@PathVariable Long id, @PathVariable double rating) {
+        return new ResponseEntity<>(restaurantService.rateRestaurant(id, rating), HttpStatus.OK);
     }
 }
 

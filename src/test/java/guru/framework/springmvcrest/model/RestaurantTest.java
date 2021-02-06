@@ -38,11 +38,6 @@ class RestaurantTest {
         assertTrue(restaurant.getRating() == 5);
     }
 
-    @Test
-    void getRatingVotes() {
-        restaurant.setRatingVotes(5);
-        assertTrue(restaurant.getRatingVotes() == 5);
-    }
 
     @Test
     void getOpeningHour() {
@@ -74,10 +69,11 @@ class RestaurantTest {
         assertTrue(restaurant.getImg_dir() == "test");
     }
 
-    List<Menu>menus=new ArrayList<>();
-    List<Tag>tags=new ArrayList<>();
-    List<Order>orders=new ArrayList<>();
-    Profile profile=new Profile();
+    List<Menu> menus = new ArrayList<>();
+    List<Tag> tags = new ArrayList<>();
+    List<Order> orders = new ArrayList<>();
+    Profile profile = new Profile();
+
     @Test
     void getMenus() {
         restaurant.setMenus(menus);
@@ -95,13 +91,6 @@ class RestaurantTest {
         restaurant.setOrders(orders);
         assertTrue(restaurant.getOrders() == orders);
     }
-
-    @Test
-    void getProfile() {
-        restaurant.setProfile(profile);
-        assertTrue(restaurant.getProfile() == profile);
-    }
-
 
 
     @Test
@@ -128,11 +117,6 @@ class RestaurantTest {
         assertEquals(5, restaurant.getRating());
     }
 
-    @Test
-    void setRatingVotes() {
-        restaurant.setRatingVotes(5);
-        assertEquals(5, restaurant.getRatingVotes());
-    }
 
     @Test
     void setOpeningHour() {
@@ -182,9 +166,5 @@ class RestaurantTest {
         assertEquals(orders, restaurant.getOrders());
     }
 
-    @Test
-    void setProfile() {
-        restaurant.setProfile(profile);
-        assertEquals(profile, restaurant.getProfile());
-    }
+
 }

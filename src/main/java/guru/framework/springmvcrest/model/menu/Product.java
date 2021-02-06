@@ -16,18 +16,25 @@ import java.util.List;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected long id;
+    private long id;
 
     @Column(name = "name")
-    protected String name;
+    private String name;
 
     @Column(name = "price")
-    protected double price;
+    private double price;
+
     @Column(name = "amount")
-    protected double amount;//ml and gr
+    private double amount;
+
+    @Column(name = "description")
+    private String description;
 
     @Column(name = "img_dir")
-    protected String img_dir;
+    private String img_dir;
+
+    @Column(name = "type_product")
+    private TypeProduct typeProduct;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.PERSIST)
     @JsonBackReference(value = "product-menu")
@@ -43,16 +50,42 @@ public class Product {
 
     }
 
-    public Product(String name, double price, double amount) {
+    public Product(String name, double price, double amount, String description, String img_dir, TypeProduct typeProduct) {
         this.name = name;
         this.price = price;
         this.amount = amount;
+        this.description = description;
+        this.img_dir = img_dir;
+        this.typeProduct = typeProduct;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public TypeProduct getTypeProduct() {
+        return typeProduct;
+    }
+
+    public void setTypeProduct(TypeProduct typeProduct) {
+        this.typeProduct = typeProduct;
     }
 
     public long getId() {
         return id;
     }
-
 
     public String getName() {
         return name;
@@ -68,14 +101,6 @@ public class Product {
 
     public void setPrice(double price) {
         this.price = price;
-    }
-
-    public double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(double amount) {
-        this.amount = amount;
     }
 
     public String getImg_dir() {

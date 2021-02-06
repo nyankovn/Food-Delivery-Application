@@ -1,6 +1,5 @@
 package guru.framework.springmvcrest.WebSockets.bean;
 
-import guru.framework.springmvcrest.model.menu.Meal;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

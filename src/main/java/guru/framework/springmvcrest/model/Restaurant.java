@@ -29,9 +29,9 @@ public class Restaurant implements java.io.Serializable {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column(name = "rating", nullable = true)
+    @Column(name = "rating")
     private double rating;
-    @Column(name = "rating_votes", nullable = true)
+    @Column(name = "rating_votes")
     private int ratingVotes;
 
     @Column(name = "opening_hour")
@@ -47,10 +47,10 @@ public class Restaurant implements java.io.Serializable {
     @Column(name = "img_dir")
     private String img_dir;
 
-    @OneToMany(mappedBy = "restaurant", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "restaurant", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @Fetch(value = FetchMode.SUBSELECT)
-    @JsonManagedReference(value="restaurant-menu")
-    private  List<Menu> menus;
+    @JsonManagedReference(value = "restaurant-menu")
+    private List<Menu> menus;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
@@ -59,18 +59,18 @@ public class Restaurant implements java.io.Serializable {
             joinColumns = @JoinColumn(name = "restaurant_id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id")
     )
-    private  List<Tag> tags=new ArrayList<>();
+    private List<Tag> tags = new ArrayList<>();
 
 
     @OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY)
     @Fetch(value = FetchMode.SUBSELECT)
 //    @JsonManagedReference
-    @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class,property="@id", scope = Product.class)
-    private  List<Order> orders;
+    @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id", scope = Product.class)
+    private List<Order> orders;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
     @JsonBackReference(value = "restaurant-profile")
-    private  Profile profile;
+    private Profile profile;
 
     public Restaurant() {
 
@@ -86,6 +86,8 @@ public class Restaurant implements java.io.Serializable {
         this.closingHour = closingHour;
         this.minMinsToPrepare = minMinsToPrepare;
         this.maxMinsToPrepare = maxMinsToPrepare;
+        this.ratingVotes = 0;
+        this.rating = 0;
     }
 
     public long getId() {
@@ -122,15 +124,23 @@ public class Restaurant implements java.io.Serializable {
     }
 
     public void setRating(double rating) {
-        this.rating = rating;
+        double totalSum = getRating();
+
+        if (totalSum == 0) {
+            totalSum += rating;
+            this.rating = totalSum;
+        } else {
+            totalSum += rating;
+            this.rating = totalSum / 2;
+        }
     }
 
     public int getRatingVotes() {
         return ratingVotes;
     }
 
-    public void setRatingVotes(int ratingVotes) {
-        this.ratingVotes = ratingVotes;
+    public void setRatingVotes() {
+        this.ratingVotes += 1;
     }
 
     public long getOpeningHour() {

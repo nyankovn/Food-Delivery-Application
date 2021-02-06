@@ -100,40 +100,58 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity
                 .csrf().disable().cors().and()
                 .authorizeRequests()// Enabling URL to be accessed by all users (even un-authenticated)
-                .antMatchers("/admin_ui/authenticate/signin").permitAll().
-                antMatchers("/admin_ui/authenticate/signin/**").permitAll().
 
-                antMatchers("/admin_ui/authenticate/signup").permitAll().
-                antMatchers("/admin_ui/authenticate/signup/**").permitAll().
+                .antMatchers("/authenticate/signin").permitAll().
+                antMatchers("/authenticate/signin/**").permitAll().
+
+                antMatchers("/authenticate/signup").permitAll().
+                antMatchers("/authenticate/signup/**").permitAll().
 
                 antMatchers("/admin_ui/users").permitAll().
-
                 antMatchers("/admin_ui/users/{id}").permitAll().
+
+                antMatchers("/admin_ui/profiles").permitAll().
+                antMatchers("/admin_ui/profiles/{id}").permitAll().
+                antMatchers("/admin_ui/profiles/register-restaurant").permitAll().
+
+                antMatchers("/admin_ui/{role}").permitAll().
+                antMatchers("/admin_ui/profiles}/{id}").permitAll().
+
+                antMatchers("/admin_ui/restaurants").permitAll().
+                antMatchers("/admin_ui//restaurants/assign-restaurant/{profileId}").permitAll().
+                antMatchers("/admin_ui/restaurants/top-rated").permitAll().
+                antMatchers("/admin_ui/restaurants/{id}").permitAll().
+
+                antMatchers("/admin_ui/menus").permitAll().
+                antMatchers("/admin_ui/menus/{id}").permitAll().
+                antMatchers("/admin_ui/menus/{menuId}/{typeProduct}").permitAll().
+
+                antMatchers("/restaurants/{restaurantId}/menus").permitAll().
+                antMatchers("/admin_ui/restaurants/{restaurantId}/menus").permitAll().
+                antMatchers("/admin_ui/restaurants/{restaurantId}/menus/{menuId}").permitAll().
+                antMatchers("/admin_ui/restaurants/{id}/tags/{tagId}").permitAll().
+                antMatchers("/admin_ui/restaurants/{id}/rate/{rating}").permitAll().
+
+                antMatchers("/admin_ui/tags").permitAll().
+                antMatchers("/admin_ui/tags/{id}").permitAll().
+
+                antMatchers("/admin_ui/products").permitAll().
+                antMatchers("/admin_ui/products/{id}").permitAll().
+                antMatchers("/admin_ui/menus/{menuId}/{typeProduct}").permitAll().
+                antMatchers("/admin_ui/menus/{menuId}/products/{id}").permitAll().
+
+                antMatchers("/admin_ui/orders").permitAll().
+                antMatchers("/admin_ui/orders/{id}").permitAll().
+                antMatchers("/admin_ui/restaurants/view-restaurant/{id}").permitAll().
+
                 antMatchers("/websocket-chat").permitAll().
                 antMatchers("/websocket-chat/user-all").permitAll().
                 antMatchers("/websocket-chat/topic/user").permitAll().
                 antMatchers("/websocket-chat/*").permitAll().
                 antMatchers("/websocket-chat/**").permitAll().
 
-                antMatchers("/admin_ui/restaurants/mockRestaurant").hasAuthority(admin).
-
-                antMatchers("/admin_ui/restaurants").permitAll().
-                antMatchers("/admin_ui/restaurants/top-rated").permitAll().
-                antMatchers("/admin_ui/restaurants/{id}").permitAll().
-
                 antMatchers("/admin_ui/roles").hasAuthority(admin).
-                antMatchers("/admin_ui/profiles").permitAll().
 
-                antMatchers("/admin_ui/orders").permitAll().
-                antMatchers("/admin_ui/orders/{id}").permitAll().
-                antMatchers("/admin_ui/restaurants/view-restaurant/{id}").permitAll().
-
-                antMatchers("/admin_ui/menus/**").permitAll().
-                antMatchers("/admin_ui/menus/*").permitAll().
-                antMatchers("/admin_ui/menus/{id}").permitAll().
-
-                antMatchers("/admin_ui/{userRole}").hasAuthority(admin).
-                antMatchers("/admin_ui/{userRole}/{id}").permitAll().
 
                 anyRequest()
                 .authenticated()// Any resources not mentioned above needs to be authenticated

@@ -1,6 +1,5 @@
 package guru.framework.springmvcrest.model;
 
-import guru.framework.springmvcrest.model.menu.Meal;
 import guru.framework.springmvcrest.model.menu.Product;
 import guru.framework.springmvcrest.model.users.Profile;
 import org.junit.jupiter.api.Test;

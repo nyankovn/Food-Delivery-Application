@@ -35,36 +35,24 @@ public class RestaurantControllerTest {
     @Mock
     RestaurantRepository restaurantRepository;
 
-    @Test
-    void testMockRestaurant() {
-        Restaurant mockRestaurant = new Restaurant("New Restaurant", "Location 4", "+85845845450", 4, 4, 10, 22, 15, 50);
-
-        ResponseEntity<Restaurant> expected =ResponseEntity.ok(mockRestaurant);
-        ResponseEntity<Restaurant> result =restaurantController.getMockRestaurant();
-
-        assertEquals(expected.getBody().getClosingHour(), result.getBody().getClosingHour());
-        assertEquals(expected.getBody().getName(), result.getBody().getName());
-        assertEquals(expected.getBody().getLocation(), result.getBody().getLocation());
-    }
-
-    @Test
-    public void testGetAllRestaurants() {
-        List<Restaurant> list = new ArrayList<>();
-
-        Restaurant restaurantOne = new Restaurant("Name1", "location", "+123456789", 0, 0, 10, 2, 20, 40);
-        Restaurant restaurantTwo = new Restaurant("Name2", "location", "+123456789", 0, 0, 10, 2, 20, 40);
-        Restaurant restaurantThree = new Restaurant("Name3", "location", "+123456789", 0, 0, 10, 2, 20, 40);
-
-        list.add(restaurantOne);
-        list.add(restaurantTwo);
-        list.add(restaurantThree);
-
-        when(restaurantRepository.findAll()).thenReturn(list);
-        List<Restaurant> restList = restaurantService.findAllRestaurants();
-
-        assertEquals(3, restList.size());
-        verify(restaurantRepository, times(1)).findAll();
-    }
+//    @Test
+//    public void testGetAllRestaurants() {
+//        List<Restaurant> list = new ArrayList<>();
+//
+//        Restaurant restaurantOne = new Restaurant("Name1", "location", "+123456789", 0, 0, 10, 2, 20, 40);
+//        Restaurant restaurantTwo = new Restaurant("Name2", "location", "+123456789", 0, 0, 10, 2, 20, 40);
+//        Restaurant restaurantThree = new Restaurant("Name3", "location", "+123456789", 0, 0, 10, 2, 20, 40);
+//
+//        list.add(restaurantOne);
+//        list.add(restaurantTwo);
+//        list.add(restaurantThree);
+//
+//        when(restaurantRepository.findAll()).thenReturn(list);
+//        List<Restaurant> restList = restaurantService.findAllRestaurants();
+//
+//        assertEquals(3, restList.size());
+//        verify(restaurantRepository, times(1)).findAll();
+//    }
 
     @Test
     void testGetRestaurantById() {

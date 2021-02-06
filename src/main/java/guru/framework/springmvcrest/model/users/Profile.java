@@ -36,7 +36,7 @@ public class Profile {
 
     @OneToMany(mappedBy = "profile")
     @LazyCollection(LazyCollectionOption.FALSE)
-    @JsonManagedReference(value = "restaurant-profile")
+//    @JsonManagedReference(value = "restaurant-profile")
     private List<Restaurant> restaurants;
 
     @OneToMany(mappedBy = "profile", fetch = FetchType.LAZY)
