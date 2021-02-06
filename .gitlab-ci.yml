@@ -1,30 +1,22 @@
-image: docker
-
-services:
-  - docker:dind
 stages:
   - build
   - test
   - sonarqube
-
 build:
   stage: build
   script:
-    - docker build . --file Dockerfile
+    - mvn $MAVEN_CLI_OPTS compile
 test:
-  stage: test
-  dependencies:
-    - build
-  script:
-    - mvn $MAVEN_CLI_OPTS test
+    stage: test
+    dependencies:
+      - build
+    script:
+      - mvn $MAVEN_CLI_OPTS test
 sonarqube:
   stage: sonarqube
   dependencies:
     - test
-  only:
-    - Production
   script:
     - mvn verify sonar:sonar "-Desonar.qualitygate=true"
 after_script:
-  - echo "End CI"
-
+    - echo "End CI"
