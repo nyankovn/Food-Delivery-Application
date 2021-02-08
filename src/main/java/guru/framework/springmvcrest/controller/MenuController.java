@@ -12,10 +12,7 @@ import java.util.Map;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping(MenuController.BASE_URL)
 public class MenuController {
-
-    public static final String BASE_URL = "/admin_ui";
 
     @Autowired
     private MenuService menuService;

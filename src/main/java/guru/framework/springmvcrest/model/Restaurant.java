@@ -11,6 +11,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,25 +23,32 @@ public class Restaurant implements java.io.Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "name")
+    @NotEmpty(message = "Name must not be empty")
+    @Column(name = "name",unique = true)
     private String name;
+
     @Column(name = "location")
     private String location;
+
+    @NotEmpty(message = "Phone number must not be empty")
     @Column(name = "phone_number")
     private String phoneNumber;
 
     @Column(name = "rating")
     private double rating;
+
     @Column(name = "rating_votes")
     private int ratingVotes;
 
     @Column(name = "opening_hour")
     private long openingHour;
+
     @Column(name = "closing_hour")
     private long closingHour;
 
     @Column(name = "min_mins_to_prepare")
     private int minMinsToPrepare;
+
     @Column(name = "max_mins_to_prepare")
     private int maxMinsToPrepare;
 

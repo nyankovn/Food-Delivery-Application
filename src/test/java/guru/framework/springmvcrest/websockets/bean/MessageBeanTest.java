@@ -1,4 +1,4 @@
-package guru.framework.springmvcrest.WebSockets.bean;
+package guru.framework.springmvcrest.websockets.bean;
 
 import org.junit.jupiter.api.Test;
 

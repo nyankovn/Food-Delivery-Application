@@ -6,10 +6,7 @@ import guru.framework.springmvcrest.model.users.User;
 import guru.framework.springmvcrest.repository.ProfileRepository;
 import guru.framework.springmvcrest.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;

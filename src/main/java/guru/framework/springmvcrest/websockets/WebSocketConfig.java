@@ -1,4 +1,4 @@
-package guru.framework.springmvcrest.WebSockets;
+package guru.framework.springmvcrest.websockets;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;

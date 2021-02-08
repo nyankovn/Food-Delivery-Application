@@ -3,6 +3,7 @@ package guru.framework.springmvcrest.model.users;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,12 +16,17 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotEmpty(message = "First name must not be empty")
     @Column(name = "first_name")
     private String firstName;
+
     @Column(name = "last_name")
     private String lastName;
+
+    @NotEmpty(message = "Phone number must not be empty")
     @Column(name = "phone_number")
     private String phoneNumber;
+
     @Column(name = "address")
     private String address;
 

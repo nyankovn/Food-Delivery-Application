@@ -107,42 +107,42 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 antMatchers("/authenticate/signup").permitAll().
                 antMatchers("/authenticate/signup/**").permitAll().
 
-                antMatchers("/admin_ui/users").permitAll().
-                antMatchers("/admin_ui/users/{id}").permitAll().
+                antMatchers("/users").permitAll().
+                antMatchers("/users/{id}").permitAll().
 
-                antMatchers("/admin_ui/profiles").permitAll().
-                antMatchers("/admin_ui/profiles/{id}").permitAll().
-                antMatchers("/admin_ui/profiles/register-restaurant").permitAll().
+                antMatchers("/profiles").permitAll().
+                antMatchers("/profiles/{id}").permitAll().
+                antMatchers("/profiles/register-restaurant").permitAll().
 
-                antMatchers("/admin_ui/{role}").permitAll().
-                antMatchers("/admin_ui/profiles}/{id}").permitAll().
+                antMatchers("/{role}").permitAll().
+                antMatchers("/profiles}/{id}").permitAll().
 
-                antMatchers("/admin_ui/restaurants").permitAll().
-                antMatchers("/admin_ui//restaurants/assign-restaurant/{profileId}").permitAll().
-                antMatchers("/admin_ui/restaurants/top-rated").permitAll().
-                antMatchers("/admin_ui/restaurants/{id}").permitAll().
+                antMatchers("/restaurants").permitAll().
+                antMatchers("/restaurants/assign-restaurant/{profileId}").permitAll().
+                antMatchers("/restaurants/top-rated").permitAll().
+                antMatchers("/restaurants/{id}").permitAll().
 
-                antMatchers("/admin_ui/menus").permitAll().
-                antMatchers("/admin_ui/menus/{id}").permitAll().
-                antMatchers("/admin_ui/menus/{menuId}/{typeProduct}").permitAll().
+                antMatchers("/menus").permitAll().
+                antMatchers("/menus/{id}").permitAll().
+                antMatchers("/menus/{menuId}/{typeProduct}").permitAll().
 
                 antMatchers("/restaurants/{restaurantId}/menus").permitAll().
-                antMatchers("/admin_ui/restaurants/{restaurantId}/menus").permitAll().
-                antMatchers("/admin_ui/restaurants/{restaurantId}/menus/{menuId}").permitAll().
-                antMatchers("/admin_ui/restaurants/{id}/tags/{tagId}").permitAll().
-                antMatchers("/admin_ui/restaurants/{id}/rate/{rating}").permitAll().
+                antMatchers("/restaurants/{restaurantId}/menus").permitAll().
+                antMatchers("/restaurants/{restaurantId}/menus/{menuId}").permitAll().
+                antMatchers("/restaurants/{id}/tags/{tagId}").permitAll().
+                antMatchers("/restaurants/{id}/rate/{rating}").permitAll().
 
-                antMatchers("/admin_ui/tags").permitAll().
-                antMatchers("/admin_ui/tags/{id}").permitAll().
+                antMatchers("/tags").permitAll().
+                antMatchers("/tags/{id}").permitAll().
 
-                antMatchers("/admin_ui/products").permitAll().
-                antMatchers("/admin_ui/products/{id}").permitAll().
-                antMatchers("/admin_ui/menus/{menuId}/{typeProduct}").permitAll().
-                antMatchers("/admin_ui/menus/{menuId}/products/{id}").permitAll().
+                antMatchers("/products").permitAll().
+                antMatchers("/products/{id}").permitAll().
+                antMatchers("/menus/{menuId}/{typeProduct}").permitAll().
+                antMatchers("/menus/{menuId}/products/{id}").permitAll().
 
-                antMatchers("/admin_ui/orders").permitAll().
-                antMatchers("/admin_ui/orders/{id}").permitAll().
-                antMatchers("/admin_ui/restaurants/view-restaurant/{id}").permitAll().
+                antMatchers("/orders").permitAll().
+                antMatchers("/orders/{id}").permitAll().
+                antMatchers("/restaurants/view-restaurant/{id}").permitAll().
 
                 antMatchers("/websocket-chat").permitAll().
                 antMatchers("/websocket-chat/user-all").permitAll().
@@ -150,7 +150,7 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 antMatchers("/websocket-chat/*").permitAll().
                 antMatchers("/websocket-chat/**").permitAll().
 
-                antMatchers("/admin_ui/roles").hasAuthority(admin).
+                antMatchers("/roles").hasAuthority(admin).
 
 
                 anyRequest()

@@ -3,6 +3,7 @@ package guru.framework.springmvcrest.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,10 +11,11 @@ import java.util.List;
 @Table(name = "tags")
 public class Tag {
     @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "name")
+    @NotEmpty(message = "Name must not be empty")
+    @Column(name = "name",unique = true)
     private String name;
 
     @ManyToMany(mappedBy = "tags")

@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import guru.framework.springmvcrest.model.Order;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,9 +19,11 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "name")
+    @NotEmpty(message = "Name must not be empty")
+    @Column(name = "name",unique = true)
     private String name;
 
+    @NotEmpty(message = "Price must not be empty")
     @Column(name = "price")
     private double price;
 

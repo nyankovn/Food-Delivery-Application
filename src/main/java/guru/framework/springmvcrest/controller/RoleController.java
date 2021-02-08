@@ -14,10 +14,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping(RoleController.BASE_URL)
 public class RoleController {
-
-    public static final String BASE_URL = "/admin_ui";
 
     @Autowired
     private final RoleRepository roleRepository;

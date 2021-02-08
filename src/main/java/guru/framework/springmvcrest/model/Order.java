@@ -8,6 +8,7 @@ import guru.framework.springmvcrest.model.menu.Product;
 import guru.framework.springmvcrest.model.users.Profile;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,12 +21,12 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotEmpty(message = "Location must not be empty")
     @Column(name = "location")
     private String location;
 
     @Column(name = "date_ordered")
     private static LocalDateTime dateOrdered=LocalDateTime.now();
-
 
     @ManyToMany(cascade = {
             CascadeType.PERSIST,

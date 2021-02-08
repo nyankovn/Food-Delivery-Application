@@ -13,10 +13,7 @@ import java.util.Map;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping(RestaurantController.BASE_URL)
 public class TagController {
-    public static final String BASE_URL = "/admin_ui";
-
     @Autowired
     private TagService tagService;
 

@@ -1,4 +1,4 @@
-package guru.framework.springmvcrest.WebSockets.bean;
+package guru.framework.springmvcrest.websockets.bean;
 
 public class MessageBean {
     private String name;

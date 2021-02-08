@@ -1,6 +1,6 @@
-package guru.framework.springmvcrest.WebSockets.controller;
+package guru.framework.springmvcrest.websockets.controller;
 
-import guru.framework.springmvcrest.WebSockets.bean.MessageBean;
+import guru.framework.springmvcrest.websockets.bean.MessageBean;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;

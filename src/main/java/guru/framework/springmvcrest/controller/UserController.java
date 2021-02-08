@@ -13,9 +13,7 @@ import java.util.Map;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping(UserController.BASE_URL)
 public class UserController {
-    public static final String BASE_URL = "/admin_ui";
 
     @Autowired
     private UserService userService;

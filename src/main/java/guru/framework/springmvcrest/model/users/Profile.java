@@ -2,14 +2,16 @@ package guru.framework.springmvcrest.model.users;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import guru.framework.springmvcrest.model.Order;
 import guru.framework.springmvcrest.model.Restaurant;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,10 +22,16 @@ public class Profile {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "email")
+    @NotEmpty(message = "Email must not be empty")
+    @Email(message = "Email should be a valid email")
+    @Column(name = "email",unique = true)
     private String email;
-    @Column(name = "username")
+
+    @NotEmpty(message = "Username must not be empty")
+    @Column(name = "username",unique = true)
     private String username;
+
+    @NotEmpty(message = "Password must not be empty")
     @Column(name = "password")
     private String password;
 
@@ -62,7 +70,6 @@ public class Profile {
         this.password = password;
         this.profileUser = profileUser;
     }
-
 
 
     public long getId() {
@@ -112,7 +119,7 @@ public class Profile {
     public void setProfileUser(User profileUser) {
 
         this.profileUser = profileUser;
-        List<Profile> profiles=new ArrayList<>();
+        List<Profile> profiles = new ArrayList<>();
         profiles.add(this);
         profileUser.setProfiles(profiles);
     }

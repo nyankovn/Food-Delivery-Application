@@ -10,6 +10,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 
@@ -20,7 +21,8 @@ public class Menu {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "menu_title")
+    @NotEmpty(message = "Title must not be empty")
+    @Column(name = "menu_title",unique = true)
     private String title;
 
     @OneToMany(mappedBy = "menu", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
