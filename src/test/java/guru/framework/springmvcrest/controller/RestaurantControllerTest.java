@@ -56,7 +56,7 @@ public class RestaurantControllerTest {
 
     @Test
     void testGetRestaurantById() {
-        when(restaurantRepository.findById((long) 0)).thenReturn(java.util.Optional.of(new Restaurant("Name", "location", "+123456789", 0, 0, 10, 2, 20, 40)));
+        when(restaurantRepository.findById((long) 0)).thenReturn(java.util.Optional.of(new Restaurant("Name", "location", "+123456789", 10, 2, 20, 40)));
 
         ResponseEntity<Restaurant> restaurant = restaurantController.getRestaurantById((long) 0);
 

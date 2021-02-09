@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class RestaurantTest {
 
-    Restaurant restaurant = new Restaurant("Name1", "location", "+123456789", 0, 0, 10, 2, 20, 40);
+    Restaurant restaurant = new Restaurant("Name1", "location", "+123456789", 10, 2, 20, 40);
 
 
     @Test
@@ -32,11 +32,6 @@ class RestaurantTest {
         assertTrue(restaurant.getPhoneNumber() == "test");
     }
 
-    @Test
-    void getRating() {
-        restaurant.setRating(5);
-        assertTrue(restaurant.getRating() == 5);
-    }
 
 
     @Test
@@ -111,11 +106,7 @@ class RestaurantTest {
         assertEquals("test", restaurant.getPhoneNumber());
     }
 
-    @Test
-    void setRating() {
-        restaurant.setRating(5);
-        assertEquals(5, restaurant.getRating());
-    }
+
 
 
     @Test
