@@ -105,22 +105,23 @@ public class ProfileServiceImpl implements ProfileService {
         return response;
     }
 
+
     @Override
     public Restaurant registerRestaurant(Restaurant restaurant) {
         //takes the id of the logged in user, and set it as restaurant owner
 
         String token = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest().getHeader("Authorization");
 
-        if (token.length() > 0) {
+        if (token == null) {
+            throw new ResourceNotFoundException("Token is null");
+        } else {
             String jwt = token.substring(7);
 
             String username = jwtTokenUtil.extractUsername(jwt);
             Profile profile = profileRepository.findByUsername(username);
             restaurant.setProfile(profile);
             return restaurantRepository.save(restaurant);
-        } else {
-            throw new ResourceNotFoundException("Token is empty");
         }
     }
-
 }
+
