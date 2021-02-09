@@ -2,6 +2,7 @@ package guru.framework.springmvcrest.model;
 
 import guru.framework.springmvcrest.model.menu.Menu;
 import guru.framework.springmvcrest.model.users.Profile;
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -17,51 +18,48 @@ class RestaurantTest {
     @Test
     void getName() {
         restaurant.setName("test");
-        assertTrue(restaurant.getName() == "test");
     }
 
     @Test
     void getLocation() {
         restaurant.setLocation("test");
-        assertTrue(restaurant.getLocation() == "test");
+        Assert.assertSame(restaurant.getLocation(), "test");
     }
 
     @Test
     void getPhoneNumber() {
         restaurant.setPhoneNumber("test");
-        assertTrue(restaurant.getPhoneNumber() == "test");
+        Assert.assertSame(restaurant.getPhoneNumber(), "test");
     }
-
-
 
     @Test
     void getOpeningHour() {
         restaurant.setOpeningHour(9);
-        assertTrue(restaurant.getOpeningHour() == 9);
+        Assert.assertSame(restaurant.getOpeningHour(), 9);
     }
 
     @Test
     void getClosingHour() {
         restaurant.setClosingHour(22);
-        assertTrue(restaurant.getClosingHour() == 22);
+        Assert.assertSame(restaurant.getClosingHour(), 22);
     }
 
     @Test
     void getMinMinsToPrepare() {
         restaurant.setMinMinsToPrepare(20);
-        assertTrue(restaurant.getMinMinsToPrepare() == 20);
+        Assert.assertSame(restaurant.getMinMinsToPrepare(), 20);
     }
 
     @Test
     void getMaxMinsToPrepare() {
         restaurant.setMaxMinsToPrepare(40);
-        assertTrue(restaurant.getMaxMinsToPrepare() == 40);
+        Assert.assertSame(restaurant.getMaxMinsToPrepare(), 40);
     }
 
     @Test
     void getImg_dir() {
-        restaurant.setImg_dir("test");
-        assertTrue(restaurant.getImg_dir() == "test");
+        restaurant.setImgDir("test");
+        Assert.assertSame(restaurant.getImgDir(), "test");
     }
 
     List<Menu> menus = new ArrayList<>();
@@ -72,19 +70,20 @@ class RestaurantTest {
     @Test
     void getMenus() {
         restaurant.setMenus(menus);
-        assertTrue(restaurant.getMenus() == menus);
+        Assert.assertSame(restaurant.getMenus(), menus);
+
     }
 
     @Test
     void getTags() {
         restaurant.setTags(tags);
-        assertTrue(restaurant.getTags() == tags);
+        Assert.assertSame(restaurant.getMenus(), menus);
     }
 
     @Test
     void getOrders() {
         restaurant.setOrders(orders);
-        assertTrue(restaurant.getOrders() == orders);
+        Assert.assertSame(restaurant.getOrders(), orders);
     }
 
 
@@ -105,8 +104,6 @@ class RestaurantTest {
         restaurant.setPhoneNumber("test");
         assertEquals("test", restaurant.getPhoneNumber());
     }
-
-
 
 
     @Test
@@ -135,8 +132,8 @@ class RestaurantTest {
 
     @Test
     void setImg_dir() {
-        restaurant.setImg_dir("test");
-        assertEquals("test", restaurant.getImg_dir());
+        restaurant.setImgDir("test");
+        assertEquals("test", restaurant.getImgDir());
     }
 
     @Test

@@ -1,5 +1,6 @@
 package guru.framework.springmvcrest.services;
 
+import guru.framework.springmvcrest.exception.ResourceNotFoundException;
 import guru.framework.springmvcrest.model.users.MyUserDetails;
 import guru.framework.springmvcrest.model.users.Profile;
 import guru.framework.springmvcrest.repository.ProfileRepository;
@@ -20,11 +21,11 @@ public class MyUserDetailsService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) throws ResourceNotFoundException {
         Profile profile = profileRepository.findByUsername(username);
 
         if (profile == null) {
-            throw new UsernameNotFoundException("Could not find user");
+            throw new ResourceNotFoundException("Could not find user");
         }
         return new MyUserDetails(profile);
     }

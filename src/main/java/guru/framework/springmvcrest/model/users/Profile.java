@@ -7,7 +7,6 @@ import guru.framework.springmvcrest.model.Order;
 import guru.framework.springmvcrest.model.Restaurant;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
-import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;

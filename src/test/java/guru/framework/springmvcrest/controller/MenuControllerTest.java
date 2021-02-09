@@ -29,11 +29,11 @@ class MenuControllerTest {
     MenuRepository menuRepository;
 
     @Test
-    public void testFindAll() {
+    void testFindAll() {
         // given
-        Restaurant restaurant=new Restaurant();
-        Menu menu1 = new Menu("menu",null,restaurant);
-        Menu menu2 = new Menu("menu2",null,restaurant);
+        Restaurant restaurant = new Restaurant();
+        Menu menu1 = new Menu("menu", null, restaurant);
+        Menu menu2 = new Menu("menu2", null, restaurant);
 
         List<Menu> menus = new ArrayList<>();
         menus.add(menu1);
@@ -55,12 +55,12 @@ class MenuControllerTest {
     }
 
     @Test
-    public void testGetMenuByRestaurantId(){
-        Restaurant restaurant=new Restaurant();
-        List<Menu> menus=new ArrayList<>();
+    void testGetMenuByRestaurantId() {
+        Restaurant restaurant = new Restaurant();
+        List<Menu> menus = new ArrayList<>();
         restaurant.setMenus(menus);
 
-        ResponseEntity<List<Menu>> expected=menuController.getMenuByRestaurantId(restaurant.getId());
+        ResponseEntity<List<Menu>> expected = menuController.getMenuByRestaurantId(restaurant.getId());
 
         assertThat(expected.getBody()).isEqualTo(menus);
     }

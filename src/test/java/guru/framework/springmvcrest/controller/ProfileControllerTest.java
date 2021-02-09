@@ -46,7 +46,7 @@ class ProfileControllerTest {
 
 
     @Test
-    public void testGetAllProfiles() {
+    void testGetAllProfiles() {
         // given
         Profile profile1 = new Profile("email", "username", "password", user);
         Profile profile2 = new Profile("email2", "username2", "password2", user);
@@ -82,7 +82,7 @@ class ProfileControllerTest {
     }
 
     @Test
-    public void testAddOrder() {
+    void testAddOrder() {
         MockHttpServletRequest request = new MockHttpServletRequest();
 
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));

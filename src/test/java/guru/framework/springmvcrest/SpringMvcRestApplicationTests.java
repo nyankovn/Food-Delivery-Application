@@ -7,8 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 class SpringMvcRestApplicationTests {
 
     @Test
-    public void main() {
-        SpringMvcRestApplication.main(new String[] {});
+    void main() {
+        SpringMvcRestApplication.main(new String[]{});
     }
 
 }

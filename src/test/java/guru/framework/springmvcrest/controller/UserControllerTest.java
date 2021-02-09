@@ -54,7 +54,7 @@ class UserControllerTest {
 
 
     @Test
-    public void testFindAll() {
+    void testFindAll() {
         // given
         User user1 = new User("Lokesh", "Gupta", "+5265454", "Lombokpad 2a");
         User user2 = new User("Alex", "Gussin", "+9638574142", "Kleine Berg 98");
@@ -79,7 +79,7 @@ class UserControllerTest {
     }
 
     @Test
-    public void testAddEmployee() {
+    void testAddEmployee() {
         MockHttpServletRequest request = new MockHttpServletRequest();
 
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
@@ -104,7 +104,7 @@ class UserControllerTest {
 
         when(userRepository.save(user)).thenReturn(updated);
 
-        ResponseEntity<User> result = userController.updateUser(user.getId(),updated );
+        ResponseEntity<User> result = userController.updateUser(user.getId(), updated);
 
         assertEquals(updated.getFirstName(), result.getBody().getFirstName());
 
@@ -137,7 +137,7 @@ class UserControllerTest {
         User user1 = new User("Lokesh", "Gupta", "+5265454", "Lombokpad 2a");
         User user2 = new User("Alex", "Gussin", "+9638574142", "Kleine Berg 98");
 
-        when(repository.findById((long)1)).thenReturn(java.util.Optional.of(user2)); //expect a fetch, return a "fetched" person;
+        when(repository.findById((long) 1)).thenReturn(java.util.Optional.of(user2)); //expect a fetch, return a "fetched" person;
 
         userController.deleteUser(user1.getId());
 

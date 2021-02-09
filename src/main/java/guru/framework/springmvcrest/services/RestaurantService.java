@@ -1,7 +1,6 @@
 package guru.framework.springmvcrest.services;
 
 import guru.framework.springmvcrest.model.Restaurant;
-import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.Map;

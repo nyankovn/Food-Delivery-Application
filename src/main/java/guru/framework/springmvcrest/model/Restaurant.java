@@ -53,7 +53,7 @@ public class Restaurant implements java.io.Serializable {
     private int maxMinsToPrepare;
 
     @Column(name = "img_dir")
-    private String img_dir;
+    private String imgDir;
 
     @OneToMany(mappedBy = "restaurant", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @Fetch(value = FetchMode.SUBSELECT)
@@ -96,7 +96,7 @@ public class Restaurant implements java.io.Serializable {
         this.ratingTotal = 0;
     }
 
-    public double GetAverageRating(){
+    public double getAverageRating(){
         return ratingTotal/ratingVotes;
     }
 
@@ -177,12 +177,12 @@ public class Restaurant implements java.io.Serializable {
         this.maxMinsToPrepare = maxMinsToPrepare;
     }
 
-    public String getImg_dir() {
-        return img_dir;
+    public String getImgDir() {
+        return imgDir;
     }
 
-    public void setImg_dir(String img_dir) {
-        this.img_dir = img_dir;
+    public void setImgDir(String imgDir) {
+        this.imgDir = imgDir;
     }
 
     public List<Menu> getMenus() {

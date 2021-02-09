@@ -24,22 +24,22 @@ public class TagController {
 
     @GetMapping("/tags/{id}")
     public ResponseEntity<Tag> getTagById(@PathVariable Long id) {
-        return new ResponseEntity(tagService.getTagById(id), HttpStatus.OK);
+        return new ResponseEntity<>(tagService.getTagById(id), HttpStatus.OK);
     }
 
     @PostMapping("/tags")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Tag> createTag(@RequestBody Tag tag) {
-        return new ResponseEntity(tagService.createTag(tag), HttpStatus.CREATED);
+        return new ResponseEntity<>(tagService.createTag(tag), HttpStatus.CREATED);
     }
 
     @PutMapping("/tags/{id}")
     public ResponseEntity<Tag> updateTag(@PathVariable Long id, @RequestBody Tag tagDetails) {
-        return new ResponseEntity(tagService.updateTag(id, tagDetails), HttpStatus.OK);
+        return new ResponseEntity<>(tagService.updateTag(id, tagDetails), HttpStatus.OK);
     }
 
     @DeleteMapping("/tags/{id}")
     public ResponseEntity<Map<String, Boolean>> deleteTag(@PathVariable Long id) {
-        return new ResponseEntity(tagService.deleteTag(id), HttpStatus.OK);
+        return new ResponseEntity<>(tagService.deleteTag(id), HttpStatus.OK);
     }
 }

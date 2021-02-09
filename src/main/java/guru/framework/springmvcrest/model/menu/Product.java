@@ -34,7 +34,7 @@ public class Product {
     private String description;
 
     @Column(name = "img_dir")
-    private String img_dir;
+    private String imgDir;
 
     @Column(name = "type_product")
     private TypeProduct typeProduct;
@@ -53,12 +53,12 @@ public class Product {
 
     }
 
-    public Product(String name, double price, double amount, String description, String img_dir, TypeProduct typeProduct) {
+    public Product(String name, double price, double amount, String description, String imgDir, TypeProduct typeProduct) {
         this.name = name;
         this.price = price;
         this.amount = amount;
         this.description = description;
-        this.img_dir = img_dir;
+        this.imgDir = imgDir;
         this.typeProduct = typeProduct;
     }
 
@@ -106,12 +106,12 @@ public class Product {
         this.price = price;
     }
 
-    public String getImg_dir() {
-        return img_dir;
+    public String getImgDir() {
+        return imgDir;
     }
 
-    public void setImg_dir(String img_dir) {
-        this.img_dir = img_dir;
+    public void setImgDir(String imgDir) {
+        this.imgDir = imgDir;
     }
 
     public Menu getMenu() {

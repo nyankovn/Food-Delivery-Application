@@ -7,11 +7,7 @@ import guru.framework.springmvcrest.model.users.Profile;
 import guru.framework.springmvcrest.repository.ProfileRepository;
 import guru.framework.springmvcrest.repository.RestaurantRepository;
 import guru.framework.springmvcrest.repository.TagRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -38,7 +34,8 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public List<Restaurant> getAllRestaurants() {return restaurantRepository.findAll();
+    public List<Restaurant> getAllRestaurants() {
+        return restaurantRepository.findAll();
     }
 
     @Override
@@ -48,19 +45,17 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     public List<Restaurant> getTopRatedRestaurants() {
-        return  restaurantRepository.getTopRatedRestaurants();
+        return restaurantRepository.getTopRatedRestaurants();
     }
 
     @Override
-    public Restaurant getRestaurantById( Long id) {
-        Restaurant restaurant = restaurantRepository.findById(id)
+    public Restaurant getRestaurantById(Long id) {
+        return restaurantRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(restaurantWithId + id + doesNotExist));
-
-        return restaurant;
     }
 
     @Override
-    public Restaurant createRestaurant( Restaurant restaurant, Long profileId) {
+    public Restaurant createRestaurant(Restaurant restaurant, Long profileId) {
         Profile profile = profileRepository.findById(profileId)
                 .orElseThrow(() -> new ResourceNotFoundException("Profile with id " + profileId + doesNotExist));
         restaurant.setProfile(profile);
@@ -68,7 +63,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public Restaurant updateRestaurant( Long id,  Restaurant restaurantDetails) {
+    public Restaurant updateRestaurant(Long id, Restaurant restaurantDetails) {
         Restaurant restaurant = restaurantRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(restaurantWithId + id + doesNotExist));
 
@@ -80,32 +75,30 @@ public class RestaurantServiceImpl implements RestaurantService {
         restaurant.setMinMinsToPrepare(restaurantDetails.getMinMinsToPrepare());
         restaurant.setMaxMinsToPrepare(restaurantDetails.getMaxMinsToPrepare());
 
-        Restaurant updatedRestaurant = restaurantRepository.save(restaurant);
-        return updatedRestaurant;
+        return restaurantRepository.save(restaurant);
     }
 
     @Override
-    public Restaurant assignTagToRestaurant( Long restaurantId, Long tagId,  Restaurant restaurantDetails) {
+    public Restaurant assignTagToRestaurant(Long restaurantId, Long tagId, Restaurant restaurantDetails) {
         Restaurant restaurant = restaurantRepository.findById(restaurantId)
                 .orElseThrow(() -> new ResourceNotFoundException(restaurantWithId + restaurantId + doesNotExist));
 
-        List<Tag> tags=restaurantDetails.getTags();
+        List<Tag> tags = restaurantDetails.getTags();
 
-        Tag tag=tagRepository.findById(tagId)
+        Tag tag = tagRepository.findById(tagId)
                 .orElseThrow(() -> new ResourceNotFoundException("Tag with id " + tagId + doesNotExist));
 
-        if(!tags.contains(tag)){
+        if (!tags.contains(tag)) {
             tags.add(tag);
         }
 
         restaurant.setTags(tags);
 
-        Restaurant updatedRestaurant = restaurantRepository.save(restaurant);
-        return updatedRestaurant;
+        return restaurantRepository.save(restaurant);
     }
 
     @Override
-    public Map<String, Boolean> deleteRestaurant( Long id) {
+    public Map<String, Boolean> deleteRestaurant(Long id) {
         Restaurant restaurant = restaurantRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(restaurantWithId + id + doesNotExist));
 
@@ -116,7 +109,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public Restaurant rateRestaurant(Long id,double rating){
+    public Restaurant rateRestaurant(Long id, double rating) {
         Restaurant restaurant = restaurantRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(restaurantWithId + id + doesNotExist));
 

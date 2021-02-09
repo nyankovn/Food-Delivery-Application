@@ -24,7 +24,7 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 @RunWith(JUnitPlatform.class)
-public class RestaurantControllerTest {
+class RestaurantControllerTest {
 
     @InjectMocks
     RestaurantController restaurantController;
@@ -66,7 +66,7 @@ public class RestaurantControllerTest {
     }
 
     @Test
-    void getTopRatedRestaurantsTest(){
+    void getTopRatedRestaurantsTest() {
         List<Restaurant> expected = restaurantRepository.getTopRatedRestaurants();
         List<Restaurant> result = restaurantService.getTopRatedRestaurants();
 

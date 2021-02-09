@@ -26,7 +26,7 @@ class RoleControllerTest {
     RoleRepository roleRepository;
 
     @Test
-    public void testFindAll() {
+     void testFindAll() {
         // given
         Role role1=new Role("role2");
         Role role2=new Role("role1");

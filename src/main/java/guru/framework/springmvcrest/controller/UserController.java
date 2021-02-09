@@ -18,9 +18,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    private String userWithId = "User with id ";
-    private String doesNotExist = " does not exists";
-
     @GetMapping("/users")
     public List<User> getAllUsers() {
         return userService.getAllUsers();

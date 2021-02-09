@@ -34,10 +34,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserById(Long id) {
-        User user = userRepository.findById(id)
+        return userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(userWithId + id + doesNotExist));
-
-        return user;
     }
 
     @Override
@@ -53,8 +51,7 @@ public class UserServiceImpl implements UserService {
         user.setAddress(userDetails.getAddress());
         user.setPhoneNumber(userDetails.getPhoneNumber());
 
-        User updateUser = userRepository.save(user);
-        return updateUser;
+        return userRepository.save(user);
     }
 
     @Override

@@ -37,10 +37,10 @@ class OrderControllerTest {
     OrderRepository orderRepository;
 
     @Test
-    public void testGetAllOrders() {
+    void testGetAllOrders() {
         // given
-        Order order1=new Order("location");
-        Order order2=new Order("location2");
+        Order order1 = new Order("location");
+        Order order2 = new Order("location2");
 
         List<Order> orders = new ArrayList<>();
 
@@ -73,12 +73,12 @@ class OrderControllerTest {
     }
 
     @Test
-    public void testAddOrder() {
+    void testAddOrder() {
         MockHttpServletRequest request = new MockHttpServletRequest();
 
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
 
-        Order order1=new Order("location");
+        Order order1 = new Order("location");
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("orders/{id}")
