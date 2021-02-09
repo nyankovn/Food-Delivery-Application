@@ -34,8 +34,8 @@ public class Restaurant implements java.io.Serializable {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column(name = "rating")
-    private double rating;
+    @Column(name = "ratingTotal")
+    private double ratingTotal;
 
     @Column(name = "rating_votes")
     private int ratingVotes;
@@ -84,18 +84,20 @@ public class Restaurant implements java.io.Serializable {
 
     }
 
-    public Restaurant(String name, String location, String phoneNumber, double rating, int ratingVotes, long openingHour, long closingHour, int minMinsToPrepare, int maxMinsToPrepare) {
+    public Restaurant(String name, String location, String phoneNumber, long openingHour, long closingHour, int minMinsToPrepare, int maxMinsToPrepare) {
         this.name = name;
         this.location = location;
         this.phoneNumber = phoneNumber;
-        this.rating = rating;
-        this.ratingVotes = ratingVotes;
         this.openingHour = openingHour;
         this.closingHour = closingHour;
         this.minMinsToPrepare = minMinsToPrepare;
         this.maxMinsToPrepare = maxMinsToPrepare;
         this.ratingVotes = 0;
-        this.rating = 0;
+        this.ratingTotal = 0;
+    }
+
+    public double GetAverageRating(){
+        return ratingTotal/ratingVotes;
     }
 
     public long getId() {
@@ -128,19 +130,11 @@ public class Restaurant implements java.io.Serializable {
     }
 
     public double getRating() {
-        return rating;
+        return ratingTotal;
     }
 
-    public void setRating(double rating) {
-        double totalSum = getRating();
-
-        if (totalSum == 0) {
-            totalSum += rating;
-            this.rating = totalSum;
-        } else {
-            totalSum += rating;
-            this.rating = totalSum / 2;
-        }
+    public void setRatingTotal(double rating) {
+       ratingTotal+=rating;
     }
 
     public int getRatingVotes() {

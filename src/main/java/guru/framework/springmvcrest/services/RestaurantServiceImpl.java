@@ -121,7 +121,7 @@ public class RestaurantServiceImpl implements RestaurantService {
                 .orElseThrow(() -> new ResourceNotFoundException(restaurantWithId + id + doesNotExist));
 
         restaurant.setRatingVotes();
-        restaurant.setRating(rating);
+        restaurant.setRatingTotal(rating);
 
         restaurantRepository.save(restaurant);
 
