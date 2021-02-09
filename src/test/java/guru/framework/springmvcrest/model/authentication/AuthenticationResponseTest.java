@@ -1,6 +1,7 @@
 package guru.framework.springmvcrest.model.authentication;
 
 import guru.framework.springmvcrest.model.users.Role;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,8 +15,6 @@ class AuthenticationResponseTest {
 
     private List<Role> roles = new ArrayList<>();
     private AuthenticationResponse response = new AuthenticationResponse("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNjA3MzkwNzQyLCJpYXQiOjE2MDczNTQ3NDJ9.cZSP6zcauxH7EVVOusSx6SQP1-F9NPJJrgcnS4_HRIw", 1, "username", "password", roles);
-
-
 
 
     @Test
@@ -50,19 +49,19 @@ class AuthenticationResponseTest {
     @Test
     void getId() {
         response.setId(2);
-        assertTrue(response.getId() == 2);
+        Assert.assertSame(2, response.getId());
     }
 
     @Test
     void getUsername() {
         response.setUsername("test");
-        assertTrue(response.getUsername() == "test");
+        Assert.assertSame("test", response.getUsername());
     }
 
     @Test
     void getEmail() {
-        response.setEmail("newEmial");
-        assertTrue(response.getEmail() == "newEmial");
+        response.setEmail("newEmaill");
+        Assert.assertSame("newEmaill", response.getEmail());
     }
 
     @Test
@@ -70,11 +69,11 @@ class AuthenticationResponseTest {
         newRoles.add(new Role());
 
         response.setRoles(newRoles);
-        assertTrue(response.getRoles() == newRoles);
+        Assert.assertSame(newRoles, response.getRoles());
     }
 
     @Test
     void getAccessToke() {
-        assertTrue(response.getAccessToken() == "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNjA3MzkwNzQyLCJpYXQiOjE2MDczNTQ3NDJ9.cZSP6zcauxH7EVVOusSx6SQP1-F9NPJJrgcnS4_HRIw");
+        Assert.assertSame("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNjA3MzkwNzQyLCJpYXQiOjE2MDczNTQ3NDJ9.cZSP6zcauxH7EVVOusSx6SQP1-F9NPJJrgcnS4_HRIw", response.getAccessToken());
     }
 }

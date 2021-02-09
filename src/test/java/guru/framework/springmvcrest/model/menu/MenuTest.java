@@ -1,6 +1,7 @@
 package guru.framework.springmvcrest.model.menu;
 
 import guru.framework.springmvcrest.model.Restaurant;
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ class MenuTest {
     @Test
     void getId() {
         menu.setId(3);
-        assertTrue(menu.getId() == 3);
+        Assert.assertSame(3, menu.getId());
     }
 
     @Test
@@ -30,7 +31,7 @@ class MenuTest {
     @Test
     void getTitle() {
         menu.setTitle("test");
-        assertTrue(menu.getTitle() == "test");
+        Assert.assertSame("test", menu.getTitle());
     }
 
     @Test
@@ -45,7 +46,7 @@ class MenuTest {
     @Test
     void getProducts() {
         menu.setProducts(newProducts);
-        assertTrue(menu.getProducts() == newProducts);
+        Assert.assertSame(newProducts, menu.getProducts());
     }
 
     @Test
@@ -57,7 +58,7 @@ class MenuTest {
     @Test
     void getRestaurant() {
         menu.setRestaurant(newRestaurant);
-        assertTrue(menu.getRestaurant() == newRestaurant);
+        Assert.assertSame(newRestaurant, menu.getRestaurant());
     }
 
     @Test

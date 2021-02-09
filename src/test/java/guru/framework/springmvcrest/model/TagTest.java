@@ -1,5 +1,6 @@
 package guru.framework.springmvcrest.model;
 
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ class TagTest {
     @Test
     void getName() {
         tag.setName("test");
-        assertEquals("test", tag.getName());
+        Assert.assertSame("test", tag.getName());
     }
 
     @Test
@@ -29,7 +30,7 @@ class TagTest {
     @Test
     void getRestaurants() {
         tag.setRestaurants(restaurants);
-        assertTrue(tag.getRestaurants() == restaurants);
+        Assert.assertSame(restaurants, tag.getRestaurants());
     }
 
     @Test

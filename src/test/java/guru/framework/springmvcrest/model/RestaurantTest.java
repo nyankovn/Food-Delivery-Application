@@ -18,48 +18,50 @@ class RestaurantTest {
     @Test
     void getName() {
         restaurant.setName("test");
+        Assert.assertSame("test", restaurant.getName());
+
     }
 
     @Test
     void getLocation() {
         restaurant.setLocation("test");
-        Assert.assertSame(restaurant.getLocation(), "test");
+        Assert.assertSame("test", restaurant.getLocation());
     }
 
     @Test
     void getPhoneNumber() {
         restaurant.setPhoneNumber("test");
-        Assert.assertSame(restaurant.getPhoneNumber(), "test");
+        Assert.assertSame("test", restaurant.getPhoneNumber());
     }
 
     @Test
     void getOpeningHour() {
         restaurant.setOpeningHour(9);
-        Assert.assertSame(restaurant.getOpeningHour(), 9);
+        Assert.assertSame(9, restaurant.getOpeningHour());
     }
 
     @Test
     void getClosingHour() {
         restaurant.setClosingHour(22);
-        Assert.assertSame(restaurant.getClosingHour(), 22);
+        Assert.assertSame(22, restaurant.getClosingHour());
     }
 
     @Test
     void getMinMinsToPrepare() {
         restaurant.setMinMinsToPrepare(20);
-        Assert.assertSame(restaurant.getMinMinsToPrepare(), 20);
+        Assert.assertSame(20, restaurant.getMinMinsToPrepare());
     }
 
     @Test
     void getMaxMinsToPrepare() {
         restaurant.setMaxMinsToPrepare(40);
-        Assert.assertSame(restaurant.getMaxMinsToPrepare(), 40);
+        Assert.assertSame(40, restaurant.getMaxMinsToPrepare());
     }
 
     @Test
     void getImg_dir() {
         restaurant.setImgDir("test");
-        Assert.assertSame(restaurant.getImgDir(), "test");
+        Assert.assertSame("test", restaurant.getMaxMinsToPrepare());
     }
 
     List<Menu> menus = new ArrayList<>();
@@ -70,20 +72,20 @@ class RestaurantTest {
     @Test
     void getMenus() {
         restaurant.setMenus(menus);
-        Assert.assertSame(restaurant.getMenus(), menus);
+        Assert.assertSame(menus, restaurant.getMenus());
 
     }
 
     @Test
     void getTags() {
         restaurant.setTags(tags);
-        Assert.assertSame(restaurant.getMenus(), menus);
+        Assert.assertSame(menus, restaurant.getMenus());
     }
 
     @Test
     void getOrders() {
         restaurant.setOrders(orders);
-        Assert.assertSame(restaurant.getOrders(), orders);
+        Assert.assertSame(orders, restaurant.getOrders());
     }
 
 

@@ -1,6 +1,7 @@
 package guru.framework.springmvcrest.model.authentication;
 
 import guru.framework.springmvcrest.model.Order;
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,13 +21,13 @@ class AuthenticationRequestTest {
     @Test
     void getUsername() {
         request.setUsername("test");
-        assertTrue(request.getUsername() == "test");
+        Assert.assertSame("test", request.getUsername());
     }
 
     @Test
     void getPassword() {
         request.setPassword("test");
-        assertTrue(request.getPassword() == "test");
+        Assert.assertSame("test", request.getPassword());
     }
 
     @Test

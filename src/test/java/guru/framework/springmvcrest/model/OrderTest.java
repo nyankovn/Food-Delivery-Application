@@ -2,6 +2,7 @@ package guru.framework.springmvcrest.model;
 
 import guru.framework.springmvcrest.model.menu.Product;
 import guru.framework.springmvcrest.model.users.Profile;
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -11,43 +12,42 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class OrderTest {
 
-    private Order order=new Order("location");
+    private Order order = new Order("location");
 
     @Test
     void constructorTest() {
-        Order order=new Order();
+        Order order = new Order();
         order.setLocation("test");
         assertEquals("test", order.getLocation());
     }
-
 
 
     @Test
     void getLocation() {
         order.setLocation("test");
-        assertEquals("test", order.getLocation());
+        Assert.assertSame("test", order.getLocation());
     }
 
-    List<Product>products=new ArrayList<>();
-    Profile profile=new Profile();
-    Restaurant restaurant=new Restaurant();
+    List<Product> products = new ArrayList<>();
+    Profile profile = new Profile();
+    Restaurant restaurant = new Restaurant();
 
     @Test
     void getProducts() {
         order.setProducts(products);
-        assertEquals(products, order.getProducts());
+        Assert.assertSame(products, order.getProducts());
     }
 
     @Test
     void getProfile() {
         order.setProfile(profile);
-        assertEquals(profile, order.getProfile());
+        Assert.assertSame(profile, order.getProfile());
     }
 
     @Test
     void getRestaurant() {
         order.setRestaurant(restaurant);
-        assertEquals(restaurant, order.getRestaurant());
+        Assert.assertSame(restaurant, order.getRestaurant());
     }
 
 

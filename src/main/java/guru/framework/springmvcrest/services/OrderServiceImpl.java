@@ -3,8 +3,6 @@ package guru.framework.springmvcrest.services;
 import guru.framework.springmvcrest.exception.ResourceNotFoundException;
 import guru.framework.springmvcrest.model.Order;
 import guru.framework.springmvcrest.repository.OrderRepository;
-import guru.framework.springmvcrest.repository.ProfileRepository;
-import guru.framework.springmvcrest.repository.RestaurantRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;

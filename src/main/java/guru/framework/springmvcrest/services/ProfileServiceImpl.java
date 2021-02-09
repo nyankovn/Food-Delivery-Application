@@ -11,10 +11,7 @@ import guru.framework.springmvcrest.repository.RoleRepository;
 import guru.framework.springmvcrest.repository.UserRepository;
 import guru.framework.springmvcrest.security.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -72,10 +69,8 @@ public class ProfileServiceImpl implements ProfileService {
 
     @Override
     public Profile getProfileById(Long id) {
-        Profile profile = profileRepository.findById(id)
+        return profileRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(profileWithId + id + doesNotExist));
-
-        return profile;
     }
 
     @Override
@@ -86,8 +81,7 @@ public class ProfileServiceImpl implements ProfileService {
         profile.setEmail(userDetails.getEmail());
         profile.setPassword(userDetails.getPassword());
 
-        Profile updateUser = profileRepository.save(profile);
-        return updateUser;
+        return profileRepository.save(profile);
     }
 
     @Override
