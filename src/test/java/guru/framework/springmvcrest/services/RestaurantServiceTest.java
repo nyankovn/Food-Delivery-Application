@@ -53,7 +53,7 @@ import static org.mockito.Mockito.*;
     void getRestaurantByIdTest() {
         when(restaurantRepository.findById((long) 0)).thenReturn(java.util.Optional.of(new Restaurant("Name", "location", "+123456789",  10, 2, 20, 40)));
 
-        Restaurant restaurant = restaurantService.findRestaurantById((long) 0);
+        Restaurant restaurant = restaurantService.getRestaurantById((long) 0);
 
         assertEquals("Name", restaurant.getName());
         assertEquals("location", restaurant.getLocation());

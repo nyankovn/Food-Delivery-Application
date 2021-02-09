@@ -9,11 +9,9 @@ public interface RestaurantService {
 
     List<Restaurant> getAllRestaurants();
 
-    Restaurant findRestaurantById(Long id);
+    Restaurant getRestaurantById(Long id);
 
     List<Restaurant> getTopRatedRestaurants();
-
-    Restaurant getRestaurantById(Long id);
 
     Restaurant createRestaurant(Restaurant restaurant, Long profileId);
 
