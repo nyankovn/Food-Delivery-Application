@@ -107,7 +107,7 @@ public class ProfileServiceImpl implements ProfileService {
 
 
     @Override
-    public Restaurant registerRestaurant(Restaurant restaurant) {
+    public Restaurant registerRestaurant(Restaurant restaurant) throws NullPointerException {
         //takes the id of the logged in user, and set it as restaurant owner
 
         String token = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest().getHeader("Authorization");

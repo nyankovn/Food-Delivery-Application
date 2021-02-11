@@ -12,6 +12,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -56,11 +57,21 @@ public class AuthenticateServiceImpl implements AuthenticateService {
         return new AuthenticationResponse(jwt, temp.getId(), temp.getUsername(), temp.getEmail(), temp.getRoles());
     }
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
-    public Profile signupCustomer(Profile profile){
+    public Profile signupCustomer(Profile p) {
+        Profile profile = new Profile();
+
         List<Role> roles = new ArrayList<>();
         Role role = roleRepository.findByName("Customer");
         roles.add(role);
+
+        profile.setUsername(p.getUsername());
+        profile.setPassword(passwordEncoder.encode(p.getPassword()));
+        profile.setProfileUser(p.getProfileUser());
+        profile.setEmail(p.getEmail());
         profile.setRoles(roles);
         profile.setEnabled(true);
         return profileRepository.save(profile);

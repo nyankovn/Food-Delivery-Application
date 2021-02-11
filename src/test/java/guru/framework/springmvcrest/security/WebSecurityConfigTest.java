@@ -102,7 +102,7 @@ class WebSecurityConfigTest {
     @Test
     void passwordEncoder() {
         PasswordEncoder expected= NoOpPasswordEncoder.getInstance();
-        PasswordEncoder result=webSecurityConfig.passwordEncoder();
+        PasswordEncoder result=webSecurityConfig.encoder();
 
         assertThat(expected).isEqualTo(result);
 
