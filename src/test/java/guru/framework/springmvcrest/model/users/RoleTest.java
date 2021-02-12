@@ -10,20 +10,32 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class RoleTest {
 
-    private Role role=new Role("name");
+    private Role role = new Role("name");
 
-    List<Profile> profiles=new ArrayList<>();
+    List<Profile> profiles = new ArrayList<>();
 
     @Test
     void getName() {
         role.setName("test");
-        Assert.assertSame("test",role.getName());
+        Assert.assertSame("test", role.getName());
     }
 
     @Test
     void getProfiles() {
         role.setProfiles(profiles);
-        Assert.assertSame(profiles,role.getProfiles());
+        Assert.assertSame(profiles, role.getProfiles());
+    }
+
+    @Test
+    void getId() {
+        role.setId(1);
+        Assert.assertSame(role.getId(), 1);
+    }
+
+    @Test
+    void setId() {
+        role.setId(1);
+        assertEquals(1, role.getId());
     }
 
     @Test

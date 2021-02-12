@@ -14,7 +14,6 @@ class RestaurantTest {
 
     Restaurant restaurant = new Restaurant("Name1", "location", "+123456789", 10, 2, 20, 40);
 
-
     @Test
     void getName() {
         restaurant.setName("test");
@@ -88,72 +87,114 @@ class RestaurantTest {
         Assert.assertSame(orders, restaurant.getOrders());
     }
 
+    @Test
+    void getAverageRating() {
+        restaurant.setMinMinsToPrepare(20);
+        Assert.assertSame(20, restaurant.getMinMinsToPrepare());
+    }
+
+    @Test
+    void getRating() {
+        restaurant.setRatingTotal(5);
+        Assert.assertSame(5, restaurant.getRating());
+    }
+
+    @Test
+    void getProfile() {
+        restaurant.setProfile(profile);
+        Assert.assertSame(profile, restaurant.getProfile());
+    }
+
+    @Test
+    void getRatingVotes() {
+        restaurant.setRatingVotes();
+        Assert.assertSame(1, restaurant.getRatingVotes());
+    }
+
+
+    @Test
+    void setRatingVotes() {
+        restaurant.setRatingVotes();
+        assertEquals(restaurant.getRating(), 1);
+    }
+
+    @Test
+    void setRatingTotal() {
+        restaurant.setRatingTotal(5);
+        assertEquals(restaurant.getRating(), 5);
+    }
+
+    @Test
+    void setProfile() {
+        restaurant.setProfile(profile);
+        assertEquals(restaurant.getProfile(), profile);
+    }
 
     @Test
     void setName() {
         restaurant.setName("test");
-        assertEquals("test", restaurant.getName());
+        assertEquals(restaurant.getName(), "test");
     }
 
     @Test
     void setLocation() {
         restaurant.setLocation("test");
-        assertEquals("test", restaurant.getLocation());
+        assertEquals(restaurant.getLocation(), "test");
     }
 
     @Test
     void setPhoneNumber() {
         restaurant.setPhoneNumber("test");
-        assertEquals("test", restaurant.getPhoneNumber());
+        assertEquals(restaurant.getPhoneNumber(), "test");
     }
 
 
     @Test
     void setOpeningHour() {
         restaurant.setOpeningHour(5);
-        assertEquals(5, restaurant.getOpeningHour());
+        assertEquals(restaurant.getOpeningHour(), 5);
     }
 
     @Test
     void setClosingHour() {
         restaurant.setClosingHour(5);
-        assertEquals(5, restaurant.getClosingHour());
+        assertEquals(restaurant.getClosingHour(), 5);
     }
 
     @Test
     void setMinMinsToPrepare() {
         restaurant.setMaxMinsToPrepare(5);
-        assertEquals(5, restaurant.getMaxMinsToPrepare());
+        assertEquals(restaurant.getMaxMinsToPrepare(), 5);
     }
 
     @Test
     void setMaxMinsToPrepare() {
         restaurant.setMaxMinsToPrepare(5);
-        assertEquals(5, restaurant.getMaxMinsToPrepare());
+        assertEquals(restaurant.getMaxMinsToPrepare(), 5);
     }
 
     @Test
     void setImg_dir() {
         restaurant.setImgDir("test");
-        assertEquals("test", restaurant.getImgDir());
+        assertEquals(restaurant.getImgDir(), "test");
     }
 
     @Test
     void setMenus() {
         restaurant.setMenus(menus);
-        assertEquals(menus, restaurant.getMenus());
+        assertEquals(restaurant.getMenus(), menus);
     }
 
     @Test
     void setTags() {
         restaurant.setTags(tags);
-        assertEquals(tags, restaurant.getTags());
+        assertEquals(restaurant.getTags(), tags);
     }
 
     @Test
     void setOrders() {
         restaurant.setOrders(orders);
-        assertEquals(orders, restaurant.getOrders());
+        assertEquals(restaurant.getOrders(), orders);
     }
 
 

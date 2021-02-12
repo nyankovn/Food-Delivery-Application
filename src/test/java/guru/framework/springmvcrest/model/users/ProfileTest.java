@@ -71,7 +71,11 @@ class ProfileTest {
         Assert.assertSame(roles,profile.getRoles() );
     }
 
-
+    @Test
+    void setId() {
+        profile.setId(1);
+        assertEquals(1, profile.getId());
+    }
 
     @Test
     void setEmail() {

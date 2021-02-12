@@ -45,6 +45,11 @@ class UserTest {
     }
 
 
+    @Test
+    void setId() {
+        user.setId(1);
+        assertEquals(1, user.getId());
+    }
 
     @Test
     void setFirstName() {

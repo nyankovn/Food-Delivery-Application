@@ -12,7 +12,6 @@ class TagTest {
 
     private Tag tag=new Tag();
 
-
     @Test
     void getName() {
         tag.setName("test");
