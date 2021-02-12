@@ -1,5 +1,6 @@
 package guru.framework.springmvcrest.model.users;
 
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -11,39 +12,36 @@ class UserTest {
 
     private User user = new User("firstname", "lastname", "+98412654", "address");
 
-
-
     @Test
     void getFirstName() {
         user.setFirstName("test");
-        assertTrue(user.getFirstName() == "test");
+        Assert.assertSame("test",user.getFirstName());
     }
 
     @Test
     void getLastName() {
         user.setLastName("test");
-        assertTrue(user.getLastName() == "test");
+        Assert.assertSame("test",user.getLastName());
     }
 
     @Test
     void getPhoneNumber() {
         user.setPhoneNumber("test");
-        assertTrue(user.getPhoneNumber() == "test");
+        Assert.assertSame("test",user.getPhoneNumber());
     }
 
     @Test
     void getAddress() {
         user.setAddress("test");
-        assertTrue(user.getAddress() == "test");
+        Assert.assertSame("test",user.getAddress());
     }
 
     List<Profile> profiles = new ArrayList<>();
 
-
     @Test
     void getProfiles() {
         user.setProfiles(profiles);
-        assertTrue(user.getProfiles() == profiles);
+        Assert.assertSame(profiles,user.getProfiles());
     }
 
 

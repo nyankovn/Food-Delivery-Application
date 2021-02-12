@@ -1,6 +1,6 @@
 package guru.framework.springmvcrest.model.users;
 
-import guru.framework.springmvcrest.model.menu.Product;
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -9,11 +9,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class MyUserDetailsTest {
 
-    private Profile profile=new Profile();
+    private Profile profile = new Profile();
     private MyUserDetails userDetails = new MyUserDetails(profile);
 
     @Test
@@ -25,38 +26,39 @@ class MyUserDetailsTest {
             expected.add(new SimpleGrantedAuthority(s.getName()));
         }
 
-        Collection<? extends GrantedAuthority>  result = userDetails.getAuthorities();
+        Collection<? extends GrantedAuthority> result = userDetails.getAuthorities();
 
         assertEquals(expected, result);
     }
 
     @Test
     void getPassword() {
-        assertTrue(userDetails.getPassword() == profile.getPassword());
+        Assert.assertSame(profile.getPassword(), userDetails.getPassword());
     }
 
     @Test
     void getUsername() {
-        assertTrue(userDetails.getUsername() == profile.getUsername());
+        Assert.assertSame(profile.getUsername(), userDetails.getUsername());
     }
 
     @Test
     void isAccountNonExpired() {
-        assertTrue(userDetails.isAccountNonExpired() == true);
+        Assert.assertSame(true, userDetails.isAccountNonExpired());
     }
 
     @Test
     void isAccountNonLocked() {
-        assertTrue(userDetails.isAccountNonLocked() == true);
+        Assert.assertSame(true, userDetails.isAccountNonLocked());
     }
 
     @Test
     void isCredentialsNonExpired() {
-        assertTrue(userDetails.isCredentialsNonExpired() == true);
+        Assert.assertSame(true, userDetails.isCredentialsNonExpired());
+
     }
 
     @Test
     void isEnabled() {
-        assertTrue(userDetails.isEnabled() == profile.isEnabled());
+        Assert.assertSame(profile.isEnabled(), userDetails.isEnabled());
     }
 }

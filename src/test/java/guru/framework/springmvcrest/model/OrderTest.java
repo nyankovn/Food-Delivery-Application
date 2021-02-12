@@ -21,11 +21,10 @@ class OrderTest {
         assertEquals("test", order.getLocation());
     }
 
-
     @Test
     void getLocation() {
         order.setLocation("test");
-        Assert.assertSame("test", order.getLocation());
+        Assert.assertSame("test",order.getLocation());
     }
 
     List<Product> products = new ArrayList<>();

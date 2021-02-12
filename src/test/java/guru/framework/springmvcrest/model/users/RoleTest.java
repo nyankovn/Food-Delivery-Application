@@ -1,5 +1,6 @@
 package guru.framework.springmvcrest.model.users;
 
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -13,21 +14,17 @@ class RoleTest {
 
     List<Profile> profiles=new ArrayList<>();
 
-
-
-
     @Test
     void getName() {
         role.setName("test");
-        assertTrue(role.getName() == "test");
+        Assert.assertSame("test",role.getName());
     }
 
     @Test
     void getProfiles() {
         role.setProfiles(profiles);
-        assertTrue(role.getProfiles() == profiles);
+        Assert.assertSame(profiles,role.getProfiles());
     }
-
 
     @Test
     void setName() {

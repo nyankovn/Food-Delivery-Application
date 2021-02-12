@@ -25,8 +25,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @ActiveProfiles("dev")
 class WebSecurityConfigTest {
-//
-    private WebSecurityConfig webSecurityConfig=new WebSecurityConfig();
+
+    private WebSecurityConfig webSecurityConfig = new WebSecurityConfig();
 
     @Autowired
     private WebApplicationContext wac;
@@ -42,21 +42,8 @@ class WebSecurityConfigTest {
         this.mockMvc = builder.build();
     }
 
-
-//    @Test
-//    public void givenAuthRequestOnPrivateService_shouldSucceedWith200() throws Exception {
-////        mvc.perform(get("/admin_ui/authenticate/signin").contentType(MediaType.APPLICATION_JSON))
-////                .andExpect(status().isOk());
-//
-//        URI uri = UriComponentsBuilder.fromUriString("/admin_ui/authenticate/signin")
-//                .build().encode().toUri();
-//
-//        mockMvc.perform(get(uri)).andExpect(status().isOk());
-//
-//    }
-
     @Test
-    public void givenAuthRequestOnPrivateService_shouldSucceedWith200() throws Exception {
+    void givenAuthRequestOnPrivateService_shouldSucceedWith200() throws Exception {
         mockMvc.perform(get("/admin_ui/users").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
@@ -71,38 +58,20 @@ class WebSecurityConfigTest {
 
         mockMvc.perform(get("/admin_ui/restaurants/1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
-
     }
 
-
-
-
-//    @Test
-//    void corsFilter() {
-//    }
-//
-//    @Test
-//    void corsConfigurer() {
-//    }
-//
-//    @Test
-//    void corsConfigurationSource() {
-//    }
-//
-
     @Test
-    public void testCors() throws Exception {
+    void testCors() throws Exception {
         this.mockMvc
                 .perform(options("/test-cors")
                         .header("Access-Control-Request-Method", "GET")
                         .header("Origin", "http://www.someurl.com"));
     }
 
-
     @Test
     void passwordEncoder() {
-        PasswordEncoder expected= NoOpPasswordEncoder.getInstance();
-        PasswordEncoder result=webSecurityConfig.encoder();
+        PasswordEncoder expected = NoOpPasswordEncoder.getInstance();
+        PasswordEncoder result = webSecurityConfig.encoder();
 
         assertThat(expected).isEqualTo(result);
 

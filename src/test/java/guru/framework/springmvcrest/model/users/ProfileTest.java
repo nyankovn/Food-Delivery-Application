@@ -2,6 +2,7 @@ package guru.framework.springmvcrest.model.users;
 
 import guru.framework.springmvcrest.model.Order;
 import guru.framework.springmvcrest.model.Restaurant;
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -18,25 +19,25 @@ class ProfileTest {
     @Test
     void getEmail() {
         profile.setEmail("test");
-        assertTrue(profile.getEmail() == "test");
+        Assert.assertSame("test",profile.getEmail() );
     }
 
     @Test
     void getUsername() {
         profile.setUsername("test");
-        assertTrue(profile.getUsername() == "test");
+        Assert.assertSame("test",profile.getUsername() );
     }
 
     @Test
     void getPassword() {
         profile.setPassword("test");
-        assertTrue(profile.getPassword() == "test");
+        Assert.assertSame("test",profile.getPassword() );
     }
 
     @Test
     void isEnabled() {
         profile.setEnabled(true);
-        assertTrue(profile.isEnabled() == true);
+        Assert.assertSame(true,profile.isEnabled() );
     }
 
 
@@ -49,25 +50,25 @@ class ProfileTest {
     @Test
     void getProfileUser() {
         profile.setProfileUser(newUser);
-        assertTrue(profile.getProfileUser() == newUser);
+        Assert.assertSame(newUser,profile.getProfileUser() );
     }
 
     @Test
     void getRestaurants() {
         profile.setRestaurants(restaurants);
-        assertTrue(profile.getRestaurants() == restaurants);
+        Assert.assertSame(restaurants,profile.getRestaurants() );
     }
 
     @Test
     void getOrders() {
         profile.setOrders(orders);
-        assertTrue(profile.getOrders() == orders);
+        Assert.assertSame(orders,profile.getOrders() );
     }
 
     @Test
     void getRoles() {
         profile.setRoles(roles);
-        assertTrue(profile.getRoles() == roles);
+        Assert.assertSame(roles,profile.getRoles() );
     }
 
 
