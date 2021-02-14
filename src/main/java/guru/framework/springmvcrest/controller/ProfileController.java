@@ -2,7 +2,7 @@ package guru.framework.springmvcrest.controller;
 
 import guru.framework.springmvcrest.model.Restaurant;
 import guru.framework.springmvcrest.model.users.Profile;
-import guru.framework.springmvcrest.services.ProfileService;
+import guru.framework.springmvcrest.service.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

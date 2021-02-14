@@ -10,8 +10,6 @@ import org.springframework.web.client.RestTemplate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.http.HttpStatus.OK;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class UserControllerAcceptanceTest {
 
@@ -24,19 +22,14 @@ class UserControllerAcceptanceTest {
     @BeforeEach
     void setUp() {
         restTemplate = new RestTemplate();
-        url = "http://localhost:" + randomServerPort + "/admin_ui/";
+        url = "http://localhost:" + randomServerPort ;
     }
 
     @Test
     void shouldGetUsers() throws Exception {
-        ResponseEntity responseEntity = restTemplate.getForEntity(url+"users", String.class);
+        ResponseEntity responseEntity = restTemplate.getForEntity(url+"/users", String.class);
         assertEquals(OK, responseEntity.getStatusCode());
     }
 
-    @Test
-    void shouldGetUserId() throws Exception {
 
-        ResponseEntity responseEntity = restTemplate.getForEntity(url+"user/1", String.class);
-        assertEquals(OK, responseEntity.getStatusCode());
-    }
 }

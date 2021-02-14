@@ -22,6 +22,13 @@ public class Tag {
     @JsonIgnore
     private List<Restaurant> restaurants = new ArrayList<>();
 
+    public Tag() {
+    }
+
+    public Tag(String name) {
+        this.name = name;
+    }
+
     public long getId() {
         return id;
     }

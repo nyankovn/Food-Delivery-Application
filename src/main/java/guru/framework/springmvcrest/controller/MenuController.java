@@ -1,7 +1,7 @@
 package guru.framework.springmvcrest.controller;
 
 import guru.framework.springmvcrest.model.menu.Menu;
-import guru.framework.springmvcrest.services.MenuService;
+import guru.framework.springmvcrest.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

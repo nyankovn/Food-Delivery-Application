@@ -1,7 +1,7 @@
 package guru.framework.springmvcrest.controller;
 
 import guru.framework.springmvcrest.model.users.User;
-import guru.framework.springmvcrest.services.UserService;
+import guru.framework.springmvcrest.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

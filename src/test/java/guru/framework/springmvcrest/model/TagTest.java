@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TagTest {
 
-    private Tag tag=new Tag();
+    private Tag tag=new Tag("test");
 
     @Test
     void getName() {
@@ -37,6 +37,4 @@ class TagTest {
         tag.setRestaurants(restaurants);
         assertEquals(restaurants, tag.getRestaurants());
     }
-
-
 }

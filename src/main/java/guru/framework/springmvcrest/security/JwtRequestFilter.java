@@ -1,6 +1,6 @@
 package guru.framework.springmvcrest.security;
 
-import guru.framework.springmvcrest.services.MyUserDetailsService;
+import guru.framework.springmvcrest.security.service.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

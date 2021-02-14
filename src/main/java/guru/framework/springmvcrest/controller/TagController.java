@@ -2,7 +2,7 @@ package guru.framework.springmvcrest.controller;
 
 
 import guru.framework.springmvcrest.model.Tag;
-import guru.framework.springmvcrest.services.TagService;
+import guru.framework.springmvcrest.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

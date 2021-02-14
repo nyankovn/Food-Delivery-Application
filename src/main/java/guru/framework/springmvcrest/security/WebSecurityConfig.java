@@ -1,6 +1,6 @@
 package guru.framework.springmvcrest.security;
 
-import guru.framework.springmvcrest.services.MyUserDetailsService;
+import guru.framework.springmvcrest.security.service.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -123,7 +123,7 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 antMatchers("/authenticate/signup").permitAll().
                 antMatchers("/authenticate/signup/**").permitAll().
 
-                antMatchers("/users").hasAuthority(customer).
+                antMatchers("/users").permitAll().
                 antMatchers("/users/{id}").permitAll().
 
                 antMatchers("/profiles").permitAll().
